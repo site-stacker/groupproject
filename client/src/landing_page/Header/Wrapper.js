@@ -34,6 +34,7 @@ export const HeaderWrapper = styled.div`
   background-image: ${props => props.bg_img};
   background-color: ${props => props.bg_color};
   
+  
   &:before{
     position:absolute;
     z-index: 1;
