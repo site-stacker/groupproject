@@ -10,7 +10,8 @@ const initialState ={
     subheading: "This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader.",
     product_img: "https://mockuphone.com/static/images/devices/apple-iphone6-spacegrey-portrait.png",
     product_img: "https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/bb311e4d3417ac027a5e4545146389e7/usecases-board02.jpg",
-    logo: "https://static.mailchimp.com/web/brand-assets/logo-script-light.svg"
+    logo: "https://static.mailchimp.com/web/brand-assets/logo-script-light.svg",
+    button_text: "Try this app"
   },
   about:{
     heading: "About Us",
@@ -60,36 +61,50 @@ const initialState ={
           "color_palette": ["#FFFFFF", "#353740", "#F5CA0A", "#F5870A", "#FCAE02"]
       },
       {
-          "color_id": 2,
+          "color_id": 6,
           "color_palette_name": "Orange",
           "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
       },
       {
-          "color_id": 3,
+          "color_id": 7,
           "color_palette_name": "Ocher",
           "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
       },
       {
-          "color_id": 4,
+          "color_id": 8,
           "color_palette_name": "Beige",
           "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
-      },
-      {
-          "color_id": 5,
-          "color_palette_name": "Yellow",
-          "color_palette": ["#FFFFFF", "#353740", "#F5CA0A", "#F5870A", "#FCAE02"]
       }
   ],
-  fonts_list:[]
+  fonts_list:[],
+  currentProject:{},
+  sections:["About Us", "Features"],
+  contentSection: "Sections",
+  sectionSelected: "",
 }
 
 
-const GET_FONTS_LIST = "GET_FONTS_LIST"
+const GET_FONTS_LIST = "GET_FONTS_LIST";
+const GET_PROJECT = "GET_PROJECT";
+const CHANGE_SELECTED_SECTION = "CHANGE_SELECTED_SECTION"
+const UPDATE_HEADER_HEADING = "UPDATE_HEADER_HEADING"
+const UPDATE_HEADER_SUBHEADING = "UPDATE_HEADER_SUBHEADING"
+const UPDATE_HEADER_BUTTON = "UPDATE_HEADER_BUTTON"
 
 export default function reducer(state = initialState, action){
   switch(action.type){
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
+    case GET_PROJECT + "_FULFILLED":
+      return Object.assign({}, state, {currentProject: action.payload[0] }) 
+    case CHANGE_SELECTED_SECTION:
+      return Object.assign({}, state, {sectionSelected: action.payload }) 
+    
+    //HEADER EDITOR
+    case UPDATE_HEADER_HEADING:
+      return Object.assign({}, state, {header: {...state.header, heading: action.payload}}) 
+    case UPDATE_HEADER_SUBHEADING:
+      return Object.assign({}, state, {header: {...state.header, subheading: action.payload}}) 
     default:
       return state
   }
@@ -102,5 +117,47 @@ export const getFontsList = () =>{
   return{
     type: GET_FONTS_LIST,
     payload: list
+  }
+}
+
+export const getProject = (user_id, project_id) =>{
+  const project = axios.get(`/api/getProject/${user_id}/${project_id}`).then(res => res.data)
+  return{
+    type: GET_PROJECT,
+    payload: project
+  }
+}
+
+export const changeSelectedSection = (str) => {
+  console.log(str)
+  return {
+    type: CHANGE_SELECTED_SECTION,
+    payload: str
+  }
+}
+
+// HEADER EDITOR
+
+export const updateHeaderHeading = str => {
+  
+  return{
+    type: UPDATE_HEADER_HEADING, 
+    payload: str
+  }
+}
+
+export const updateHeaderSubheading = str => {
+  console.log(str)
+  return{
+    type: UPDATE_HEADER_SUBHEADING, 
+    payload: str
+  }
+}
+
+export const updateHeaderButton = str => {
+  console.log(str)
+  return{
+    type: UPDATE_HEADER_BUTTON, 
+    payload: str
   }
 }
