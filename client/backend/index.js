@@ -1,4 +1,3 @@
-
 //npm
 const express = require('express');
 const massive = require('massive');
@@ -23,9 +22,16 @@ massive(CONNECTION_STRING).then(db => {
 })
 //enpoints and server
 /////////////////////////////////////////////////
-app.get('/api/getProjects/:id', ctrl.getProjects)
-
-
+app.get('/api/getProjects/:user_id', ctrl.getProjects)
+app.get('/api/getProject/:user_id/:project_id', ctrl.getProject)
+app.get('/api/getColors', ctrl.getColors)
+app.post('/api/createUser', ctrl.createUser)
+app.post('/api/createProject', ctrl.createProject)
+app.post('/api/createHeader/:project_id', ctrl.createHeader)
+app.put('/api/updateHeader/:headerid', ctrl.updateHeader)
+app.put('/api/updateProject/:project_id', ctrl.updateProject)
+app.delete('/api/deleteProject/:project_id', ctrl.deleteProject)
+app.delete('/api/deleteUser/:user_id', ctrl.deleteUser)
 
 
 app.listen(SERVER_PORT, () => {

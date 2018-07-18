@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const initialState ={
   header:{
     background_img: "https://images.unsplash.com/photo-1531715191146-cd2c1770a253?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f96160272735a53e3c67d6fb1aa922ce&auto=format&fit=crop&w=1950&q=80",
@@ -29,14 +31,76 @@ const initialState ={
       icon: "",
       title: "Feature 3",
       text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
-    },
-  ]
+    }
+  ],
+  color_themes: [
+      {
+          "color_id": 1,
+          "color_palette_name": "Blue",
+          "color_palette": ["#FFFFFF", "#00CC47", "#0166FF", "#05112A", "#00B9FF"]
+      },
+      {
+          "color_id": 2,
+          "color_palette_name": "Orange",
+          "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
+      },
+      {
+          "color_id": 3,
+          "color_palette_name": "Ocher",
+          "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
+      },
+      {
+          "color_id": 4,
+          "color_palette_name": "Beige",
+          "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
+      },
+      {
+          "color_id": 5,
+          "color_palette_name": "Yellow",
+          "color_palette": ["#FFFFFF", "#353740", "#F5CA0A", "#F5870A", "#FCAE02"]
+      },
+      {
+          "color_id": 2,
+          "color_palette_name": "Orange",
+          "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
+      },
+      {
+          "color_id": 3,
+          "color_palette_name": "Ocher",
+          "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
+      },
+      {
+          "color_id": 4,
+          "color_palette_name": "Beige",
+          "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
+      },
+      {
+          "color_id": 5,
+          "color_palette_name": "Yellow",
+          "color_palette": ["#FFFFFF", "#353740", "#F5CA0A", "#F5870A", "#FCAE02"]
+      }
+  ],
+  fonts_list:[]
 }
 
 
+const GET_FONTS_LIST = "GET_FONTS_LIST"
+
 export default function reducer(state = initialState, action){
   switch(action.type){
+    case GET_FONTS_LIST + "_FULFILLED":
+      return Object.assign({}, state, {fonts_list: action.payload})
     default:
       return state
+  }
+}
+
+export const getFontsList = () =>{
+  const list = axios.get("https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=AIzaSyAyR8cCSuls2EHZHPFIUdxzpDZOM8AJ1r8").then(res =>{
+      return res.data.items.filter((font, i) => i < 20)
+    })
+  return{
+    type: GET_FONTS_LIST,
+    payload: list
   }
 }
