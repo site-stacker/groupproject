@@ -1,36 +1,52 @@
 import React, {Component} from "react";
-import styled from "styled-components";
 import {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection} from "./../../../redux/reducer"
 import {connect} from "react-redux"
+import ImageUploader from "./../../ImageUploader/ImageUploader"
+import {Input} from "./../../shared/Input"
+import styled from "../../../../node_modules/styled-components";
+import BackgroundImgPicker from "./BackgroundImgPicker";
 
 class HeaderEditor extends Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state={
-
+      toggleImgPicker: false
     }
   }
+  
+  handleTogle = () => {
+    this.setState({toggleImgPicker: !this.state.toggleImgPicker})
+  }
+
 
   render(){
     return(
-      <div>
+      <Wrapper>
         <p onClick={() => this.props.changeSelectedSection("general")}>BACK</p>
-      <Input onChange={(e) => this.props.updateHeaderHeading(e.target.value)}/>
-      <Input onChange={(e) => this.props.updateHeaderSubheading(e.target.value)}/>
-      <Input onChange={(e) => this.props.updateHeaderButton(e.target.value)}/>
-      </div>
+        <p>Header</p>
+        <Input onChange={(e) => this.props.updateHeaderHeading(e.target.value)}/>
+        <Input onChange={(e) => this.props.updateHeaderSubheading(e.target.value)}/>
+        <Input onChange={(e) => this.props.updateHeaderButton(e.target.value)}/>
+        <ImageUploader />
+        <Btn onClick={()=>this.handleTogle()}>asdfasdf</Btn>
+        {this.state.toggleImgPicker ? <BackgroundImgPicker /> : null}
+      </Wrapper>
     )
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state.sections)
+  console.log(state.sectionSelected)
   return{
     sections: state.sectionSelected
   }
 }
 export default connect(mapStateToProps, {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection})(HeaderEditor)
 
-const Input = styled.input`
-  width: 100%;
+const Btn = styled.button`
+  padding: 10px;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
 `;

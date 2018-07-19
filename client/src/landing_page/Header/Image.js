@@ -11,7 +11,7 @@ function Image(props){
 
 const mapStateToProps = state => {
   return {
-    product_img: state.header.product_img
+    product_img: state.currentProject.main_img
   }
 }
 

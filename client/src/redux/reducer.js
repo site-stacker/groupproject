@@ -2,9 +2,8 @@ import axios from "axios";
 
 const initialState ={
   header:{
-    background_img: "https://images.unsplash.com/photo-1531715191146-cd2c1770a253?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f96160272735a53e3c67d6fb1aa922ce&auto=format&fit=crop&w=1950&q=80",
     background_color: "#313A5A",
-    background_combined: true,
+    background_combined: false,
     font_color: "red",
     heading: "This is a sample heading for the landing page we are building with the super builder",
     subheading: "This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader.",
@@ -81,6 +80,7 @@ const initialState ={
   sections:["About Us", "Features"],
   contentSection: "Sections",
   sectionSelected: "",
+  toggleSidebar: false
 }
 
 
@@ -90,9 +90,15 @@ const CHANGE_SELECTED_SECTION = "CHANGE_SELECTED_SECTION"
 const UPDATE_HEADER_HEADING = "UPDATE_HEADER_HEADING"
 const UPDATE_HEADER_SUBHEADING = "UPDATE_HEADER_SUBHEADING"
 const UPDATE_HEADER_BUTTON = "UPDATE_HEADER_BUTTON"
+const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
+const UPDATE_HEADER_IMAGE = "UPDATE_HEADER_IMAGE"
+const UPDATE_HEADER_BG = "UPDATE_HEADER_BG"
 
 export default function reducer(state = initialState, action){
   switch(action.type){
+    case TOGGLE_SIDEBAR:
+      return Object.assign({}, state, {toggleSidebar: !state.toggleSidebar})
+
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
     case GET_PROJECT + "_FULFILLED":
@@ -102,9 +108,15 @@ export default function reducer(state = initialState, action){
     
     //HEADER EDITOR
     case UPDATE_HEADER_HEADING:
-      return Object.assign({}, state, {header: {...state.header, heading: action.payload}}) 
+      return Object.assign({}, state, {currentProject: {...state.currentProject, heading: action.payload}}) 
     case UPDATE_HEADER_SUBHEADING:
-      return Object.assign({}, state, {header: {...state.header, subheading: action.payload}}) 
+      return Object.assign({}, state, {currentProject: {...state.currentProject, subheading: action.payload}})
+    case UPDATE_HEADER_BUTTON:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, button_text: action.payload}})
+    case UPDATE_HEADER_IMAGE:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, main_img: action.payload}}) 
+    case UPDATE_HEADER_BG:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, background_img: action.payload}}) 
     default:
       return state
   }
@@ -129,7 +141,6 @@ export const getProject = (user_id, project_id) =>{
 }
 
 export const changeSelectedSection = (str) => {
-  console.log(str)
   return {
     type: CHANGE_SELECTED_SECTION,
     payload: str
@@ -147,7 +158,6 @@ export const updateHeaderHeading = str => {
 }
 
 export const updateHeaderSubheading = str => {
-  console.log(str)
   return{
     type: UPDATE_HEADER_SUBHEADING, 
     payload: str
@@ -155,9 +165,31 @@ export const updateHeaderSubheading = str => {
 }
 
 export const updateHeaderButton = str => {
-  console.log(str)
   return{
     type: UPDATE_HEADER_BUTTON, 
     payload: str
+  }
+}
+
+export const updateHeaderImage = str => {
+  return{
+    type: UPDATE_HEADER_IMAGE, 
+    payload: str
+  }
+}
+
+export const updateHeaderBg = str => {
+  return{
+    type: UPDATE_HEADER_BG, 
+    payload: str
+  }
+}
+
+
+//TOGGLE SIDEBAR
+export const toggleSidebar = () => {
+  return{
+    type: TOGGLE_SIDEBAR,
+    payload: true
   }
 }
