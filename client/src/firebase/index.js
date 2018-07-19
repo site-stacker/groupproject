@@ -3,11 +3,11 @@ import 'firebase/storage';
 
 var config = {
     apiKey: process.env.FIREBASE_API,
-    authDomain: "skizzle-d3c48.firebaseapp.com",
-    databaseURL: "https://skizzle-d3c48.firebaseio.com",
-    projectId: "skizzle-d3c48",
-    storageBucket: "skizzle-d3c48.appspot.com",
-    messagingSenderId: "255093267529"
+    authDomain: "skizzl-67005.firebaseapp.com",
+    databaseURL: "https://skizzl-67005.firebaseio.com",
+    projectId: "skizzl-67005",
+    storageBucket: "",
+    messagingSenderId: "293295609965"
   };
   firebase.initializeApp(config);
 
