@@ -7,7 +7,11 @@ var config = {
     authDomain: "skizzl-67005.firebaseapp.com",
     databaseURL: "https://skizzl-67005.firebaseio.com",
     projectId: "skizzl-67005",
+<<<<<<< HEAD
     storageBucket: "skizzl-67005.appspot.com",
+=======
+    storageBucket: "",
+>>>>>>> master
     messagingSenderId: "293295609965"
   };
   firebase.initializeApp(config);
