@@ -4,7 +4,7 @@ import About from "./About/index"
 import Features from "./Features/index";
 // import HomePage from '../home_page/index';
 
-export default function(LandingPage){
+export default function LandingPage(){
   return(
     <div>
     <Header/>

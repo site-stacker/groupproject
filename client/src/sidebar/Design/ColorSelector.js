@@ -1,16 +1,19 @@
 import React from "react"
 import {connect} from "react-redux"
 import styled from "styled-components"
-import ThemeSample from "./ThemeSample"
+import ColorSample from "./ColorSample"
 
 function ColorSelector(props){
+  console.log(props.themes)
   const sample = props.themes.map( theme => {
-    return <ThemeSample name={theme.color_palette_name} palette={theme.color_palette}/>
+    return <ColorSample key={theme.color_id} name={theme.color_palette_name} palette={theme.color_palette}/>
   })
   return(
     <div>
       <H2>COLOR THEMES</H2>
-    {sample}
+      <SampleWrapper>
+      {sample}
+      </SampleWrapper>
     </div>
   )
 }
@@ -24,4 +27,11 @@ export default connect(mapStateToProps)(ColorSelector)
 
 const H2 = styled.h2`
   color: red;
+`;
+
+const SampleWrapper = styled.div`
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 `;

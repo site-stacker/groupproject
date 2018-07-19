@@ -5,7 +5,7 @@ import styled from "styled-components"
 function Image(props){
   console.log(props.product_img)
   return(
-    <Product_img src={`${props.product_img}`}/>
+    <ProductImg src={`${props.product_img}`}/>
   )
 }
 
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(Image)
 
-export const Product_img = styled.img`
+export const ProductImg = styled.img`
   height: 400px;
   z-index: 1;
 `;

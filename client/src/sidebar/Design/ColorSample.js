@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components"
 
-export default function ThemeSample(props){
-console.log(props.palette)
+export default function ColorSample(props){
+// console.log(props)
   return(
     <ColorBox>
       <ColorPalette>
-        <ColorSample bg_color={props.palette[1]}/>
-        <ColorSample bg_color={props.palette[2]}/>
-        <ColorSample bg_color={props.palette[3]}/>
-        <ColorSample bg_color={props.palette[4]}/>
+        <ThemeSample bg_color={props.palette[1]}/>
+        <ThemeSample bg_color={props.palette[2]}/>
+        <ThemeSample bg_color={props.palette[3]}/>
+        <ThemeSample bg_color={props.palette[4]}/>
       </ColorPalette>
       <NameContainer>
         <ColorName>{props.name}</ColorName>
@@ -21,10 +21,13 @@ console.log(props.palette)
 const ColorBox = styled.div`
   display: flex;
   flex-flow: column;
-  width: 300px;
-  height: 100px;
+  width: 180px;
+  height: 150px;
   margin: 20px 0;
   position: relative;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ccc;
 `;
 
 const NameContainer = styled.div`
@@ -51,9 +54,13 @@ const ColorPalette = styled.div`
   justify-content: space-between;
 `;
 
-const ColorSample = styled.div`
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;
-  background-color: ${props => props.bg_color}
+const ThemeSample = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: ${props => props.bg_color};
+  transition: 0.2s ease-out;
+
+    :hover{
+    width: 250%
+  }
 `;
