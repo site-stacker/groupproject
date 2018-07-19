@@ -9,7 +9,8 @@ class Content extends Component{
     super();
 
     this.state = {
-      left: 0
+      left: 0,
+      selectedSection: ""
     }
   }
 
@@ -22,6 +23,12 @@ class Content extends Component{
       case "header":
         this.setState({left: "-500px"})
         break;
+      case "About Us":
+        this.setState({left: "-1000px"})
+        break;
+      case "Features":
+        this.setState({left: "-1500px"})
+        break;    
     }
   }
 
