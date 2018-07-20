@@ -58,11 +58,14 @@ module.exports =
                     session_id_count++
                     req.session.user.user_id = user[0].user_id
                     req.session.user.username = user[0].username
+                    console.log(req.session)
                     res.status(200).send('Logged in successfully')
                 } else {
+                    console.log(req.session)
                     res.status(200).send('Invalid Password')
                 }
             } else {
+                console.log(req.session)
                 res.status(200).send('User does not exist')
             }
         })
