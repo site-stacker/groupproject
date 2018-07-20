@@ -26,7 +26,7 @@ module.exports =
     getAbout: (req, res) => {
         const { user_id, project_id } = req.params
         const db = req.app.get('db')
-        db.get_about_components([user_id, project_id])
+        db.get_about_component([user_id, project_id])
             .then((about) => res.status(200).send(about))
             .catch((err) => res.status(500).send(err))
     },
