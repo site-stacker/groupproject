@@ -1,49 +1,49 @@
 import React, {Component} from "react";
 import ContentSelector from "./ContentSelector";
+import GeneralEditor from "./General/GeneralEditor";
 import HeaderEditor from "./Header/HeaderEditor";
+import AboutEditor from "./AboutUs/AboutEditor";
+import FeaturesEditor from "./Features/FeaturesEditor";
 import styled from "styled-components";
 import {connect} from "react-redux"
 
 class Content extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
-      left: 0,
+      left: this.props.resetPosition,
       selectedSection: ""
     }
   }
 
   componentDidMount(){
     this.setState({selectedSection: this.props.sectionSelected})
-    switch(this.props.sectionSelected){
+  }
+
+  updatePosition = (str) => {
+   this.state.left === 0 ? this.setState({left: "-500px", selectedSection: str}) : this.setState({left: 0})
+   
+  }
+
+  renderEditor = (s) => {
+    switch(s){
       case "general":
-        this.setState({left: 0})
-        break;
+        return <GeneralEditor updatePosition={this.updatePosition}/>
       case "header":
-        this.setState({left: "-500px"})
-        break;
+        return <HeaderEditor updatePosition={this.updatePosition}/>
       case "About Us":
-        this.setState({left: "-1000px"})
-        break;
+        return <AboutEditor updatePosition={this.updatePosition}/>
       case "Features":
-        this.setState({left: "-1500px"})
-        break;    
+      return <FeaturesEditor updatePosition={this.updatePosition}/>
     }
   }
 
-  
-  componentDidUpdate(prevProps, nextProps){
-    if(nextProps.selectedSection !== this.props.sectionSelected){
-      this.componentDidMount()
-    }
-  }
   render(){
-  
 return(
   <SliderWrapper left={this.state.left}>
-    <ContentSelector />
-    <HeaderEditor />
+    <ContentSelector updatePosition={this.updatePosition}/>
+    {this.renderEditor(this.state.selectedSection)}
   </SliderWrapper >
 )
 }
@@ -63,7 +63,8 @@ const SliderWrapper = styled.div`
 
 const mapStateToProps = state => {
   return {
-    sectionSelected: state.sectionSelected
+    sectionSelected: state.sectionSelected,
+    resetPosition: state.resetPosition
   }
 }
 export default connect(mapStateToProps)(Content);
