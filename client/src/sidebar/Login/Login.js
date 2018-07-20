@@ -8,7 +8,7 @@ class Login extends Component{
             username: '',
             password: '',
             error: '',
-            loggedIn: ''
+            loggedIn: false
         }
     }
     login(){
@@ -18,8 +18,9 @@ class Login extends Component{
               console.log(res.data)
               if(res.data.length !== 0){
                   this.setState({error: res.data})
+                  this.setState({loggedIn: true})
               } else {
-                  this.setState({loggedIn: 'You logged in successfully', error: ''})
+                  this.setState({loggedIn: true, error: ''})
               }
             })
         } else {
@@ -33,12 +34,20 @@ class Login extends Component{
                 if(res.data.length !==0) {
                    this.setState({error: res.data})
                 } else {
-                    this.setState({loggedIn: 'You are now registered and logged in'})
+                    this.setState({loggedIn: true})
                 }
             })
         } else {
             this.setState({error: 'Please fill in both fields'})
         }
+    }
+    logout(){
+        // const {username, password} = this.state
+        axios.post('/api/logout').then(res =>{
+           if(res){
+               this.setState({loggedIn: false})
+           }
+        })
     }
     render(){
         return(
@@ -58,6 +67,7 @@ class Login extends Component{
             <br/><br/>
             <button type='submit' onClick={() => this.login()} className='login-btn'>Login</button>
             <button type='submit' onClick={() => this.register()} className='register-btn'>Register</button>
+            <button type='submit' onClick={() => this.logout()} className='logout-btn'>Logout</button>
             <p>{this.state.error}</p>
             <p>{this.state.loggedIn}</p>
             </div> 
