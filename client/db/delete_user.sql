@@ -1,3 +1,9 @@
+DELETE FROM feature_components
+WHERE user_id = $1;
+
+DELETE FROM about_components
+WHERE user_id = $1;
+
 DELETE FROM header_components
 WHERE user_id = $1;
 

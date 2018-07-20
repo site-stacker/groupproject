@@ -37,3 +37,20 @@ button_text VARCHAR(30),
 heading VARCHAR(30),
 subheading VARCHAR(50)
 );
+
+CREATE TABLE about_components (
+about_component_id SERIAL PRIMARY KEY,
+project_id INTEGER REFERENCES projects(project_id),
+user_id INTEGER REFERENCES users(user_id),
+about_header VARCHAR(120),
+about_text TEXT
+);
+
+CREATE TABLE feature_components (
+feature_component_id SERIAL PRIMARY KEY,
+project_id INTEGER REFERENCES projects(project_id),
+user_id INTEGER REFERENCES users(user_id),
+feature_icon TEXT,
+feature_title VARCHAR(120),
+feature_text TEXT
+);

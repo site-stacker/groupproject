@@ -23,6 +23,20 @@ module.exports =
             .then(colors => res.status(200).send(colors))
             .catch((err) => res.status(500).send(err))
     },
+    getAbout: (req, res) => {
+        const { user_id, project_id } = req.params
+        const db = req.app.get('db')
+        db.get_about_components([user_id, project_id])
+            .then((about) => res.status(200).send(about))
+            .catch((err) => res.status(500).send(err))
+    },
+    getFeature: (req, res) => {
+        const { user_id, project_id } = req.params
+        const db = req.app.get('db')
+        db.get_feature_components([user_id, project_id])
+            .then((features) => res.status(200).send(features))
+            .catch((err) => res.status(500).send(err))
+    },
     createUser: (req, res) => {
         const {user_img, auth_id, username, email, password} = req.body
         const db = req.app.get('db')
@@ -46,6 +60,20 @@ module.exports =
                     .catch(err => res.status(500).send(err))
             }
         })
+    },
+    createAbout: (req, res) => {
+        const { project_id, user_id, about_header, about_text } = req.body
+        const db = req.app.get('db')
+        db.create_about_components([project_id, user_id, about_header, about_text])
+            .then(() => res.status(200).send())
+            .catch((err) => res.status(500).send(err))
+    },
+    createFeature: (req, res) => {
+        const { project_id, user_id, feature_icon, feature_title, feature_text } = req.body
+        const db = req.app.get('db')
+        db.create_feature_component([project_id, user_id, feature_icon, feature_title, feature_text])
+            .then(() => res.status(200).send())
+            .catch((err) => res.status(500).send(err))
     },
     loginUser: (req, res) => {
         const {username, password} = req.body
@@ -115,6 +143,20 @@ module.exports =
             .then(updatedProject => res.status(200).send(updatedProject))
             .catch((err) => res.status(500).send(err))
     },
+    updateAbout: (req, res) => {
+        const { about_header, about_text, about_component_id } = req.body
+        const db = req.app.get('db')
+        db.update_about_components([about_header, about_text, about_component_id])
+            .then(() => res.status(200).send())
+            .catch((err) => res.status(500).send(err))
+    },
+    updateFeature: (req, res) => {
+        const { feature_icon, feature_title, feature_text, feature_component_id } = req.body
+        const db = req.app.get('db')
+        db.update_feature_component([feature_icon, feature_title, feature_text, feature_component_id])
+            .then(() => res.status(200).send())
+            .catch((err) => res.status(500).send(err))
+    },
     deleteProject: (req, res) => {
         const {project_id} = req.params
         const db = req.app.get('db')
@@ -128,6 +170,19 @@ module.exports =
         db.delete_user([user_id])
             .then(() => res.status(200).send())
             .catch((err) => res.status(500).send(err))
+    },
+    deleteAbout: (req, res) => {
+        const { about_id } = req.params
+        const db = req.app.get('db')
+        db.delete_about_component([about_id])
+            .then(() => res.status(200).send())
+            .catch((err) => res.status(500).send(err))
+    },
+    deleteFeature: (req, res) => {
+        const { feature_id } = req.params
+        const db = req.app.get('db')
+        db.delete_feature_component([feature_id])
+            .then(() => res.status(200).send())
+            .catch((err) => res.status(500).send(err))
     }
-
 }
