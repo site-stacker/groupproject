@@ -11,7 +11,7 @@ class App extends Component {
         <Sidebar />
         <EditIcon />
         <LandingPage />
-        {/* <Login /> */}
+        <Login />
       </div>
     );
   }
