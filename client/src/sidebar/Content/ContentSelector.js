@@ -6,7 +6,7 @@ import {changeSelectedSection} from "./../../redux/reducer"
 function ContentSelector(props){
   const mappedSections = props.sections.map( (s, i) => {
     return (
-      <SectionBtn key={i} >
+      <SectionBtn key={i} onClick={() => props.changeSelectedSection(s)}>
         <p>{s}</p>
       </SectionBtn>
     )
