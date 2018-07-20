@@ -3,7 +3,7 @@ import {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeS
 import {connect} from "react-redux"
 import ImageUploader from "./../../ImageUploader/ImageUploader"
 import {Input} from "./../../shared/Input"
-import styled from "../../../../node_modules/styled-components";
+import styled from "styled-components";
 import BackgroundImgPicker from "./BackgroundImgPicker";
 
 class HeaderEditor extends Component{
@@ -23,7 +23,7 @@ class HeaderEditor extends Component{
   render(){
     return(
       <Wrapper>
-        <p onClick={() => this.props.changeSelectedSection("general")}>BACK</p>
+        <p onClick={() => this.props.updatePosition("general")}>BACK</p>
         <p>Header</p>
         <Input onChange={(e) => this.props.updateHeaderHeading(e.target.value)}/>
         <Input onChange={(e) => this.props.updateHeaderSubheading(e.target.value)}/>
@@ -48,5 +48,7 @@ const Btn = styled.button`
 `;
 
 const Wrapper = styled.div`
-  position: relative;
+  width: 400px;
+  margin-right: 100px;
+  justify-content: center;
 `;
