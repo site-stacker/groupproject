@@ -11,7 +11,7 @@ function Heading(props){
 
 const mapStateToProps = state => {
   return {
-    heading: state.header.heading,
+    heading: state.currentProject.heading,
     font_color: state.header.font_color
   }
 }

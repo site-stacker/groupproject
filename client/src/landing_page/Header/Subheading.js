@@ -4,14 +4,16 @@ import styled from "styled-components"
 
 function Subheading(props){
   return(
-    <Subheader>{props.subheading}</Subheader>
+    <Subheader color={props.font_color.length !== 0 ? props.font_color[0].substring(1, props.font_color[0].length-1) : null}>{props.subheading}</Subheader>
   )
 }
 
 const mapStateToProps = state => {
+  const str = state.currentProject.color_palette
+  const arr = str ? str.substring(1, str.length-1).split(", ") : []
   return {
-    subheading: state.header.subheading,
-    font_color: state.header.font_color
+    subheading: state.currentProject.subheading,
+    font_color: arr
   }
 }
 

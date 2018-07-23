@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Design from "./Design";
+import Design from "./Design/Design";
 
 export default function Wrapper(){
   return(
@@ -20,7 +20,7 @@ const Sidebar = styled.div`
   padding: 50px;
   width: 500px;
   height: 100vh;
-  background: rgba(255, 255 ,255 ,0.95);
+  background: red;
   position: fixed;
   z-index: 40;
   box-sizing: border-box;

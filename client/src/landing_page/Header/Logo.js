@@ -10,7 +10,7 @@ function Logo(props){
 
 const mapStateToProps = state => {
   return {
-    logo: state.header.logo
+    logo: state.currentProject.logo
   }
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Content from "./Content";
+import {darkwhite, darkblue} from "./../shared/colors"
 
 export default function ContentWrapper(){
   return(
@@ -20,13 +21,13 @@ const Sidebar = styled.div`
   padding: 50px;
   width: 500px;
   height: 100vh;
-  background: rgba(255, 255 ,255 ,0.95);
+  background: ${darkwhite};
   position: fixed;
   z-index: 40;
   box-sizing: border-box;
   overflow-y: scroll;
   /* align-items: center; */
-  box-shadow: 0 0 30px black;
+  box-shadow: 0 0 30px ${darkblue};
 
   ::-webkit-scrollbar {
     width: 0;

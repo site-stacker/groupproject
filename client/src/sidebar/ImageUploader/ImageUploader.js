@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { storage } from '../firebase/index';
+import {storage} from "./../../firebase/index"
+import {updateHeaderImage} from "./../../redux/reducer"
+import {connect} from "react-redux"
+
 
 class ImageUploader extends Component {
     constructor(props) {
@@ -10,15 +13,13 @@ class ImageUploader extends Component {
             url: '',
             progress: 0
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleUpload = this.handleUpload.bind(this);
     }
 
     handleChange = e => {
         if(e.target.files[0]) {
             const image = e.target.files[0];
             this.setState({
-                image 
+                image: image 
             })
         }
     }
@@ -26,6 +27,7 @@ class ImageUploader extends Component {
     handleUpload = () => {
         const {image} = this.state;
         const uploadTask = storage.ref(`main_images/${image.name}`).put(image);
+        // this.props.updateHeaderImage(image)
         uploadTask.on('state_changed', 
         (snapshot) => {
             // progress function
@@ -40,6 +42,7 @@ class ImageUploader extends Component {
             // complete function
             storage.ref('main_images').child(image.name).getDownloadURL().then(url => {
                 console.log(url);
+                this.props.updateHeaderImage(url)
                 this.setState({url})
                 // AXIOS CALL TO SAVE IMAGE URL IN DB GOES HERE
             })
@@ -65,4 +68,4 @@ class ImageUploader extends Component {
     }
 }
 
-export default ImageUploader;
+export default connect(null, {updateHeaderImage})(ImageUploader);
