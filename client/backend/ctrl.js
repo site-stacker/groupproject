@@ -4,9 +4,8 @@ let session_id_count = 1
 module.exports = 
 { 
     getProjects: (req, res) => {
-    const { user_id } = req.params
     const db = req.app.get('db')
-    db.get_projects([user_id])
+    db.get_projects([req.session.user.user_id])
         .then(projects => res.status(200).send(projects))
         .catch((err) => res.status(500).send(err))
     },

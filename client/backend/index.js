@@ -31,7 +31,7 @@ app.use(session({
 app.use(checkUserSession)
 //enpoints 
 ////////////////////////////////////////////////
-app.get('/api/getProjects/:user_id', ctrl.getProjects)
+app.get('/api/getProjects/', ctrl.getProjects)
 app.get('/api/getProject/:user_id/:project_id', ctrl.getProject)
 app.get('/api/getColors', ctrl.getColors)
 app.get('/api/getAbout/:user_id/:project_id', ctrl.getAbout)
