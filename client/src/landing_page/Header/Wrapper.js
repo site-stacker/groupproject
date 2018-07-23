@@ -36,7 +36,6 @@ class Wrapper extends Component{
   }
 }
 const mapStateToProps = state => {
-  console.log("hit")
   return {
     bg_img: state.currentProject.background_img,
     bg_color: state.header.background_color,

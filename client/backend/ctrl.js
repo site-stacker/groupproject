@@ -55,8 +55,8 @@ module.exports =
                         session_id_count++
                         req.session.user.user_id = user[0].user_id
                         req.session.user.username = user[0].username
-                        console.log('registered: ', req.session)
-                        res.status(200).send(user.username)})
+                        console.log(req.session)
+                        res.status(200).send(req.session.user)})
                     .catch(err => res.status(500).send(err))
             }
         })
@@ -86,8 +86,8 @@ module.exports =
                     session_id_count++
                     req.session.user.user_id = user[0].user_id
                     req.session.user.username = user[0].username
-                    console.log(req.session)
-                    res.status(200).send('Logged in successfully')
+                    console.log('hey', req.session)
+                    res.status(200).send('Logged In')
                 } else {
                     console.log(req.session)
                     res.status(200).send('Invalid Password')
