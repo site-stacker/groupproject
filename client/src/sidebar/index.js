@@ -5,6 +5,7 @@ import {getFontsList, getProject} from "./../redux/reducer";
 import {connect} from "react-redux"
 import styled from "styled-components"
 import Menu from "./Menu"
+import "./../assets/pe-icon-7-stroke.css"
 
 class Sidebar extends Component{
   constructor(){
@@ -24,8 +25,6 @@ class Sidebar extends Component{
     if(nP.toggle !== this.props.toggle){
       this.toggle()
     }
-
-    console.log(this.props.selected)
   }
 
   toggle = () =>{
@@ -63,7 +62,9 @@ const SidebarDiv = styled.div`
   left: ${props => props.left};
   transition: 0.3s ease-in;
   width: 500px;
-  height: 100vh;
+  height: 100%;
+  box-shadow: 0px 0 10px #888888;
+  z-index: 2;
 `;
 const Container = styled.div`
   position: absolute;
@@ -76,7 +77,6 @@ const Container = styled.div`
 `;
 const Div = styled.div`
   position: absolute;
-  background: red;
   height: 100%;
   width: 100%;
   top: 0;
@@ -84,4 +84,5 @@ const Div = styled.div`
   left: 0;
   right: 0;
   overflow: hidden;
+  
 `;

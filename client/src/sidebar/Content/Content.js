@@ -59,6 +59,7 @@ const SliderWrapper = styled.div`
   left: ${props => props.left};
   width: 1000px;
   transition: 0.3s ease-in;
+  margin-top: 50px;
 `;
 
 const mapStateToProps = state => {
