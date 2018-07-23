@@ -58,7 +58,7 @@ const Inputs = styled.input`
 const Label = styled.label`
   position: absolute; 
   left: 0; 
-  top: ${props => props.top}
+  top: ${props => props.top};
   color: #aaa; 
   transition: 0.3s; 
   z-index: -1; 
