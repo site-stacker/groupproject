@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {getUser} from '../../redux/reducer'
+import {connect} from 'react-redux'
 import axios from 'axios'
 
 class Login extends Component{
@@ -8,7 +10,7 @@ class Login extends Component{
             username: '',
             password: '',
             error: '',
-            loggedIn: false
+            loggedIn: false,
         }
     }
     login(){
@@ -17,6 +19,7 @@ class Login extends Component{
             axios.post('/api/login', {username: username.toLowerCase(), password: password}).then(res => {
               console.log(res.data)
               if(res.data.length !== 0){
+                  this.props.getUser(res.data)
                   this.setState({error: res.data})
                   this.setState({loggedIn: true})
               } else {
@@ -75,4 +78,5 @@ class Login extends Component{
     }
 }
 
-export default Login
+
+export default connect (null, {getUser})(Login)

@@ -21,6 +21,7 @@ class GeneralEditor extends Component{
   
 
   render(){
+    console.log(this.props)
     return(
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>

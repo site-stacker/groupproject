@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const initialState ={
+  user: {},
   header:{
     // background_color: "#313A5A",
     background_combined: false,
@@ -39,6 +40,7 @@ const initialState ={
 }
 
 
+const GET_USER = "GET_USER";
 
 const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
@@ -63,6 +65,9 @@ const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
 
 export default function reducer(state = initialState, action){
   switch(action.type){
+    case GET_USER:
+      return Object.assign({}, state, {user: action.payload})
+
     case TOGGLE_SIDEBAR:
       return Object.assign({}, state, {toggleSidebar: !state.toggleSidebar})
       
@@ -71,6 +76,7 @@ export default function reducer(state = initialState, action){
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
     case GET_PROJECT + "_FULFILLED":
+    
       return Object.assign({}, state, {currentProject: action.payload[0] }) 
     case CHANGE_SELECTED_SECTION:
       return Object.assign({}, state, {sectionSelected: action.payload }) 
@@ -108,6 +114,15 @@ export default function reducer(state = initialState, action){
   }
 }
 
+export function getUser(userData){
+
+  return {
+    type: GET_USER,
+    payload: userData
+  }
+}
+
+
 export const getColorThemes = () =>{
 
   const colors = axios.get("/api/getColors").then(res => res.data)
@@ -129,6 +144,7 @@ export const getFontsList = () =>{
 }
 
 export const getProject = (user_id, project_id) =>{
+  console.log(user_id)
   const project = axios.get(`/api/getProject/${user_id}/${project_id}`).then(res => res.data)
   return{
     type: GET_PROJECT,
