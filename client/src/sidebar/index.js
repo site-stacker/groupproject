@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ContentWrapper from "./Content/ContentWrapper";
 import DesignWrapper from "./Design/DesignWrapper";
-import {getFontsList, getProject} from "./../redux/reducer";
+import {getFontsList, getProject, getColorThemes} from "./../redux/reducer";
 import {connect} from "react-redux"
 import styled from "styled-components"
 import Menu from "./Menu"
@@ -19,6 +19,7 @@ class Sidebar extends Component{
   componentDidMount(){
     this.props.getProject(this.props.user.user_id, 1)
     this.props.getFontsList()
+    this.props.getColorThemes()
   }
 
   componentDidUpdate(pP, nP){
@@ -56,7 +57,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getFontsList, getProject})(Sidebar)
+export default connect(mapStateToProps, {getFontsList, getProject, getColorThemes})(Sidebar)
 
 const SidebarDiv = styled.div`
   font-family: "Raleway";

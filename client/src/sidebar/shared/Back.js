@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 export default function Back(props){
   return(
-    <Btn>
+    <Btn onClick={() => props.updatePosition("general")}>
     <MenuIcon className="pe-7s-angle-left"></MenuIcon>
-    <P onClick={() => props.updatePosition("general")}>BACK</P>
+    <P>BACK</P>
     </Btn>
   )
 }

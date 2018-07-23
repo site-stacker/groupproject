@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {changeSelectedSection, updateFeaturesHeading, updateAboutText} from "./../../../redux/reducer"
 import {connect} from "react-redux"
-import {Input} from "./../../shared/Input"
+import Input from "./../../shared/Input"
 import {Textarea} from "./../../shared/Textarea"
+import Back from "./../../shared/Back"
 import styled from "styled-components";
 
 class AboutEditor extends Component{
@@ -14,12 +15,15 @@ class AboutEditor extends Component{
     }
   }
 
+  handleInput = (str) => {
+    this.props.updateFeaturesHeading(str)
+  };
+
   render(){
     return(
       <Wrapper>
-        <p onClick={() => this.props.updatePosition("general")}>BACK</p>
-        <p>Features</p>
-        <Input onChange={(e) => this.props.updateFeaturesHeading(e.target.value)}/>
+        <Back updatePosition={this.props.updatePosition}/>
+        <Input handleInput={this.handleInput} name="Heading"/>
         <Textarea rows="6" cols="50" onChange={(e) => this.props.updateAboutText(e.target.value)}/>
       </Wrapper>
     )
