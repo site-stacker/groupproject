@@ -10,7 +10,7 @@ function Heading(props){
 
 const mapStateToProps = state => {
   return{
-    heading: state.about.heading
+    heading: state.currentProject.about_heading
   }
 }
 

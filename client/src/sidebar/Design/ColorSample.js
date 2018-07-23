@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components"
 
 export default function ColorSample(props){
-// console.log(props)
+  const color = props.palette.match(/[#a-zA-Z0-9]+/g) 
   return(
     <ColorBox>
       <ColorPalette>
-        <ThemeSample bg_color={props.palette[1]}/>
-        <ThemeSample bg_color={props.palette[2]}/>
-        <ThemeSample bg_color={props.palette[3]}/>
-        <ThemeSample bg_color={props.palette[4]}/>
+        <ThemeSample bg_color={color[1]}/>
+        <ThemeSample bg_color={color[2]}/>
+        <ThemeSample bg_color={color[3]}/>
+        <ThemeSample bg_color={color[4]}/>
       </ColorPalette>
       <NameContainer>
         <ColorName>{props.name}</ColorName>

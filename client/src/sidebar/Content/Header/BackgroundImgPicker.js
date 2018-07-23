@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import styled from "styled-components"
 import {connect} from "react-redux"
 import {darkwhite} from "./../../shared/colors"
-import { Input } from "./../../shared/Input"
+import Input from "./../../shared/Input"
 import axios from "axios"
 import {updateHeaderBg} from "./../../../redux/reducer"
 // require("dotenv").config()
@@ -75,24 +75,18 @@ export default connect(mapStateToProps, {updateHeaderBg})(BackgroundPicker)
 
 const Bg = styled.div`
   width: 100%;
-  height: 100%;
   padding: 30px;
-  background: ${darkwhite};
+  box-sizing: border-box;
+  background: white;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 40px;
   right: 0;
-  bottom: 0;
+  margin-bottom: 40px;
 `;
 
 const ImgsGrid = styled.div`
   width: 100%;
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  grid-auto-rows: minmax(120px, auto);
-    grid-auto-flow: dense;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px; */
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -100,9 +94,9 @@ const ImgsGrid = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  width: 45%;
-  margin: 0 0 15px;
-  height: 120px;
+  width: 48%;
+  margin: 0 0 5px;
+  height: 100px;
   overflow: hidden;
   display: flex;
   flex-flow: row;

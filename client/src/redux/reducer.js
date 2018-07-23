@@ -1,20 +1,11 @@
 import axios from "axios";
 
 const initialState ={
+  user: {},
   header:{
-    background_color: "#313A5A",
+    // background_color: "#313A5A",
     background_combined: false,
-    font_color: "red",
-    heading: "This is a sample heading for the landing page we are building with the super builder",
-    subheading: "This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader. This is the subheader.",
-    product_img: "https://mockuphone.com/static/images/devices/apple-iphone6-spacegrey-portrait.png",
-    product_img: "https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/bb311e4d3417ac027a5e4545146389e7/usecases-board02.jpg",
-    logo: "https://static.mailchimp.com/web/brand-assets/logo-script-light.svg",
-    button_text: "Try this app"
-  },
-  about:{
-    heading: "About Us",
-    text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+    font_color: "#333",
   },
   features:[
     {
@@ -33,79 +24,69 @@ const initialState ={
       text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
     }
   ],
-  color_themes: [
-      {
-          "color_id": 1,
-          "color_palette_name": "Blue",
-          "color_palette": ["#FFFFFF", "#00CC47", "#0166FF", "#05112A", "#00B9FF"]
-      },
-      {
-          "color_id": 2,
-          "color_palette_name": "Orange",
-          "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
-      },
-      {
-          "color_id": 3,
-          "color_palette_name": "Ocher",
-          "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
-      },
-      {
-          "color_id": 4,
-          "color_palette_name": "Beige",
-          "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
-      },
-      {
-          "color_id": 5,
-          "color_palette_name": "Yellow",
-          "color_palette": ["#FFFFFF", "#353740", "#F5CA0A", "#F5870A", "#FCAE02"]
-      },
-      {
-          "color_id": 6,
-          "color_palette_name": "Orange",
-          "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
-      },
-      {
-          "color_id": 7,
-          "color_palette_name": "Ocher",
-          "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
-      },
-      {
-          "color_id": 8,
-          "color_palette_name": "Beige",
-          "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
-      }
-  ],
+  color_themes:[],
   fonts_list:[],
-  currentProject:{},
+  currentProject:{
+      about_heading: "About US",
+      about_text: "Sed "
+    },
   sections:["About Us", "Features"],
   contentSection: "Sections",
-  sectionSelected: "",
-  toggleSidebar: false
+  sectionSelected: "content",
+  selectedTheme:["#FFFFFF", "#313A5A", "#1FDB84", "#999999", "#00B9FF"],
+  toggleSidebar: true,
+  resetPosition: 0
+  
 }
 
 
+const GET_USER = "GET_USER";
+
 const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
+const GET_COLORS_THEME = "GET_COLORS_THEME";
+
+const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
 const CHANGE_SELECTED_SECTION = "CHANGE_SELECTED_SECTION"
+
+const UPDATE_GENERAL_TITLE = "UPDATE_GENERAL_TITLE"
+const UPLOAD_GENERAL_LOGO = "UPLOAD_GENERAL_LOGO"
+
 const UPDATE_HEADER_HEADING = "UPDATE_HEADER_HEADING"
 const UPDATE_HEADER_SUBHEADING = "UPDATE_HEADER_SUBHEADING"
 const UPDATE_HEADER_BUTTON = "UPDATE_HEADER_BUTTON"
-const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
 const UPDATE_HEADER_IMAGE = "UPDATE_HEADER_IMAGE"
 const UPDATE_HEADER_BG = "UPDATE_HEADER_BG"
 
+const UPDATE_ABOUT_HEADING = "UPDATE_ABOUT_HEADING"
+const UPDATE_ABOUT_TEXT = "UPDATE_ABOUT_TEXT"
+
+const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
+
 export default function reducer(state = initialState, action){
   switch(action.type){
+    case GET_USER:
+      return Object.assign({}, state, {user: action.payload})
+
     case TOGGLE_SIDEBAR:
       return Object.assign({}, state, {toggleSidebar: !state.toggleSidebar})
-
+      
+    case GET_COLORS_THEME + "_FULFILLED":
+      return Object.assign({}, state, {color_themes: action.payload})
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
     case GET_PROJECT + "_FULFILLED":
+    
       return Object.assign({}, state, {currentProject: action.payload[0] }) 
     case CHANGE_SELECTED_SECTION:
       return Object.assign({}, state, {sectionSelected: action.payload }) 
-    
+
+    //GENERAL EDITOR  
+    case UPDATE_GENERAL_TITLE:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, title: action.payload}}) 
+    case UPLOAD_GENERAL_LOGO:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, logo: action.payload}})   
+
     //HEADER EDITOR
     case UPDATE_HEADER_HEADING:
       return Object.assign({}, state, {currentProject: {...state.currentProject, heading: action.payload}}) 
@@ -117,8 +98,38 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, {currentProject: {...state.currentProject, main_img: action.payload}}) 
     case UPDATE_HEADER_BG:
       return Object.assign({}, state, {currentProject: {...state.currentProject, background_img: action.payload}}) 
-    default:
+
+    //ABOUT EDITOR  
+    case UPDATE_ABOUT_HEADING:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, about_heading: action.payload}})
+    case UPDATE_ABOUT_TEXT:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, about_text: action.payload}})    
+    
+    //FEATURES EDITOR  
+    case UPDATE_FEATURES_HEADING:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, features_heading: action.payload}})
+      
+      default:
       return state
+  }
+}
+
+export function getUser(userData){
+
+  return {
+    type: GET_USER,
+    payload: userData
+  }
+}
+
+
+export const getColorThemes = () =>{
+
+  const colors = axios.get("/api/getColors").then(res => res.data)
+  
+  return{
+    type: GET_COLORS_THEME,
+    payload: colors
   }
 }
 
@@ -133,6 +144,7 @@ export const getFontsList = () =>{
 }
 
 export const getProject = (user_id, project_id) =>{
+  console.log(user_id)
   const project = axios.get(`/api/getProject/${user_id}/${project_id}`).then(res => res.data)
   return{
     type: GET_PROJECT,
@@ -141,8 +153,25 @@ export const getProject = (user_id, project_id) =>{
 }
 
 export const changeSelectedSection = (str) => {
+  console.log("action.payload")
   return {
     type: CHANGE_SELECTED_SECTION,
+    payload: str
+  }
+}
+
+// GENERAL EDITOR
+
+export const updateGeneralTitle = str => {
+  return{
+    type: UPDATE_GENERAL_TITLE, 
+    payload: str
+  }
+}
+
+export const uploadGeneralLogo = str => {
+  return{
+    type: UPLOAD_GENERAL_LOGO, 
     payload: str
   }
 }
@@ -185,6 +214,37 @@ export const updateHeaderBg = str => {
   }
 }
 
+// ABOUT EDITOR
+
+export const updateAboutHeading = str => {
+  return{
+    type: UPDATE_ABOUT_HEADING, 
+    payload: str
+  }
+}
+
+export const updateAboutText = str => {
+  return{
+    type: UPDATE_ABOUT_TEXT, 
+    payload: str
+  }
+}
+
+// ABOUT EDITOR
+
+export const updateFeaturesHeading = str => {
+  return{
+    type: UPDATE_FEATURES_HEADING, 
+    payload: str
+  }
+}
+
+export const updateFeaturesText = str => {
+  return{
+    type: UPDATE_ABOUT_TEXT, 
+    payload: str
+  }
+}
 
 //TOGGLE SIDEBAR
 export const toggleSidebar = () => {

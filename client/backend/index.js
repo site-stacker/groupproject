@@ -32,12 +32,25 @@ app.use(checkUserSession)
 //enpoints 
 ////////////////////////////////////////////////
 app.get('/api/getProjects/', ctrl.getProjects)
+app.get('/api/user/', (req, res) => {
+    if(req.session.user){
+        res.status(200).send(user)
+    } else {
+        res.status(401).send('Unauthorized')
+    }
+})
 app.get('/api/getProject/:user_id/:project_id', ctrl.getProject)
 app.get('/api/getColors', ctrl.getColors)
 app.get('/api/getAbout/:user_id/:project_id', ctrl.getAbout)
 app.get('/api/getFeature/:user_id/:project_id', ctrl.getFeature)
 app.post('/api/createUser', ctrl.createUser)
 app.post('/api/login', ctrl.loginUser)
+app.post('/api/logout', (req, res) => { 
+    console.log(req.session)
+    req.session.destroy();
+    console.log(req.session)
+    res.status(200).send()
+})
 app.post('/api/createProject', ctrl.createProject)
 app.post('/api/createHeader/:project_id', ctrl.createHeader)
 app.post('/api/createAbout', ctrl.createAbout)

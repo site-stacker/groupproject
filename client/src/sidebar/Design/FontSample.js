@@ -6,7 +6,7 @@ export default function FontSample(props){
     <FontBox>
       <FontDisplay font_family={props.name}><TextSample>Aa</TextSample></FontDisplay>  
       <NameContainer>
-        <FontName>{props.name}</FontName>
+        <FontName font_family={props.name}>{props.name}</FontName>
       </NameContainer>  
     </FontBox>  
   )
@@ -39,6 +39,7 @@ const NameContainer = styled.div`
 `;
 
 const FontName = styled.p`
+  font-family: ${props => props.font_family};
   color: #333;
   font-size: 0.8em;
   font-weight: 700;
