@@ -40,7 +40,7 @@ const SectionMenu = styled.div`
   height: 50px;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 40px;
+  margin: 30px auto 40px;
   position: relative;
   z-index: 41;
 `;

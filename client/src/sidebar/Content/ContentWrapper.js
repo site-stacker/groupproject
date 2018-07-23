@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import Content from "./Content";
-import {darkwhite, darkblue} from "./../shared/colors";
+import {darkwhite} from "./../shared/colors";
 
 
 class ContentWrapper extends Component{
@@ -37,18 +37,8 @@ const Container = styled.div`
   z-index: 40;
   box-sizing: border-box;
   overflow-y: scroll;
-  /* align-items: center; */
-  
 
   ::-webkit-scrollbar {
     width: 0;
 }
-`;
-
-
-
-const FlexRow = styled.div`
-  display: flex;
-  flex-flow: row;
-  width: 1000px;
 `;

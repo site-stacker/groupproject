@@ -5,6 +5,7 @@ import ImageUploader from "./../../ImageUploader/ImageUploader"
 import {Input} from "./../../shared/Input"
 import styled from "styled-components";
 import BackgroundImgPicker from "./BackgroundImgPicker";
+import Back from "./../../shared/Back"
 
 class HeaderEditor extends Component{
   constructor(props){
@@ -23,8 +24,7 @@ class HeaderEditor extends Component{
   render(){
     return(
       <Wrapper>
-        <p onClick={() => this.props.updatePosition("general")}>BACK</p>
-        <p>Header</p>
+        <Back updatePosition={this.props.updatePosition}/>
         <Input onChange={(e) => this.props.updateHeaderHeading(e.target.value)}/>
         <Input onChange={(e) => this.props.updateHeaderSubheading(e.target.value)}/>
         <Input onChange={(e) => this.props.updateHeaderButton(e.target.value)}/>
@@ -36,7 +36,6 @@ class HeaderEditor extends Component{
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state.sectionSelected)
   return{
     sections: state.sectionSelected
   }

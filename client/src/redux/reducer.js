@@ -2,9 +2,9 @@ import axios from "axios";
 
 const initialState ={
   header:{
-    background_color: "#313A5A",
+    // background_color: "#313A5A",
     background_combined: false,
-    font_color: "red",
+    font_color: "#333",
   },
   features:[
     {
