@@ -31,6 +31,7 @@ app.use(session({
 app.use(checkUserSession)
 //enpoints 
 ////////////////////////////////////////////////
+app.get('/api/getProjects/', ctrl.getProjects)
 app.get('/api/user/', (req, res) => {
     if(req.session.user){
         res.status(200).send(user)
@@ -38,7 +39,6 @@ app.get('/api/user/', (req, res) => {
         res.status(401).send('Unauthorized')
     }
 })
-app.get('/api/getProjects/:user_id', ctrl.getProjects)
 app.get('/api/getProject/:user_id/:project_id', ctrl.getProject)
 app.get('/api/getColors', ctrl.getColors)
 app.get('/api/getAbout/:user_id/:project_id', ctrl.getAbout)

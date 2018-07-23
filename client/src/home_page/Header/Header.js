@@ -1,17 +1,32 @@
 import React from 'react';
+import styled from 'styled-components';
 
 function Header() {
     return (
-        <div>
-            <div>
+        <HeaderDiv>
+            <TitleHolder>
                 <img src='http://lees.fe.uni-lj.si/uploads/default-logo.png' alt='' width='50px'/>
                 <h2>SKIZZL</h2>    
-            </div> 
+            </TitleHolder> 
             <div>
-                <h4>Account</h4>
+                <h3>Account</h3>
             </div> 
-        </div> 
+        </HeaderDiv> 
     )
 }
 
 export default Header;
+
+const HeaderDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    color: #5D38DB;
+`
+
+const TitleHolder = styled.div`
+    display: flex;
+    align-items: center;
+`
