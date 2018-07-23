@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection} from "./../../../redux/reducer"
 import {connect} from "react-redux"
 import ImageUploader from "./../../ImageUploader/ImageUploader"
-import {Input} from "./../../shared/Input"
+import Input from "./../../shared/Input"
 import styled from "styled-components";
 import BackgroundImgPicker from "./BackgroundImgPicker";
 import Back from "./../../shared/Back"
@@ -20,14 +20,26 @@ class HeaderEditor extends Component{
     this.setState({toggleImgPicker: !this.state.toggleImgPicker})
   }
 
+  handleHeading = (str) => {
+    this.props.updateHeaderHeading(str)
+  };
+
+  handleSubheading = (str) => {
+    this.props.updateHeaderSubheading(str)
+  };
+
+  handleButtonText = (str) => {
+    this.props.updateHeaderButton(str)
+  };
+
 
   render(){
     return(
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>
-        <Input onChange={(e) => this.props.updateHeaderHeading(e.target.value)}/>
-        <Input onChange={(e) => this.props.updateHeaderSubheading(e.target.value)}/>
-        <Input onChange={(e) => this.props.updateHeaderButton(e.target.value)}/>
+        <Input handleInput={this.handleHeading} name="Heading"/>
+        <Input handleInput={this.handleSubheading} name="Subheading"/>
+        <Input handleInput={this.handleButtonText} name="Button text"/>
         <ImageUploader />
         <Btn onClick={()=>this.handleTogle()}>asdfasdf</Btn>
         {this.state.toggleImgPicker ? <BackgroundImgPicker /> : null}

@@ -23,48 +23,7 @@ const initialState ={
       text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
     }
   ],
-  color_themes: [
-      {
-          "color_id": 1,
-          "color_palette_name": "Blue",
-          "color_palette": ["#FFFFFF", "#00CC47", "#0166FF", "#05112A", "#00B9FF"]
-      },
-      {
-          "color_id": 2,
-          "color_palette_name": "Orange",
-          "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
-      },
-      {
-          "color_id": 3,
-          "color_palette_name": "Ocher",
-          "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
-      },
-      {
-          "color_id": 4,
-          "color_palette_name": "Beige",
-          "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
-      },
-      {
-          "color_id": 5,
-          "color_palette_name": "Yellow",
-          "color_palette": ["#FFFFFF", "#353740", "#F5CA0A", "#F5870A", "#FCAE02"]
-      },
-      {
-          "color_id": 6,
-          "color_palette_name": "Orange",
-          "color_palette": ["#FFFFFF", "#2050D3", "#F24A2A", "#D44125", "#F7F9FA"]
-      },
-      {
-          "color_id": 7,
-          "color_palette_name": "Ocher",
-          "color_palette": ["#FFFFFF", "#1A0F2F", "#CCAA3F", "#957A3E", "#AB8F3D"]
-      },
-      {
-          "color_id": 8,
-          "color_palette_name": "Beige",
-          "color_palette": ["#FFFFFF", "#666663", "#F2DEC5", "#E0C295", "#E2C69C"]
-      }
-  ],
+  color_themes:[],
   fonts_list:[],
   currentProject:{
       about_heading: "About US",
@@ -73,6 +32,7 @@ const initialState ={
   sections:["About Us", "Features"],
   contentSection: "Sections",
   sectionSelected: "content",
+  selectedTheme:["#FFFFFF", "#313A5A", "#1FDB84", "#999999", "#00B9FF"],
   toggleSidebar: true,
   resetPosition: 0
   
@@ -82,6 +42,7 @@ const initialState ={
 
 const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
+const GET_COLORS_THEME = "GET_COLORS_THEME";
 
 const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
 const CHANGE_SELECTED_SECTION = "CHANGE_SELECTED_SECTION"
@@ -104,7 +65,9 @@ export default function reducer(state = initialState, action){
   switch(action.type){
     case TOGGLE_SIDEBAR:
       return Object.assign({}, state, {toggleSidebar: !state.toggleSidebar})
-
+      
+    case GET_COLORS_THEME + "_FULFILLED":
+      return Object.assign({}, state, {color_themes: action.payload})
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
     case GET_PROJECT + "_FULFILLED":
@@ -142,6 +105,16 @@ export default function reducer(state = initialState, action){
       
       default:
       return state
+  }
+}
+
+export const getColorThemes = () =>{
+
+  const colors = axios.get("/api/getColors").then(res => res.data)
+  
+  return{
+    type: GET_COLORS_THEME,
+    payload: colors
   }
 }
 
