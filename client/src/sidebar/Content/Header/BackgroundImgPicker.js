@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import styled from "styled-components"
 import {connect} from "react-redux"
 import {darkwhite} from "./../../shared/colors"
-import { Input } from "./../../shared/Input"
+import Input from "./../../shared/Input"
 import axios from "axios"
 import {updateHeaderBg} from "./../../../redux/reducer"
 // require("dotenv").config()

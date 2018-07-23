@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ContentSelector from "./ContentSelector";
 import GeneralEditor from "./General/GeneralEditor";
-import HeaderEditor from "./Header/HeaderEditor";
+import HeaderEditor from "./Header/HeaderEditor.js"
 import AboutEditor from "./AboutUs/AboutEditor";
 import FeaturesEditor from "./Features/FeaturesEditor";
 import styled from "styled-components";

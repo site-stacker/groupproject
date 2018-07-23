@@ -4,7 +4,7 @@ import styled from "styled-components"
 import ColorSample from "./ColorSample"
 
 function ColorSelector(props){
-  console.log(props.themes)
+  if(props.themes[0]){console.log(props.themes[0].color_palette.match(/[#a-zA-Z0-9]+/g))}
   const sample = props.themes.map( theme => {
     return <ColorSample key={theme.color_id} name={theme.color_palette_name} palette={theme.color_palette}/>
   })
