@@ -4,9 +4,8 @@ let session_id_count = 1
 module.exports = 
 { 
     getProjects: (req, res) => {
-    const { user_id } = req.params
     const db = req.app.get('db')
-    db.get_projects([user_id])
+    db.get_projects([req.session.user.user_id])
         .then(projects => res.status(200).send(projects))
         .catch((err) => res.status(500).send(err))
     },
@@ -87,7 +86,7 @@ module.exports =
                     req.session.user.user_id = user[0].user_id
                     req.session.user.username = user[0].username
                     console.log('hey', req.session)
-                    res.status(200).send(req.session.user)
+                    res.status(200).send(req.session.user.user_id.toString())
                 } else {
                     console.log(req.session)
                     res.status(200).send('Invalid Password')
