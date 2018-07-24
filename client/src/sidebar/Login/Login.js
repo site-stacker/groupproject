@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {getUser} from '../../redux/reducer'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {Link} from 
 
 class Login extends Component{
     constructor(){
