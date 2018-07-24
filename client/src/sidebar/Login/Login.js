@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {getUser} from '../../redux/reducer'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import {Link} from 
+import {Route, Redirect} from 'react-router'
+import {Link} from 'react-router-dom'
 
 class Login extends Component{
     constructor(){
@@ -69,11 +70,22 @@ class Login extends Component{
             className='password-input'
             />
             <br/><br/>
+            {
+                this.state.loggedIn ? 
+            
+            <button type='submit' onClick={() => this.login()} className='login-btn'>
+            <Redirect to={'/projects'}/>
+            Login</button>
+                                    :
             <button type='submit' onClick={() => this.login()} className='login-btn'>Login</button>
-            <button type='submit' onClick={() => this.register()} className='register-btn'>Register</button>
-            <button type='submit' onClick={() => this.logout()} className='logout-btn'>Logout</button>
+            }
+            <button type='submit' onClick={() => this.register()} className='register-btn'>Register</button> 
+            <Link to='/'> 
+            <button type='submit' onClick={() => this.logout()} className='logout-btn'>
+            Logout
+            </button>
+            </Link>
             <p>{this.state.error}</p>
-            <p>{this.state.loggedIn}</p>
             </div> 
         )
     }
