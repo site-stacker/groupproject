@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {getUser} from '../../redux/reducer'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {Link} from 
 
 class Login extends Component{
     constructor(){
@@ -20,7 +21,7 @@ class Login extends Component{
               console.log(res.data)
               if(res.data.length !== 0){
                   this.props.getUser(res.data)
-                  this.setState({error: res.data})
+                  this.setState({error: 'Logged In'})
                   this.setState({loggedIn: true})
               } else {
                   this.setState({loggedIn: true, error: ''})

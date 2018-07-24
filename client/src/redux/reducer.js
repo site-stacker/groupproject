@@ -115,7 +115,7 @@ export default function reducer(state = initialState, action){
 }
 
 export function getUser(userData){
-
+  console.log(userData)
   return {
     type: GET_USER,
     payload: userData
