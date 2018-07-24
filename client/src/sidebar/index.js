@@ -17,7 +17,7 @@ class Sidebar extends Component{
   }
 
   componentDidMount(){
-    this.props.getProject(this.props.user.user_id, 1)
+    // this.props.getProject(this.props.user.user_id, 1)
     this.props.getFontsList()
     this.props.getColorThemes()
   }
@@ -48,7 +48,7 @@ class Sidebar extends Component{
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.user)
+  console.log(state.currentProject)
     return{
       project: state.currentProject,
       toggle: state.toggleSidebar,

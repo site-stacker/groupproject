@@ -86,7 +86,7 @@ module.exports =
                     req.session.user.user_id = user[0].user_id
                     req.session.user.username = user[0].username
                     console.log('hey', req.session)
-                    res.status(200).send('Logged In')
+                    res.status(200).send(req.session.user.user_id.toString())
                 } else {
                     console.log(req.session)
                     res.status(200).send('Invalid Password')

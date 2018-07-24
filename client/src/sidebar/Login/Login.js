@@ -20,7 +20,7 @@ class Login extends Component{
               console.log(res.data)
               if(res.data.length !== 0){
                   this.props.getUser(res.data)
-                  this.setState({error: res.data})
+                //   this.setState({error: res.data})
                   this.setState({loggedIn: true})
               } else {
                   this.setState({loggedIn: true, error: ''})
