@@ -101,7 +101,7 @@ module.exports =
         const {user_id, color_id, font, title, domain, logo} = req.body
         const db = req.app.get('db')
         db.create_project([user_id, color_id, font, title, domain, logo])
-            .then(newProject => res.status(200).send(newProject))
+            .then(projectId => res.status(200).send(projectId))
             .catch((err) => res.status(500).send(err))
     },
     createHeader: (req, res) => {

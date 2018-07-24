@@ -4,7 +4,6 @@ import Main from './Main/Main';
 import ExampleHolder from './ExampleHolder/ExampleHolder';
 import Features from './Features/Features';
 import Footer from './Footer/Footer';
-import Login from '../sidebar/Login/Login';
 
 export default function HomePage() {
     return (
@@ -13,8 +12,7 @@ export default function HomePage() {
             <Main />
             <ExampleHolder />
             <Features />
-            <Footer /> 
-            <Login />
+            <Footer />
         </div> 
     )
 }
