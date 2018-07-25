@@ -1,4 +1,5 @@
 import axios from "axios";
+import { gzip } from "zlib";
 
 const initialState ={
   user: '',
@@ -28,7 +29,8 @@ const initialState ={
   fonts_list:[],
   currentProject:{
       about_heading: "About US",
-      about_text: "Sed "
+      about_text: "Sed ",
+      background_img: ''
     },
   sections:["About Us", "Features"],
   contentSection: "Sections",
@@ -144,9 +146,8 @@ export const getFontsList = () =>{
   }
 }
 
-export const getProject = (user_id, project_id) =>{
-  console.log(user_id, project_id)
-  const project = axios.get(`/api/getProject/${user_id}/${project_id}`).then(res => res.data[0])
+export const getProject = (project_id) =>{
+  const project = axios.get(`/api/getProject/${project_id}`).then(res => res.data[0])
   console.log(project)
   return{
     type: GET_PROJECT,
