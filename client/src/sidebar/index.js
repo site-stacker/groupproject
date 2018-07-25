@@ -17,7 +17,7 @@ class Sidebar extends Component{
   }
 
   componentDidMount(){
-    // this.props.getProject(this.props.user.user_id, 1)
+    // this.props.getProject(this.props.user.user_id, this.props.project)
     this.props.getFontsList()
     this.props.getColorThemes()
   }

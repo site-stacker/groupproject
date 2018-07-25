@@ -14,12 +14,12 @@ class Main extends Component {
     }
 
     freeStart = () => {
-        axios.post('/api/createProject').then(res => {
+        axios.post('/api/createDefaultProject').then(res => {
             console.log(res.data[0].project_id)
             this.setState({
                 project: +res.data[0].project_id
             });
-            axios.post(`/api/createHeader/${res.data[0].project_id}`).then(res => {
+            axios.post(`/api/createDefaultHeader/${res.data[0].project_id}`).then(res => {
                 this.setState({
                     redirect: true
                 })
