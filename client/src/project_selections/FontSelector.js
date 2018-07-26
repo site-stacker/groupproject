@@ -56,7 +56,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(null)(FontPicker);
+export default connect(mapStateToProps)(FontPicker);
 
 const Font = styled.div`
     width: 1000px;
