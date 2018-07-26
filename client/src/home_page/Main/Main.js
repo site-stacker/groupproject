@@ -1,44 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            redirect: false,
-            project: 0
-        }
-    }
-
-    freeStart = () => {
-        axios.post('/api/createDefaultProject').then(res => {
-            console.log(res.data[0].project_id)
-            this.setState({
-                project: +res.data[0].project_id
-            });
-            axios.post(`/api/createDefaultHeader/${res.data[0].project_id}`).then(res => {
-                this.setState({
-                    redirect: true
-                })
-            })
-        })
-    }
 
     render() {
-        if(this.state.redirect) {
-            return <Redirect to={`/edit/${this.state.project}`} />
-        }
         return (
             <MainDiv>
                 <H1>The Easiest Solution to<br />Creating Your Website</H1>
-                {/* <Link to='/edit/1'> */}
-                    <FreeButton onClick={() => this.freeStart()}>
+                <Link to='/selections'>
+                    <FreeButton>
                         Start Here for Free
                     </FreeButton>
-                {/* </Link> */}
+                </Link>
             </MainDiv>
         )
     }
@@ -66,9 +40,16 @@ const MainDiv = styled.div`
 
 const FreeButton = styled.button`
     background-color: white;
+    width: 280px;
     font-size: 25px;
     margin: 20px;
     border: 3px whitesmoke solid;
     color: #5D38DB;
     border-radius: 5px;
+    transition: .5s;
+
+    :hover{
+        width: 350px;
+        transition: .5s;
+        }
 `
