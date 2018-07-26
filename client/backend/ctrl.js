@@ -133,8 +133,9 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         createDefaultProject: (req, res) => {
+            const {color_id, font, title} = req.body
             const db = req.app.get('db')
-            db.create_default_project([])
+            db.create_default_project([color_id, font, title])
                 .then(projectId => res.status(200).send(projectId))
                 .catch((err) => res.status(500).send(err))
         },

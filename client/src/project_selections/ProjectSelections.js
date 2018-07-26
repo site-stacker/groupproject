@@ -3,6 +3,8 @@ import TitleSelector from './TitleSelector';
 import ColorPicker from './ColorSelector';
 import FontPicker from './FontSelector';
 import { connect } from 'react-redux';
+import { getFontsList } from '../redux/reducer';
+import { getColorThemes } from '../redux/reducer';
 
 class ProjectSelections extends Component {
     constructor(props) {
@@ -12,13 +14,16 @@ class ProjectSelections extends Component {
             titleShow: true,
             colorShow: false,
             fontShow: false,
-            title: '',
-            color: '',
-            font: ''
+            title: ''
         }
         this.goToTitle = this.goToTitle.bind(this);
         this.goToColor = this.goToColor.bind(this);
         this.goToFont = this.goToFont.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.getColorThemes();
+        this.props.getFontsList();
     }
 
     goToTitle = () => {
@@ -51,25 +56,13 @@ class ProjectSelections extends Component {
         })
     }
 
-    setColor = (color) => {
-        this.setState({
-            color: color
-        })
-    }
-
-    setFont = (font) => {
-        this.setState({
-            font: font
-        })
-    }
-
     render() {
         return (
             <div>
-                { this.state.titleShow ? <TitleSelector goToColor={this.goToColor} setTitle={this.setTitle} title={this.state.title}/> : this.state.colorShow ? <ColorPicker goToFont={this.goToFont} goToTitle={this.goToTitle}/> : this.state.fontShow ? <FontPicker goToColor={this.goToColor}/> : '' }
+                { this.state.titleShow ? <TitleSelector goToColor={this.goToColor} setTitle={this.setTitle} title={this.state.title}/> : this.state.colorShow ? <ColorPicker goToFont={this.goToFont} goToTitle={this.goToTitle}/> : this.state.fontShow ? <FontPicker goToColor={this.goToColor} title={this.state.title}/> : '' }
             </div> 
         )
     }
 }
 
-export default ProjectSelections
+export default connect(null, {getFontsList, getColorThemes})(ProjectSelections);

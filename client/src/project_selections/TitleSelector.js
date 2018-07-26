@@ -2,17 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Icon from '@material-ui/icons';
 
 function TitleSelector(props) {
     return (
-        <Title>
-            <h1>What is the Title of Your Project?</h1>
-            <input onChange={(e) => props.setTitle(e.target.value)} value={props.title}/>
-            <Link to={props.user ? '/projects' : '/'} >
-            <button>Back</button>
-            </Link >
-            <button onClick={() => props.goToColor()}>Continue</button>
-        </Title> 
+        <Center>
+            <Title>
+                <h1>What is the Title of Your Project?</h1>
+                <TitleInput onChange={(e) => props.setTitle(e.target.value)} value={props.title} />
+                <br />
+                <br />
+                <div>
+                    <Link to={props.user ? '/projects' : '/'} >
+                        <Arrow className='pe-7s-left-arrow' ></Arrow>
+                    </Link >
+                    <Arrow onClick={() => props.goToColor()} className='pe-7s-right-arrow'></Arrow>
+                </div>
+            </Title>
+        </Center>
     )
 }
 
@@ -33,4 +40,46 @@ const Title = styled.div`
     align-items: center;
     top: 200px;
     color: #5D38DB;
+`
+
+const Center = styled.div`
+    height: 100vh;
+    display: flex;
+`
+
+const Arrow = styled.button`
+    background: none;
+    outline: none;
+    border: none;
+    color: #5D38DB;
+    margin: 0px 20px;
+    font-size: 40px;
+    transition: .5s;
+
+    :hover{
+        font-size: 45px;
+        transition: .5s;
+        margin: -5px 20px;
+    }
+`
+
+const TitleInput = styled.input`
+    border-bottom: 1px solid #5D38DB;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 250px;
+    text-align: center;
+    color: #5D38DB;
+    font-size: 30px;
+    transition: .5s;
+
+    :hover{
+        width: 400px;
+        transition: .5s;
+    }
+    :focus{
+        width: 400px;
+        outline: none;
+    }
 `
