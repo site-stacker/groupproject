@@ -17,18 +17,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      project_id: this.props.match.params.project_id
-    })
     this.props.getProject(this.props.match.params.project_id).then(res => {
       setInterval(this.autosaver, 20000);
     })
   }
   
   autosaver() {
-    axios.put(`/api/updateProject/${this.state.project_id}`, this.props.currentProject).then(res => {
+    axios.put(`/api/updateProject/${this.props.match.params.project_id}`, this.props.currentProject).then(res => {
       console.log(res.data)
-      axios.put(`/api/updateHeader/${this.state.project_id}`, this.props.currentProject)
+      axios.put(`/api/updateHeader/${this.props.match.params.project_id}`, this.props.currentProject)
     })
   }
 

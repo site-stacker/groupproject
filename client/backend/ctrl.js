@@ -12,8 +12,8 @@ module.exports =
         getProject: (req, res) => {
             const { project_id } = req.params
             const db = req.app.get('db')
-            db.get_project([project_id])
-                .then(project => res.status(200).send(project))
+            db.get_project([+project_id])
+                .then(project => {res.status(200).send(project)})
                 .catch((err) => res.status(500).send(err))
         },
         getColors: (req, res) => {
@@ -156,9 +156,9 @@ module.exports =
         },
         updateProject: (req, res) => {
             const { project_id } = req.params
-            const { color_id, font_id, title, domain, logo } = req.body
+            const { color_id, font, title, domain, logo } = req.body
             const db = req.app.get('db')
-            db.update_project([color_id, font_id, title, domain, logo, project_id])
+            db.update_project([color_id, font, title, domain, logo, project_id])
                 .then(updatedProject => res.status(200).send(updatedProject))
                 .catch((err) => res.status(500).send(err))
         },
