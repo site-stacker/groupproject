@@ -5,7 +5,7 @@ import Heading from "./Heading";
 import Subheading from "./Subheading";
 import Image from "./Image"
 import Logo from "./Logo"
-import Button from "./../shared/Button"
+import Button from "./Button"
 
 
 class Wrapper extends Component{

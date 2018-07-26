@@ -9,10 +9,12 @@ function Subheading(props){
 }
 
 const mapStateToProps = state => {
-  return {
-    subheading: state.currentProject.subheading,
-    font_color: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette[0] : null,
-    font_family: state.currentProject.font
+  if(state.currentProject.color_palette){
+    return {
+      subheading: state.currentProject.subheading,
+      font_color:  state.currentProject.color_palette[0],
+      font_family: state.currentProject.font
+    }
   }
 }
 
@@ -24,6 +26,6 @@ export const Subheader = styled.h3`
   color: ${props => props.color};
   position: relative;
   z-index: 1;
-  margin: 0;
+  margin: 10px 0;
   font-family: ${props => props.font};
 `;
