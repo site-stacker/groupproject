@@ -44,6 +44,8 @@ const GET_COLORS_THEME = "GET_COLORS_THEME";
 const PICK_COLOR = "PICK_COLOR"
 const PICK_FONT = "PICK_FONT"
 
+const TOGGLE_ABOUT = "TOGGLE_ABOUT"
+
 const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
 const CHANGE_SELECTED_SECTION = "CHANGE_SELECTED_SECTION"
 
@@ -57,6 +59,7 @@ const UPDATE_HEADER_IMAGE = "UPDATE_HEADER_IMAGE"
 const UPDATE_HEADER_BG = "UPDATE_HEADER_BG"
 const UPDATE_HEADER_BG_COLOR = "UPDATE_HEADER_BG_COLOR"
 const UPDATE_TOGGLE_COMBINATION = "UPDATE_TOGGLE_COMBINATION"
+const UPDATE_THEME = "UPDATE_THEME"
 
 const UPDATE_ABOUT_HEADING = "UPDATE_ABOUT_HEADING"
 const UPDATE_ABOUT_TEXT = "UPDATE_ABOUT_TEXT"
@@ -104,13 +107,18 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, {currentProject: {...state.currentProject, main_img: action.payload}}) 
     case UPDATE_HEADER_BG:
       return Object.assign({}, state, {currentProject: {...state.currentProject, background_img: action.payload}})
-      case UPDATE_HEADER_BG_COLOR:
+    case UPDATE_HEADER_BG_COLOR:
       return Object.assign({}, state, {currentProject: {...state.currentProject, background_color: action.payload}})
+    case UPDATE_THEME:  
+      return Object.assign({}, state, {currentProject: {...state.currentProject, color_palette: action.payload}})
 
     case UPDATE_TOGGLE_COMBINATION:
       return Object.assign({}, state, {currentProject: {...state.currentProject, picture_and_color: action.payload}})  
 
     //ABOUT EDITOR  
+
+    case TOGGLE_ABOUT:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, about: action.payload}})
     case UPDATE_ABOUT_HEADING:
       return Object.assign({}, state, {currentProject: {...state.currentProject, about_heading: action.payload}})
     case UPDATE_ABOUT_TEXT:
@@ -254,7 +262,21 @@ export const updateToggleCombination = (bool) => {
   }
 }
 
+export const updateTheme = (arr) => {
+  return{
+    type: UPDATE_THEME,
+    payload: arr
+  }
+}
+
 // ABOUT EDITOR
+
+export const toggleAboutSection = () => {
+  return{
+    type: TOGGLE_ABOUT, 
+    payload: true
+  }
+}
 
 export const updateAboutHeading = str => {
   return{
