@@ -1,8 +1,9 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {updateHeaderBackgroundColor} from "./../../../redux/reducer"
+import {updateHeaderBackgroundColor, updateTheme} from "./../../../redux/reducer"
 import styled from "styled-components"
 import {grey} from "./../../shared/colors"
+import { clone } from "../../../../node_modules/@firebase/util";
 
 class ColorPicker extends Component {
   constructor(){
@@ -18,11 +19,16 @@ class ColorPicker extends Component {
   }
 
   handleSelection = (num) => {
-    this.props.updateHeaderBackgroundColor(num)
+    let cloneTheme = [...this.props.theme];
+    let arrTheme = cloneTheme.splice(num)
+    arrTheme.forEach( (c,i) => cloneTheme.splice(1+i,0, c))
+    this.props.updateTheme(cloneTheme)
+    this.props.updateHeaderBackgroundColor(1)
     this.handleTogglePicker();
   }
 
   render(){
+    console.log(this.props.color_palette)
     const mappedSamples = this.props.theme.map((color, i) => {
       return(
         <Sample key={color} background={color} onClick={() => this.handleSelection(i)}/>
@@ -43,16 +49,16 @@ class ColorPicker extends Component {
 }
 const mapStateToProp = (state) =>{
   
-  const id = state.currentProject.color_id
-  const colorObj = state.color_themes.filter(obj => obj.color_id === id)
-  const color = colorObj[0].color_palette.match(/[#a-zA-Z0-9]+/g)
+  // const id = state.currentProject.color_id
+  // const colorObj = state.color_themes.filter(obj => obj.color_id === id)
+  // const color = colorObj[0].color_palette.match(/[#a-zA-Z0-9]+/g)
   return {
-    theme: color,
+    theme: state.currentProject.color_palette,
     backgroundColor: state.currentProject.background_color
   }
 }
 
-export default connect(mapStateToProp, {updateHeaderBackgroundColor})(ColorPicker)
+export default connect(mapStateToProp, {updateHeaderBackgroundColor, updateTheme})(ColorPicker)
 
 const Div = styled.div`
   display: flex;

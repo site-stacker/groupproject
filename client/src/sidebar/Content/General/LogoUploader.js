@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {storage} from "./../../../firebase/index"
 import {uploadGeneralLogo} from "./../../../redux/reducer"
 import {connect} from "react-redux"
+import styled from "styled-components"
+import {Btn} from "./../../shared/Button"
 
 
-class LogoUploader extends Component {
+class ImageUploader extends Component {
     constructor(props) {
         super(props);
 
@@ -26,8 +28,7 @@ class LogoUploader extends Component {
 
     handleUpload = () => {
         const {image} = this.state;
-        const uploadTask = storage.ref(`logos/${image.name}`).put(image);
-        // this.props.updateHeaderImage(image)
+        const uploadTask = storage.ref(`main_images/${image.name}`).put(image);
         uploadTask.on('state_changed', 
         (snapshot) => {
             // progress function
@@ -41,31 +42,71 @@ class LogoUploader extends Component {
         () => {
             // complete function
             storage.ref('logos').child(image.name).getDownloadURL().then(url => {
-                console.log(url);
                 this.props.uploadGeneralLogo(url)
                 this.setState({url})
                 // AXIOS CALL TO SAVE IMAGE URL IN DB GOES HERE
-            })
+            }).then(() => this.setState({image: null}))
         });
     }
 
     render() {
-        const style = {
-            height: '100px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-        };
-        return (
-            <div style={style}>
-                <progress value={this.state.progress} max='100' />
-                <br />
-                <input type='file' onChange={this.handleChange}/>
-                <button onClick={this.handleUpload}>Upload</button>
-            </div> 
-        )
+
+        if(this.state.progress !== 0 && this.state.progress < 100) {
+            return (
+                <Uploader>
+                  
+                        <ProgressBar opacity={this.state.progress !== 0 && this.state.progress < 100 ? 1 : 0 } value={this.state.progress} max='100' />
+                </Uploader> 
+            )
+        } else {
+            return (
+                <Uploader>
+                    <Input type='file' onChange={this.handleChange} innerRef={fileInput => this.fileInput = fileInput}/>
+                        {!this.state.image
+                        ?
+                        <Button onClick={() => this.fileInput.click()}>Select Image</Button>
+                        :
+                        <Button onClick={this.handleUpload}>Upload</Button>}
+                        
+                </Uploader> 
+            )
+        }
+        
+        
+
     }
 }
 
-export default connect(null, {uploadGeneralLogo})(LogoUploader);
+export default connect(null, {uploadGeneralLogo})(ImageUploader);
+
+const Uploader = styled.div`
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    position: relative;
+`;
+
+const ProgressBar = styled.progress`
+    width: 100px;
+    opacity: ${props => props.opacity};
+    transition: 0.2s ease-in;
+    position: relative;
+`;
+
+const Input = styled.input`
+   display: none;
+`;
+
+const Button = Btn.extend`
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin: 5px 0; 
+    transform: translateX(0);
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+`;
+

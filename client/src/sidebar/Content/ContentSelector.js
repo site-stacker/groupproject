@@ -2,13 +2,15 @@ import React from "react";
 import {connect} from "react-redux";
 import styled from "styled-components";
 import { darkwhite, lightGrey, violet, green } from "../shared/colors";
+import Toggle from "./../shared/SwitchToggle"
 
 function ContentSelector(props){
   const mappedSections = props.sections.map( (s, i) => {
     return (
-      <SectionBtn key={i} onClick={() => action(s)}>
+      <SectionBtn key={i} >
         <p>{s}</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
+        <Toggle />
       </SectionBtn>
     )
   })
