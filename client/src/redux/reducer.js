@@ -40,6 +40,7 @@ const GET_USER = "GET_USER";
 
 const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
+const GET_ABOUT = "GET_ABOUT";
 const GET_COLORS_THEME = "GET_COLORS_THEME";
 const PICK_COLOR = "PICK_COLOR"
 const PICK_FONT = "PICK_FONT"
@@ -82,6 +83,8 @@ export default function reducer(state = initialState, action){
     case GET_PROJECT + "_FULFILLED":
       console.log(action.payload)
       return Object.assign({}, state, {currentProject: action.payload }) 
+    case GET_ABOUT + "_FULFILLED":
+      return Object.assign({}, state, {currentProject: {...state.currentProject, about_component: action.payload}})
     case CHANGE_SELECTED_SECTION:
       return Object.assign({}, state, {sectionSelected: action.payload }) 
       
@@ -166,24 +169,32 @@ export const pickFont = (name) => {
 }
 
 
-export const getFontsList = () =>{
+export const getFontsList = () => {
   const list = axios.get("https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=AIzaSyAyR8cCSuls2EHZHPFIUdxzpDZOM8AJ1r8").then(res =>{
       return res.data.items.filter((font, i) => i < 20)
     })
-  return{
+  return {
     type: GET_FONTS_LIST,
     payload: list
   }
 }
 
-export const getProject = (project_id) =>{
+export const getProject = (project_id) => {
   console.log(project_id)
   const project = axios.get(`/api/getProject/${project_id}`).then(res => { 
     res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g) 
   return res.data[0]})
-  return{
+  return {
     type: GET_PROJECT,
     payload: project
+  }
+}
+
+export const getAbout = (project_id) => {
+  const about_component = axios.get(`/api/getAbout/${project_id}`).then(res => res.data[0])
+  return {
+    type: GET_ABOUT,
+    payload: about_component
   }
 }
 

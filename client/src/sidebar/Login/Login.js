@@ -37,7 +37,7 @@ class Login extends Component{
         if(username && password) {
             axios.post('/api/createUser', {username: username.toLocaleLowerCase(), password: password}).then(res => {
                 if(res.data.length !==0) {
-                   this.setState({error: res.data})
+                   this.setState({error:'You have registered'})
                 } else {
                     this.setState({loggedIn: true})
                 }

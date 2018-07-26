@@ -11,13 +11,17 @@ class App extends Component {
     super(props)
 
     this.state = {
-      project_id: ''
+      project_id: '',
+      display: 'none'
     }
     this.autosaver = this.autosaver.bind(this)
   }
 
   componentDidMount() {
     this.props.getProject(this.props.match.params.project_id).then(res => {
+      this.setState({
+        display: 'initial'
+      });
       setInterval(this.autosaver, 20000);
     })
   }
@@ -31,12 +35,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{display:this.state.display}}>
         <Sidebar />
         <EditIcon />
         <LandingPage />
       </div>
-    );
+    )
   }
 }
 
