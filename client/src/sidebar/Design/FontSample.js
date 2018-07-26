@@ -1,9 +1,11 @@
 import React from "react";
+import {connect} from "react-redux";
+import {pickFont} from "./../../redux/reducer";
 import styled from "styled-components";
 
-export default function FontSample(props){
+function FontSample(props){
   return(
-    <FontBox>
+    <FontBox onClick={() => props.pickFont(props.name)}>
       <FontDisplay font_family={props.name}><TextSample>Aa</TextSample></FontDisplay>  
       <NameContainer>
         <FontName>{props.name}</FontName>
@@ -11,6 +13,8 @@ export default function FontSample(props){
     </FontBox>  
   )
 }
+
+export default connect(null, {pickFont})(FontSample)
 
 const FontBox = styled.div`
   display: flex;

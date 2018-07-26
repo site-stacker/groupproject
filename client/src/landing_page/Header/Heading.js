@@ -5,14 +5,15 @@ import styled from "styled-components"
 
 function Heading(props){
     return(
-      <Header color={props.font_color}>{props.heading}</Header>
+      <Header font={props.font_family} color={props.color}>{props.heading}</Header>
     )
   }
 
 const mapStateToProps = state => {
   return {
     heading: state.currentProject.heading,
-    font_color: state.header.font_color
+    color: state.currentProject.color_palette ? state.currentProject.color_palette[0] : null,
+    font_family: state.currentProject.font
   }
 }
 
@@ -25,4 +26,5 @@ export const Header = styled.h1`
   position: relative;
   z-index: 1;
   margin: 0;
+  font-family: ${props => props.font};
 `;

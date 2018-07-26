@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import styled from "styled-components"
-import {connect} from "react-redux";
-// import {getFontsList} from "./../../redux/reducer";
+import {connect} from "react-redux"
 import FontSample from "./FontSample";
 
 class FontSelector extends Component{
