@@ -35,7 +35,9 @@ class Content extends Component{
       case "About Us":
         return <AboutEditor updatePosition={this.updatePosition}/>
       case "Features":
-      return <FeaturesEditor updatePosition={this.updatePosition}/>
+        return <FeaturesEditor updatePosition={this.updatePosition}/>
+      default:
+        return <GeneralEditor updatePosition={this.updatePosition}/>
     }
   }
 

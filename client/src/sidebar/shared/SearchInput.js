@@ -1,36 +1,21 @@
-import React, {Component} from "react"
+import React from "react"
 import styled from "styled-components";
 import {lightGrey, violet} from "./colors"
 
-export default class Input extends Component{
-  constructor(){
-    super();
-
-    this.state={
-      input: ""
-    }
-  }
-  handler = (str) =>{
-    this.props.handleInput(str)
-    this.setState({input: str})
-  }
-  render(){
+export default function SearchInput(props){
     return(
       <Div>
-        <Inputs onChange={(e) => this.handler(e.target.value)}/>
-        <Label top={!this.state.input ? 0 : "-16px"}>{this.props.name}</Label>
-        <FocusBorder width={!this.state.input ? 0 : "100%"}/>
+        <Inputs />
+        <Label top={props.input ? 0 : "-16px"}>{props.name}</Label>
+        <FocusBorder width={props.input ? 0 : "100%"}/>
       </Div>
     )
-  }
 }
 
 const Div = styled.div`
   width: 90%;
   position: relative;
   margin: 50px 0;
-
-
 `;
 
 const Inputs = styled.input`

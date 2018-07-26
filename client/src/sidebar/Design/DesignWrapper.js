@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Design from "./Design";
-import {darkwhite, darkblue, darkAmethyst} from "./../shared/colors";
+import {darkwhite} from "./../shared/colors";
 
 export default function Wrapper(){
   return(

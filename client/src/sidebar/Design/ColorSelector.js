@@ -4,17 +4,16 @@ import styled from "styled-components"
 import ColorSample from "./ColorSample"
 
 function ColorSelector(props){
-  if(props.themes[0]){console.log(props.themes[0].color_palette.match(/[#a-zA-Z0-9]+/g))}
   const sample = props.themes.map( theme => {
-    return <ColorSample key={theme.color_id} name={theme.color_palette_name} palette={theme.color_palette}/>
+    return <ColorSample key={theme.color_id} name={theme.color_palette_name}  color_id={theme.color_id} palette={theme.color_palette}/>
   })
   return(
-    <div>
+    <Div>
       <H2>COLOR THEMES</H2>
       <SampleWrapper>
       {sample}
       </SampleWrapper>
-    </div>
+    </Div>
   )
 }
 
@@ -24,6 +23,10 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps)(ColorSelector)
+
+const Div = styled.div`
+
+`;
 
 const H2 = styled.h2`
   color: red;
