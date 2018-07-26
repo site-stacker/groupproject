@@ -1,2 +1,2 @@
-INSERT INTO header_components (project_id, main_img, button_text, heading, subheading, background_img, user_id)
-VALUES ($1, 'https://cdn.dribbble.com/users/39905/screenshots/1353646/simple-browser-mockup.png', 'Click here', 'Main Title Goes Here', 'Welcome to our website. Try our product.', '', $2)
+INSERT INTO header_components (project_id, main_img, button_text, heading, subheading, background_img, picture_and_color, background_color)
+VALUES ($1, 'https://cdn.dribbble.com/users/39905/screenshots/1353646/simple-browser-mockup.png', 'Click here', 'Main Title Goes Here', 'Welcome to our website. Try our product.', '', false, 0)

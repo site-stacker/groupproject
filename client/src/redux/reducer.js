@@ -1,7 +1,7 @@
 import axios from "axios";
+import { gzip } from "zlib";
 
 const initialState ={
-
   features:[
     {
       icon: "",
@@ -24,7 +24,7 @@ const initialState ={
   currentProject:{
       about_heading: "About US",
       about_text: "Sed ",
-      background_img: "https://images.unsplash.com/photo-1532423622396-10a3f979251a?ixlib=rb-0.3.5&s=3ee0d8ccac68cb22073aa026263cea52&auto=format&fit=crop&w=2850&q=80"
+      background_img: ''
     },
   sections:["About Us", "Features"],
   contentSection: "Sections",
@@ -36,6 +36,7 @@ const initialState ={
 }
 
 
+const GET_USER = "GET_USER";
 
 const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
@@ -63,7 +64,11 @@ const UPDATE_ABOUT_TEXT = "UPDATE_ABOUT_TEXT"
 const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
 
 export default function reducer(state = initialState, action){
+  console.log(action)
   switch(action.type){
+    case GET_USER:
+      return Object.assign({}, state, {user: action.payload})
+
     case TOGGLE_SIDEBAR:
       return Object.assign({}, state, {toggleSidebar: !state.toggleSidebar})
       
@@ -72,7 +77,8 @@ export default function reducer(state = initialState, action){
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
     case GET_PROJECT + "_FULFILLED":
-      return Object.assign({}, state, {currentProject: action.payload[0] }) 
+      
+      return Object.assign({}, state, {currentProject: action.payload }) 
     case CHANGE_SELECTED_SECTION:
       return Object.assign({}, state, {sectionSelected: action.payload }) 
       
@@ -119,6 +125,15 @@ export default function reducer(state = initialState, action){
   }
 }
 
+export function getUser(userData){
+  
+  return {
+    type: GET_USER,
+    payload: userData
+  }
+}
+
+
 export const getColorThemes = () =>{
   const colors = axios.get("/api/getColors").then(res => res.data)
   return{
@@ -156,7 +171,6 @@ export const getFontsList = () =>{
 export const getProject = (user_id, project_id) =>{
   const project = axios.get(`/api/getProject/${user_id}/${project_id}`).then(res => { 
     res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g) 
-    console.log(res.data)
   return res.data})
   return{
     type: GET_PROJECT,

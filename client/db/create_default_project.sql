@@ -1,3 +1,3 @@
-INSERT INTO projects (user_id, color_id, font, title, domain, logo)
-VALUES ($1, 1, 'Karla', 'Your Company', '', 'http://wcobhojpur.gov.np/default_images/default-logo.png')
+INSERT INTO projects (color_id, font, title, domain, logo)
+VALUES (1, 'Roboto', 'Your Company', '', 'http://lees.fe.uni-lj.si/uploads/default-logo.png')
 RETURNING project_id;

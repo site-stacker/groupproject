@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
+import {getUser} from '../../redux/reducer'
+import {connect} from 'react-redux'
 import axios from 'axios'
+import {Route, Redirect} from 'react-router'
+import {Link} from 'react-router-dom'
 
 class Login extends Component{
     constructor(){
@@ -8,7 +12,7 @@ class Login extends Component{
             username: '',
             password: '',
             error: '',
-            loggedIn: false
+            loggedIn: false,
         }
     }
     login(){
@@ -17,7 +21,8 @@ class Login extends Component{
             axios.post('/api/login', {username: username.toLowerCase(), password: password}).then(res => {
               console.log(res.data)
               if(res.data.length !== 0){
-                  this.setState({error: res.data})
+                  this.props.getUser(res.data)
+                //   this.setState({error: res.data})
                   this.setState({loggedIn: true})
               } else {
                   this.setState({loggedIn: true, error: ''})
@@ -65,14 +70,26 @@ class Login extends Component{
             className='password-input'
             />
             <br/><br/>
+            {
+                this.state.loggedIn ? 
+            
+            <button type='submit' onClick={() => this.login()} className='login-btn'>
+            <Redirect to={'/projects'}/>
+            Login</button>
+                                    :
             <button type='submit' onClick={() => this.login()} className='login-btn'>Login</button>
-            <button type='submit' onClick={() => this.register()} className='register-btn'>Register</button>
-            <button type='submit' onClick={() => this.logout()} className='logout-btn'>Logout</button>
+            }
+            <button type='submit' onClick={() => this.register()} className='register-btn'>Register</button> 
+            <Link to='/'> 
+            <button type='submit' onClick={() => this.logout()} className='logout-btn'>
+            Logout
+            </button>
+            </Link>
             <p>{this.state.error}</p>
-            <p>{this.state.loggedIn}</p>
             </div> 
         )
     }
 }
 
-export default Login
+
+export default connect (null, {getUser})(Login)

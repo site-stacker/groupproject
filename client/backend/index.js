@@ -31,8 +31,15 @@ app.use(session({
 app.use(checkUserSession)
 //enpoints 
 ////////////////////////////////////////////////
-app.get('/api/getProjects/:user_id', ctrl.getProjects)
-app.get('/api/getProject/:user_id/:project_id', ctrl.getProject)
+app.get('/api/getProjects/', ctrl.getProjects)
+app.get('/api/user/', (req, res) => {
+    if(req.session.user){
+        res.status(200).send(user)
+    } else {
+        res.status(401).send('Unauthorized')
+    }
+})
+app.get('/api/getProject/:project_id', ctrl.getProject)
 app.get('/api/getColors', ctrl.getColors)
 app.get('/api/getAbout/:user_id/:project_id', ctrl.getAbout)
 app.get('/api/getFeature/:user_id/:project_id', ctrl.getFeature)
@@ -46,9 +53,11 @@ app.post('/api/logout', (req, res) => {
 })
 app.post('/api/createProject', ctrl.createProject)
 app.post('/api/createHeader/:project_id', ctrl.createHeader)
+app.post('/api/createDefaultProject', ctrl.createDefaultProject)
+app.post('/api/createDefaultHeader/:project_id', ctrl.createDefaultHeader)
 app.post('/api/createAbout', ctrl.createAbout)
 app.post('/api/createFeature', ctrl.createFeature)
-app.put('/api/updateHeader/:header_id', ctrl.updateHeader)
+app.put('/api/updateHeader/:project_id', ctrl.updateHeader)
 app.put('/api/updateProject/:project_id', ctrl.updateProject)
 app.put('/api/updateAbout', ctrl.updateAbout)
 app.put('/api/updateFeature', ctrl.updateFeature)
