@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components"
+import {connect} from "react-redux"
+import {pickColor} from "./../../redux/reducer"
 
-export default function ColorSample(props){
+function ColorSample(props){
   const color = props.palette.match(/[#a-zA-Z0-9]+/g) 
   return(
-    <ColorBox>
+    <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)}>
       <ColorPalette>
         <ThemeSample bg_color={color[1]}/>
         <ThemeSample bg_color={color[2]}/>
@@ -17,6 +19,8 @@ export default function ColorSample(props){
     </ColorBox>
   )
 }
+
+export default connect(null, {pickColor})(ColorSample);
 
 const ColorBox = styled.div`
   display: flex;

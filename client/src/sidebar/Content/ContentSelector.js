@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import styled from "styled-components";
-import { darkwhite, greyBlue, grey, green, cotton, violet } from "../shared/colors";
+import { darkwhite, lightGrey, violet, green } from "../shared/colors";
 
 function ContentSelector(props){
   const mappedSections = props.sections.map( (s, i) => {
@@ -32,6 +32,7 @@ function ContentSelector(props){
       </SectionBtn>
     {mappedSections}
     <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn>
+    <SaveBtn onClick={()=>alert("")}>Save</SaveBtn>
     </SectionWrapper>
   )
 }
@@ -60,9 +61,6 @@ const SectionWrapper = FlexRow.extend`
 
 const SectionBtn = FlexRow.extend`
   width: 75%;
-  /* color: white; */
-/* background: ${green}; */
-  /* border-bottom: 1px solid ${grey}; */
   height: 50px;
   display: flex;
   align-items: center;
@@ -70,16 +68,12 @@ const SectionBtn = FlexRow.extend`
   padding: 0 50px;
   margin: 5px 0;
   cursor: pointer;
-  /* box-shadow: 2px 2px 6px ${grey};  */
   border-radius: 6px;
   position: relative;
   transition: 0.2s ease-in;
 
   &:hover{
-    background: ${cotton};
-    /* transform: scale(1.03); */
-    /* box-shadow: 2px 2px 12px rgba(91, 108, 148, 0.4);  */
-    /* font-size: 18px; */
+    background: ${lightGrey};
   }
   &:hover :nth-child(2){
     right: 230px;
@@ -96,13 +90,14 @@ const AddBtn = styled.button`
   color: ${darkwhite};
   padding: 20px;
   position: absolute;
-  bottom: 0;
+  bottom: 80px;
   left: 200px;
   transform: translateX(-50%);
   border: none;
   border-radius: 6px;
   display: flex;
   flex-flow: row;
+  cursor: pointer;
   
   &:focus{
     outline: none;
@@ -124,4 +119,25 @@ const AddIcon = styled.span`
   transform: scale(2);
   line-height:1em;
   transition: 0.2s ease-in;
+`;
+
+const SaveBtn = styled.button`
+  background: ${green};
+  color: ${darkwhite};
+  width: 100px;
+  padding: 20px;
+  position: absolute;
+  bottom: 0px;
+  left: 200px;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  cursor: pointer;
+
+  &:focus{
+    outline: none;
+  }
 `;

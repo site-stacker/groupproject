@@ -4,16 +4,15 @@ import styled from "styled-components"
 
 function Subheading(props){
   return(
-    <Subheader color={props.font_color.length !== 0 ? props.font_color[0].substring(1, props.font_color[0].length-1) : null}>{props.subheading}</Subheader>
+    <Subheader font={props.font_family} color={props.font_color}>{props.subheading}</Subheader>
   )
 }
 
 const mapStateToProps = state => {
-  const str = state.currentProject.color_palette
-  const arr = str ? str.substring(1, str.length-1).split(", ") : []
   return {
     subheading: state.currentProject.subheading,
-    font_color: arr
+    font_color: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette[0] : null,
+    font_family: state.currentProject.font
   }
 }
 
@@ -26,4 +25,5 @@ export const Subheader = styled.h3`
   position: relative;
   z-index: 1;
   margin: 0;
+  font-family: ${props => props.font};
 `;

@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import styled from "styled-components"
 
 function Image(props){
-  console.log(props.product_img)
   return(
     <ProductImg src={`${props.product_img}`}/>
   )

@@ -32,7 +32,7 @@ class Sidebar extends Component{
     this.setState({toggle: this.props.toggle})
   }
   render(){
-    console.log(this.props.selected)
+    console.log(this.props.project)
     return(
       <SidebarDiv left={this.props.toggle ? 0 : "-500px"}>
       <Menu />
