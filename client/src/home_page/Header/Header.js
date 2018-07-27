@@ -29,7 +29,7 @@ class Header extends Component {
                     </TitleHolder>
                 </Link >
                 <div>
-                    <h3 onClick={() => this.handleToggle()}>Account</h3>
+                    <H3 onClick={() => this.handleToggle()}>Account</H3>
                     <Modal show={this.state.toggleModal}>
                         <Login/>
                     </Modal>
@@ -58,6 +58,15 @@ const TitleHolder = styled.div`
 
 const H2 = styled.h2`
     text-decoration: inherit;
+`
+
+const H3 = styled.h3`
+    transition: .5s;
+
+    :hover{
+        font-size: 20px;
+        transition: .5s;
+    }
 `
 
 const Modal = styled.div`

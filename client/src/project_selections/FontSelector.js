@@ -16,17 +16,20 @@ class FontPicker extends Component {
     }
 
     freeStart = () => {
-        axios.post('/api/createDefaultProject', {color_id: this.props.color_id, font: this.props.font, title: this.props.title}).then(res => {
+        axios.post('/api/createDefaultProject', { color_id: this.props.color_id, font: this.props.font, title: this.props.title }).then(res => {
             this.setState({
                 project_id: +res.data[0].project_id
             })
             axios.post(`/api/createDefaultHeader/${res.data[0].project_id}`).then(res => {
-                this.setState({
-                    redirect: true
+                axios.post(`/api/createAbout/${this.state.project_id}`).then(res => {
+                    
                 })
             })
         })
     }
+    // this.setState({
+    //     redirect: true
+    // })
 
     render() {
         if (this.state.redirect) {
