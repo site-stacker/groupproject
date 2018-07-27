@@ -10,7 +10,9 @@ function ContentSelector(props){
       <SectionBtn key={i} >
         <p>{s}</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
-        <Toggle />
+        <ToggleWrapper>
+          <Toggle />
+        </ToggleWrapper>
       </SectionBtn>
     )
   })
@@ -33,7 +35,7 @@ function ContentSelector(props){
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
       </SectionBtn>
     {mappedSections}
-    <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn>
+    {/* <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn> */}
     <SaveBtn onClick={()=>alert("")}>Save</SaveBtn>
     </SectionWrapper>
   )
@@ -73,6 +75,7 @@ const SectionBtn = FlexRow.extend`
   border-radius: 6px;
   position: relative;
   transition: 0.2s ease-in;
+  position: relative;
 
   &:hover{
     background: ${lightGrey};
@@ -142,4 +145,9 @@ const SaveBtn = styled.button`
   &:focus{
     outline: none;
   }
+`;
+
+const ToggleWrapper = styled.div`
+  position: absolute;
+  right: 0;
 `;

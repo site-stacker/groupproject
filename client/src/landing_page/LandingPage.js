@@ -5,7 +5,7 @@ import Features from "./Features/index";
 
 export default function LandingPage(){
   return(
-    <div>
+    <div id="lp">
     <Header/>
     <About />
     <Features />
