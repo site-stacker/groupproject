@@ -65,7 +65,7 @@ module.exports =
             const { project_id } = req.params
             const db = req.app.get('db')
             if (req.session.user.user_id) {
-                db.create_about_components([project_id, req.session.user.user_id])
+                db.create_about_component([project_id, req.session.user.user_id])
                     .then(() => res.status(200).send())
                     .catch((err) => res.status(500).send(err))
             } else {

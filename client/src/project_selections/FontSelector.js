@@ -22,14 +22,15 @@ class FontPicker extends Component {
             })
             axios.post(`/api/createDefaultHeader/${res.data[0].project_id}`).then(res => {
                 axios.post(`/api/createAbout/${this.state.project_id}`).then(res => {
-                    
+                    axios.post(`/api/createFeature/${this.state.project_id}`).then(res => {
+                        this.setState({
+                            redirect: true
+                        })
+                    })
                 })
             })
         })
     }
-    // this.setState({
-    //     redirect: true
-    // })
 
     render() {
         if (this.state.redirect) {
