@@ -30,9 +30,9 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         getFeature: (req, res) => {
-            const { user_id, project_id } = req.params
+            const { project_id } = req.params
             const db = req.app.get('db')
-            db.get_feature_components([user_id, project_id])
+            db.get_feature_components([project_id])
                 .then((features) => res.status(200).send(features))
                 .catch((err) => res.status(500).send(err))
         },
@@ -63,24 +63,29 @@ module.exports =
         },
         createAbout: (req, res) => {
             const { project_id } = req.params
-            const { user_id, about_header, about_text } = req.body
             const db = req.app.get('db')
             if (req.session.user.user_id) {
-                db.create_about_components([project_id, user_id, about_header, about_text])
+                db.create_about_components([project_id, req.session.user.user_id])
                     .then(() => res.status(200).send())
                     .catch((err) => res.status(500).send(err))
             } else {
-                db.create_default_about_component([project_id, about_header, about_text])
+                db.create_default_about_component([project_id])
                     .then(() => res.status(200).send())
                     .catch((err) => res.status(500).send(err))
             }
         },
         createFeature: (req, res) => {
-            const { project_id, user_id, feature_icon, feature_title, feature_text } = req.body
+            const { project_id } = req.params;
             const db = req.app.get('db')
-            db.create_feature_component([project_id, user_id, feature_icon, feature_title, feature_text])
-                .then(() => res.status(200).send())
-                .catch((err) => res.status(500).send(err))
+            if (req.session.user.user_id) {
+                db.create_feature_component([project_id, req.session.user.user_id])
+                    .then(() => res.status(200).send())
+                    .catch((err) => res.status(500).send(err))
+            } else {
+                db.create_default_feature_component([project_id])
+                    .then(() => res.status(200).send())
+                    .catch((err) => res.status(500).send(err))
+            }
         },
         loginUser: (req, res) => {
             const { username, password } = req.body
@@ -190,9 +195,10 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         updateFeature: (req, res) => {
-            const { feature_icon, feature_title, feature_text, feature_component_id } = req.body
+            const { project_id } = req.params
+            const { feature_icon, feature_title, feature_text } = req.body
             const db = req.app.get('db')
-            db.update_feature_component([feature_icon, feature_title, feature_text, feature_component_id])
+            db.update_feature_component([feature_icon, feature_title, feature_text, project_id])
                 .then(() => res.status(200).send())
                 .catch((err) => res.status(500).send(err))
         },
