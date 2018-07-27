@@ -22,15 +22,7 @@ const initialState ={
   color_themes:[],
   fonts_list:[],
   currentProject:{
-      about_heading: "About US",
-      about_text: "Sed ",
       background_img: '',
-      about_component:{
-        about_component_id: 1,
-        about_header: "About us header",
-        about_text: "lñhjkds fkljadhflkdajsh fakjdhflkjhf h alskhfskajhf l"
-      
-      }
     },
   sections:["About Us", "Features"],
   contentSection: "Sections",
@@ -188,6 +180,7 @@ export const getFontsList = () => {
 export const getProject = (project_id) => {
   console.log(project_id)
   const project = axios.get(`/api/getProject/${project_id}`).then(res => { 
+    console.log(res.data[0])
     res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g) 
   return res.data[0]})
   return {

@@ -10,7 +10,7 @@ function Paragraph(props){
 
 const mapStateToProps = state => {
   return{
-    text: "state.currentProject.about_component.about_text"
+    text: state.currentProject.about_text
   }
 }
 
