@@ -74,7 +74,6 @@ const UPDATE_ABOUT_TEXT = "UPDATE_ABOUT_TEXT"
 const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
 
 export default function reducer(state = initialState, action){
-  console.log(action)
   switch(action.type){
     case GET_USER:
       return Object.assign({}, state, {user: action.payload})
@@ -87,7 +86,6 @@ export default function reducer(state = initialState, action){
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, {fonts_list: action.payload})
     case GET_PROJECT + "_FULFILLED":
-      console.log(action.payload)
       return Object.assign({}, state, {currentProject: action.payload }) 
     case GET_ABOUT + "_FULFILLED":
       return Object.assign({}, state, {currentProject: {...state.currentProject, about_component: action.payload}})
@@ -186,10 +184,8 @@ export const getFontsList = () => {
 }
 
 export const getProject = (project_id) => {
-  console.log(project_id)
   const project = axios.get(`/api/getProject/${project_id}`).then(res => { 
-    // console.log(res.data)
-    res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g) 
+    res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g)
   return res.data[0]})
   return {
     type: GET_PROJECT,

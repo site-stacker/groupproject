@@ -4,13 +4,14 @@ import {H2} from "./../shared/H2";
 
 function Heading(props){
   return (
-    <H2>{props.heading}</H2>
+    <H2 style={{fontFamily: `${props.fontFamily}`}}>{props.heading}</H2>
   )
 }
 
 const mapStateToProps = state => {
   return{
-    heading: "state.currentProject.about_component.about_header"
+    heading: state.currentProject.about_header,
+    fontFamily: state.currentProject.font
   }
 }
 

@@ -1,22 +1,32 @@
 import React from "react"
 import styled from "styled-components"
+import instyled from "instyled";
 import {connect} from "react-redux"
+import {violet} from "./../../sidebar/shared/colors"
+
+
 
 function Paragraph(props){
   return (
-    <P>{props.text}</P>
-  )
+    <P style={{fontFamily: `${props.fontFamily}`}}>{props.text}</P>
+    //  <p style={{fontFamily: `${this.props.fontFamily}`}}>{this.props.text}</p>
+  )   
 }
+
 
 const mapStateToProps = state => {
   return{
-    text: "state.currentProject.about_component.about_text"
+    text: state.currentProject.about_text,
+    fontFamily: state.currentProject.font
   }
 }
 
-export default connect(mapStateToProps)(Paragraph)
-
-export const P = styled.p`
+const P = styled.p`
   width: 50%;
   margin: 0 auto;
-`;
+  color: ${violet};
+  text-align: center;
+`
+
+export default connect(mapStateToProps)(Paragraph)
+
