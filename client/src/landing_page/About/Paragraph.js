@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import instyled from "instyled";
 import {connect} from "react-redux"
 import {violet} from "./../../sidebar/shared/colors"
 
