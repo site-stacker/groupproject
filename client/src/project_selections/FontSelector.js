@@ -31,6 +31,9 @@ class FontPicker extends Component {
             })
         })
     }
+    // this.setState({
+    //     redirect: true
+    // })
 
     render() {
         if (this.state.redirect) {
