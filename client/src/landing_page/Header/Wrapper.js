@@ -19,8 +19,9 @@ class Wrapper extends Component{
   }
 
   render(){
+    const opactity = this.props.bg_combined ? 0.9 : 0
     return(
-      <Header bg_img={`url("${this.props.bg_img}")`} bg_color={this.props.theme[this.props.bg_color]} bg_combined={this.props.bg_combined ? 0.9 : 0} color={this.props.color}>
+      <div style={{width: "100%", height: "700px", color: `${props => props.color}`,  position:"relative", zIndex: "0", display: "flex", flexFlow: "column", justifyContent: "center", alignItems: "center"}}>
       <Logo/>
       <TextWrapper>
         <Heading />
@@ -28,7 +29,12 @@ class Wrapper extends Component{
       </TextWrapper>
       <Button />
       <Image />
-      </Header>
+      <div style={{width: "100%", height: "700px",backgroundColor: "red",  position:"absolute", zIndex: "0", opacity: `${opactity}`, transition: "0.2s ease-in"}} />
+      <div style={{width: "100%", height: "100%", backgroundImage: `url(${this.props.bg_img})`, backgroundSize: "cover", backgroundPosition: "center",  position:"absolute", zIndex: "-2",
+        display: "flex", flexFlow: "column", justifyContent: "center", alignItems: "center",}}>
+        </div>
+      </div>
+
     )
   }
 }
@@ -46,34 +52,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(Wrapper)
 
-const Header = styled.div`
-  width: 100%;
-  height: 700px;
-  color: ${props => props.color};
-  background-image: ${props => props.bg_img};
-  background-size: cover;
-  background-position: center;
-  background-color: ${props => props.bg_color};
-  position:relative;
-  z-index: 0;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  
-  &:before{
-    position:absolute;
-    z-index: 0;
-    height: 700px;
-    top: 0;
-    right: 0;
-    left: 0;
-    content:"";
-    background-color: ${props => props.bg_color};
-    opacity: ${props => props.bg_combined};
-    transition: 0.3s all;
-  }
-`;
 
 const TextWrapper = styled.div`
   width:50%;
