@@ -22,15 +22,7 @@ const initialState ={
   color_themes:[],
   fonts_list:[],
   currentProject:{
-      about_heading: "About US",
-      about_text: "Sed ",
       background_img: '',
-      about_component:{
-        about_component_id: 1,
-        about_header: "About us header",
-        about_text: "lñhjkds fkljadhflkdajsh fakjdhflkjhf h alskhfskajhf l"
-      
-      }
     },
   sections:["About Us", "Features"],
   contentSection: "Sections",
