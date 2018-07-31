@@ -5,14 +5,14 @@ import {H2} from "./../shared/H2";
 
 function Features(props){
   
-  const Feature = props.features.map( (f, i) => {
+  const Feature = props.features ? props.features.map( (f, i) => {
     return(
     <FeatureWrapper key={i}>
-      <H2>{f.title}</H2>
-      <P>{f.title}</P>
+      <H2>{f.feature_title}</H2>
+      <P>{f.feature_text}</P>
     </FeatureWrapper>
     )
-  })
+  }) : null;
 
   return (
     <FeaturesWrapper>
@@ -22,8 +22,9 @@ function Features(props){
 }
 
 const mapStateToProps = state => {
+  console.log(state.currentProject.feature_components)
   return{
-    features: state.features
+    features: state.currentProject.feature_components
   }
 }
 
