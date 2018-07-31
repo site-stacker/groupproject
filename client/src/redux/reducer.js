@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const initialState = {
+  toggleLogin: false,
   features: [
     {
       icon: "",
@@ -51,6 +52,7 @@ const PICK_COLOR = "PICK_COLOR"
 const PICK_FONT = "PICK_FONT"
 
 const TOGGLE_ABOUT = "TOGGLE_ABOUT"
+const TOGGLE_LOGIN = "TOGGLE_LOGIN"
 const TOGGLE_FEATURES = "TOGGLE_FEATURES"
 
 const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
@@ -82,6 +84,9 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_SIDEBAR:
       return Object.assign({}, state, { toggleSidebar: !state.toggleSidebar })
 
+    case TOGGLE_LOGIN:
+      return Object.assign({}, state, { toggleLogin: action.payload })
+      
     case GET_COLORS_THEME + "_FULFILLED":
       return Object.assign({}, state, { color_themes: action.payload })
     case GET_FONTS_LIST + "_FULFILLED":
@@ -358,5 +363,19 @@ export const toggleSidebar = () => {
   return {
     type: TOGGLE_SIDEBAR,
     payload: true
+  }
+}
+
+export const toggleLoginOn = () => {
+  return {
+    type: TOGGLE_LOGIN,
+    payload: true
+  }
+}
+
+export const toggleLoginOff = () => {
+  return {
+    type: TOGGLE_LOGIN,
+    payload: false
   }
 }

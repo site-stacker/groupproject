@@ -203,6 +203,38 @@ module.exports =
                 .then(() => res.status(200).send())
                 .catch((err) => res.status(500).send(err))
         },
+        updateProjectWithUser: (req, res) => {
+            const { project_id } = req.params
+            const { user_id } = req.session.user
+            const db = req.app.get('db')
+            db.update_project_with_user([user_id, project_id])
+                .then(() => res.status(200).send())
+                .catch((err) => res.status(500).send(err))
+        },
+        updateHeaderWithUser: (req, res) => {
+            const { project_id } = req.params
+            const { user_id } = req.session.user
+            const db = req.app.get('db')
+            db.update_header_with_user([user_id, project_id])
+                .then(() => res.status(200).send())
+                .catch((err) => res.status(500).send(err))
+        },
+        updateAboutWithUser: (req, res) => {
+            const { project_id } = req.params
+            const { user_id } = req.session.user
+            const db = req.app.get('db')
+            db.update_about_with_user([user_id, project_id])
+                .then(() => res.status(200).send())
+                .catch((err) => res.status(500).send(err))
+        },
+        updateFeatureWithUser: (req, res) => {
+            const { feature_component_id } = req.params
+            const { user_id } = req.session.user
+            const db = req.app.get('db')
+            db.update_feature_with_user([user_id, feature_component_id])
+                .then(() => res.status(200).send())
+                .catch((err) => res.status(500).send(err))
+        },
         deleteProject: (req, res) => {
             const { project_id } = req.params
             const db = req.app.get('db')
