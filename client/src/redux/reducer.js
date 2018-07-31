@@ -141,15 +141,9 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_FEATURES:
       return Object.assign({}, state, {currentProject: {...state.currentProject, features: action.payload}});
     case UPDATE_FEATURES_HEADING:
-<<<<<<< HEAD
-      return Object.assign({}, state, {currentProject: {...state.currentProject, features_heading: action.payload}});
-      
-      default:
-=======
       return Object.assign({}, state, { currentProject: { ...state.currentProject, features_heading: action.payload } })
 
     default:
->>>>>>> master
       return state
   }
 }
@@ -311,17 +305,10 @@ export const updateTheme = (arr) => {
 
 // ABOUT EDITOR
 
-<<<<<<< HEAD
 export const toggleAboutSection = (bool) => {
   return{
     type: TOGGLE_ABOUT, 
     payload: bool
-=======
-export const toggleAboutSection = () => {
-  return {
-    type: TOGGLE_ABOUT,
-    payload: true
->>>>>>> master
   }
 }
 
