@@ -78,6 +78,7 @@ const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
 export default function reducer(state = initialState, action) {
   console.log(action)
   switch (action.type) {
+
     case GET_USER:
       return Object.assign({}, state, { user: action.payload })
 
@@ -94,6 +95,7 @@ export default function reducer(state = initialState, action) {
     case GET_PROJECT + "_FULFILLED":
       console.log(action.payload)
       return Object.assign({}, state, { currentProject: action.payload })
+
     case GET_ABOUT + "_FULFILLED":
       return Object.assign({}, state, { currentProject: { ...state.currentProject, about_component: action.payload } })
     case GET_FEATURES + "_FULFILLED":
