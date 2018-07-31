@@ -5,8 +5,7 @@ import {toggleSidebar} from "./../../redux/reducer"
 
 function EditIcon(props){
   return(
-    <Edit onClick={() => props.toggleSidebar()}>
-      toggle
+    <Edit onClick={() => props.toggleSidebar()}><Icon className="pe-7s-note" />
     </Edit>
   )
 }
@@ -25,7 +24,16 @@ const Edit = styled.div`
   border-radius: 50%;
   background: white;
   position: absolute;
-  z-index 10;
-  right: 0;
+  z-index: 10;
+  right: 30px;
+  top: 30px;
   cursor: pointer;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Icon = styled.span`
+  font-size: 30px;
 `;

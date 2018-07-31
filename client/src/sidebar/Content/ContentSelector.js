@@ -8,10 +8,10 @@ function ContentSelector(props){
   const mappedSections = props.sections.map( (s, i) => {
     return (
       <SectionBtn key={i} >
-        <p>{s}</p>
+        <p onClick={() => action(s)}>{s}</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         <ToggleWrapper>
-          <Toggle />
+          <Toggle name={s} toggle={ s === "About Us" ? props.about : s === "Features" ? props.features : null }/>
         </ToggleWrapper>
       </SectionBtn>
     )
@@ -35,7 +35,6 @@ function ContentSelector(props){
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
       </SectionBtn>
     {mappedSections}
-    {/* <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn> */}
     <SaveBtn onClick={()=>alert("")}>Save</SaveBtn>
     </SectionWrapper>
   )
@@ -43,7 +42,9 @@ function ContentSelector(props){
 
 const mapStateTopProps = (state) => {
   return{
-    sections: state.sections
+    sections: state.sections,
+    about:  state.currentProject.about,
+    features: state.currentProject.features
   }
 }
 export default connect(mapStateTopProps)(ContentSelector);
@@ -78,7 +79,7 @@ const SectionBtn = FlexRow.extend`
   position: relative;
 
   &:hover{
-    background: ${lightGrey};
+    /* background: ${lightGrey}; */
   }
   &:hover :nth-child(2){
     right: 230px;
@@ -90,39 +91,13 @@ const Header = styled.div`
   width: 100%;
   text-align: center;
 `;
-const AddBtn = styled.button`
-  background: ${violet};
-  color: ${darkwhite};
-  padding: 20px;
-  position: absolute;
-  bottom: 80px;
-  left: 200px;
-  transform: translateX(-50%);
-  border: none;
-  border-radius: 6px;
-  display: flex;
-  flex-flow: row;
-  cursor: pointer;
-  
-  &:focus{
-    outline: none;
-  }
-`;
+
 
 const MenuIcon = styled.span`
   position: absolute;
   text-align: right;
   right: 240px;
   font-size: 30px;
-  transition: 0.2s ease-in;
-`;
-
-const AddIcon = styled.span`
-  position: relative;
-  left: 0;
-  margin-right: 10px;
-  transform: scale(2);
-  line-height:1em;
   transition: 0.2s ease-in;
 `;
 

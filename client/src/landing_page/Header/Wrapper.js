@@ -29,7 +29,7 @@ class Wrapper extends Component{
       </TextWrapper>
       <Button />
       <Image />
-      <div style={{width: "100%", height: "700px",backgroundColor: "red",  position:"absolute", zIndex: "0", opacity: `${opactity}`, transition: "0.2s ease-in"}} />
+      <div style={{width: "100%", height: "700px", backgroundColor: `${this.props.theme[this.props.bg_color]}`,  position:"absolute", zIndex: "0", opacity: `${opactity}`, transition: "0.2s ease-in"}} />
       <div style={{width: "100%", height: "100%", backgroundImage: `url(${this.props.bg_img})`, backgroundSize: "cover", backgroundPosition: "center",  position:"absolute", zIndex: "-2",
         display: "flex", flexFlow: "column", justifyContent: "center", alignItems: "center",}}>
         </div>

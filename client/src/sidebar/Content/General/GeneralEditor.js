@@ -27,7 +27,10 @@ class GeneralEditor extends Component{
         <Back updatePosition={this.props.updatePosition}/>
         <p>General</p>
         <Input handleInput={this.handleInput} name="Project Name"/>
-        <LogoUploader />
+        <OptionWrapper>
+          <p>Logo</p>
+          <LogoUploader />
+        </OptionWrapper>
       </Wrapper>
     )
   }
@@ -43,4 +46,12 @@ const Wrapper = styled.div`
   width: 400px;
   margin-right: 100px;
   justify-content: center;
+`;
+
+const OptionWrapper = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
