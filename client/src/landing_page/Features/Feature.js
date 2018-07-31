@@ -22,7 +22,6 @@ function Features(props){
 }
 
 const mapStateToProps = state => {
-  console.log(state.currentProject.feature_components)
   return{
     features: state.currentProject.feature_components,
     fontFamily: state.currentProject.font

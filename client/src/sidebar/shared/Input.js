@@ -11,7 +11,7 @@ export default class Input extends Component{
     }
   }
   handler = (str) =>{
-    this.props.handleInput(str)
+    this.props.handleInput(str, this.props.id)
     this.setState({input: str})
   }
   render(){
@@ -26,7 +26,7 @@ export default class Input extends Component{
 }
 
 const Div = styled.div`
-  width: 90%;
+  width: 100%;
   position: relative;
   margin: 50px 0;
 
@@ -37,6 +37,7 @@ const Inputs = styled.input`
   width: 100%;
   border: 0; 
   padding: 4px 20px; 
+  box-sizing: border-box; 
   border-bottom: 1px solid #ccc; 
   background-color: transparent;
 

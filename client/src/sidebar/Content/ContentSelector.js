@@ -7,28 +7,32 @@ import axios from 'axios';
 import LoginDuringProject from '../Login/LoginDuringProject';
 import {toggleLoginOn, toggleLoginOff} from '../../redux/reducer';
 
-class ContentSelector extends Component {
-  constructor(props) {
-    super(props);
+function ContentSelector(props){
+  const mappedSections = props.sections.map( (s, i) => {
+    return (
+      <SectionBtn key={i} >
+        <p onClick={() => action(s)}>{s}</p>
+        <MenuIcon className="pe-7s-angle-right"></MenuIcon>
+        <ToggleWrapper>
+          <Toggle name={s} toggle={ s === "About Us" ? props.about : s === "Features" ? props.features : null }/>
+        </ToggleWrapper>
+      </SectionBtn>
+    )
+  })
 
-    this.state = {
-      toggleModal: false
-    }
+  const action = section => {
+    props.updatePosition(section)
   }
 
-  action = section => {
-    this.props.updatePosition(section)
-  }
-
-  save = () => {
-    if (this.props.user) {
-      axios.put(`/api/updateProject/${this.props.currentProject.project_id}`, this.props.currentProject).then(res => {
+  const save = () => {
+    if (props.user) {
+      axios.put(`/api/updateProject/${props.currentProject.project_id}`, props.currentProject).then(res => {
         console.log('project updated!')
-        axios.put(`/api/updateHeader/${this.props.currentProject.project_id}`, this.props.currentProject).then(res => {
+        axios.put(`/api/updateHeader/${props.currentProject.project_id}`, props.currentProject).then(res => {
           console.log('header updated!')
-          axios.put(`/api/updateAbout/${this.props.currentProject.project_id}`, this.props.currentProject).then(res => {
+          axios.put(`/api/updateAbout/${props.currentProject.project_id}`, props.currentProject).then(res => {
             console.log('about updated!')
-            this.props.currentProject.feature_components.forEach(feature => {
+            props.currentProject.feature_components.forEach(feature => {
               axios.put(`/api/updateFeature/${feature.feature_component_id}`, feature).then(res => {
                 console.log('features updated!')
               })
@@ -37,47 +41,35 @@ class ContentSelector extends Component {
         })
       })
     } else {
-      this.props.toggleLoginOn()
-      console.log(this.props.toggleLogin)
+      props.toggleLoginOn()
+      console.log(props.toggleLogin)
     }
   }
-  render() {
-    const mappedSections = this.props.sections.map((s, i) => {
-      return (
-        <SectionBtn key={i} >
-          <p>{s}</p>
-          <MenuIcon className="pe-7s-angle-right"></MenuIcon>
-          <ToggleWrapper>
-            <Toggle />
-          </ToggleWrapper>
-        </SectionBtn>
-      )
-    })
+  
     return (
       <SectionWrapper>
         <Header>
           <p>Choose the section you want to edit</p>
         </Header>
-        <SectionBtn onClick={() => this.action("general")}>
+        <SectionBtn onClick={() => action("general")}>
           <p>General</p>
           <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         </SectionBtn>
-        <SectionBtn onClick={() => this.action("header")}>
+        <SectionBtn onClick={() => action("header")}>
           <p>Header</p>
           <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         </SectionBtn>
         {mappedSections}
         {/* <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn> */}
-        <Modal show={this.props.toggleLogin}>
+        <Modal show={props.toggleLogin}>
           <h3>You must login to save.</h3>
           <LoginDuringProject />
-          <Exit className='pe-7s-close-circle' onClick={() => this.props.toggleLoginOff()}></Exit>
+          <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
         </Modal>
-        <SaveBtn onClick={() => this.save()}>Save</SaveBtn>
+        <SaveBtn onClick={() => save()}>Save</SaveBtn>
       </SectionWrapper>
     )
   }
-}
 
 const mapStateTopProps = (state) => {
   return {
@@ -119,7 +111,7 @@ const SectionBtn = FlexRow.extend`
   position: relative;
 
   &:hover{
-    background: ${lightGrey};
+    /* background: ${lightGrey}; */
   }
   &:hover :nth-child(2){
     right: 230px;
@@ -131,39 +123,13 @@ const Header = styled.div`
   width: 100%;
   text-align: center;
 `;
-const AddBtn = styled.button`
-  background: ${violet};
-  color: ${darkwhite};
-  padding: 20px;
-  position: absolute;
-  bottom: 80px;
-  left: 200px;
-  transform: translateX(-50%);
-  border: none;
-  border-radius: 6px;
-  display: flex;
-  flex-flow: row;
-  cursor: pointer;
-  
-  &:focus{
-    outline: none;
-  }
-`;
+
 
 const MenuIcon = styled.span`
   position: absolute;
   text-align: right;
   right: 240px;
   font-size: 30px;
-  transition: 0.2s ease-in;
-`;
-
-const AddIcon = styled.span`
-  position: relative;
-  left: 0;
-  margin-right: 10px;
-  transform: scale(2);
-  line-height:1em;
   transition: 0.2s ease-in;
 `;
 
@@ -199,7 +165,7 @@ const Modal = styled.div`
   color: #5D38DB;
   background-color: ${darkwhite};
   position: absolute;
-  display: ${props => props.toggleLogin ? 'flex' : 'none'};
+  display: ${props => props.show ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: center;
   align-items: center;

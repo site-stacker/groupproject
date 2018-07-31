@@ -1,29 +1,56 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import {violet, lightGrey} from "./colors"
+import {connect} from "react-redux"
+import { toggleAboutSection, toggleFeaturesSection} from "../../redux/reducer";
 
-export default class Toggle extends Component{
-  constructor(){
-    super()
+class Toggle extends Component{
+  constructor(props){
+    super(props)
 
     this.state={
-      toggleSwitch: false
+      toggleSwitch: ""
+    }
+  }
+  componentDidMount(){
+    this.setState({toggleSwitch: this.props.toggle})
+  }
+
+  componentDidUpdate(pP){
+    if(pP.toggle !== this.props.toggle){
+      this.setState({toggleSwitch: this.props.toggle})
     }
   }
 
-  handleToggleSwitch = () => {
+  handleToggleSwitch = (section) => {
     this.setState({toggleSwitch: !this.state.toggleSwitch})
-    // this.props.updateToggleCombination(!this.props.toggleSwitch)
+    switch(section){
+      case "About Us":
+      this.props.toggleAboutSection(!this.props.about);
+      break;
+      case "Features":
+      this.props.toggleFeaturesSection(!this.props.features);
+      break;
+    }
   }
 
   render(){
     return (
       <Switch name="switch">
-        <SwitchLabel for="switch" left={this.state.toggleSwitch ? "24px" : 0} bg_color={this.state.toggleSwitch ? violet : lightGrey}  onClick={() => this.handleToggleSwitch()}/>
+        <SwitchLabel for="switch" left={this.state.toggleSwitch ? "24px" : 0} bg_color={this.state.toggleSwitch ? violet : lightGrey}  onClick={() => this.handleToggleSwitch(this.props.name)}/>
       </Switch>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return{
+    about: state.currentProject.about,
+    features: state.currentProject.features
+  }
+}
+
+export default connect(mapStateToProps, {toggleAboutSection, toggleFeaturesSection})(Toggle)
 
 const Switch = styled.div`
   position: relative;
