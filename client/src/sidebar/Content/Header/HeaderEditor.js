@@ -16,7 +16,7 @@ class HeaderEditor extends Component{
 
     this.state={
       toggleImgPicker: false,
-      toggleSwitch: false
+      toggleSwitch: this.props.toggleSwitch
     }
   }
   

@@ -23,7 +23,6 @@ class Content extends Component{
 
   updatePosition = (str) => {
    this.state.left === 0 ? this.setState({left: "-500px", selectedSection: str}) : this.setState({left: 0})
-   
   }
 
   renderEditor = (s) => {
@@ -50,7 +49,6 @@ return(
 )
 }
 }
-
 
 const SliderWrapper = styled.div`
   display: flex;

@@ -50,12 +50,9 @@ class ImageUploader extends Component {
     }
 
     render() {
-        console.log(this.state)
-
         if(this.state.progress !== 0 && this.state.progress < 100) {
             return (
                 <Uploader>
-                  
                         <ProgressBar opacity={this.state.progress !== 0 && this.state.progress < 100 ? 1 : 0 } value={this.state.progress} max='100' />
                 </Uploader> 
             )

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { gzip } from "zlib";
 
 const initialState ={
   features:[
@@ -44,6 +43,7 @@ const PICK_COLOR = "PICK_COLOR"
 const PICK_FONT = "PICK_FONT"
 
 const TOGGLE_ABOUT = "TOGGLE_ABOUT"
+const TOGGLE_FEATURES = "TOGGLE_FEATURES"
 
 const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR"
 const CHANGE_SELECTED_SECTION = "CHANGE_SELECTED_SECTION"
@@ -124,8 +124,10 @@ export default function reducer(state = initialState, action){
       return Object.assign({}, state, {currentProject: {...state.currentProject, about_text: action.payload}})    
     
     //FEATURES EDITOR  
+    case TOGGLE_FEATURES:
+      return Object.assign({}, state, {currentProject: {...state.currentProject, features: action.payload}});
     case UPDATE_FEATURES_HEADING:
-      return Object.assign({}, state, {currentProject: {...state.currentProject, features_heading: action.payload}})
+      return Object.assign({}, state, {currentProject: {...state.currentProject, features_heading: action.payload}});
       
       default:
       return state
@@ -277,10 +279,10 @@ export const updateTheme = (arr) => {
 
 // ABOUT EDITOR
 
-export const toggleAboutSection = () => {
+export const toggleAboutSection = (bool) => {
   return{
     type: TOGGLE_ABOUT, 
-    payload: true
+    payload: bool
   }
 }
 
@@ -298,7 +300,13 @@ export const updateAboutText = str => {
   }
 }
 
-// ABOUT EDITOR
+// FATURES EDITOR
+export const toggleFeaturesSection = (bool) => {
+  return{
+    type: TOGGLE_FEATURES,
+    payload: bool
+  }
+} 
 
 export const updateFeaturesHeading = str => {
   return{

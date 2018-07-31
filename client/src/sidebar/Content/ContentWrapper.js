@@ -36,6 +36,7 @@ const Container = styled.div`
   left: 0px;
   z-index: 40;
   box-sizing: border-box;
+  overflow: hidden;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {
