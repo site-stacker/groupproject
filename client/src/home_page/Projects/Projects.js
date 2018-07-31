@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getProject } from '../../redux/reducer';
@@ -10,7 +10,9 @@ class Projects extends Component {
         super(props);
 
         this.state = {
-            projects: []
+            projects: [],
+            redirect: false,
+            project_id: 0
         }
         this.deleteProject = this.deleteProject.bind(this)
     }
@@ -29,7 +31,19 @@ class Projects extends Component {
         })
     }
 
+    getProjectRedirect(project_id) {
+        this.props.getProject(project_id).then(res => {
+            this.setState({
+                project_id: project_id,
+                redirect: true
+            })
+        })
+    }
+
     render() {
+        if (this.state.redirect) {
+            return <Redirect to={`/edit/${this.state.project_id}`} />
+        }
         let mapped = this.state.projects.map(project => {
             console.log(project)
             console.log(this.props.user_id)
@@ -40,9 +54,7 @@ class Projects extends Component {
                         {project.title}
                     </H3>
                     <IconHolder>
-                        <Link to={`/edit/${project.project_id}`}>
-                            <Edit className='pe-7s-edit' color={theme[1]} onClick={() => this.props.getProject(this.props.user_id, project.project_id)}></Edit>
-                        </Link >
+                        <Edit className='pe-7s-edit' color={theme[1]} onClick={() => this.getProjectRedirect(project.project_id)}></Edit>
                         <Delete className='pe-7s-trash' color={theme[1]} onClick={() => this.deleteProject(project.project_id)}></Delete>
                     </IconHolder>
                 </ProjectHolder>
@@ -79,6 +91,7 @@ const ProjectHolder = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 5px 0;
 `
 
 const H2 = styled.h2`

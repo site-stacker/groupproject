@@ -5,6 +5,10 @@ import styled from 'styled-components';
 
 class ColorPicker extends Component {
 
+    componentDidMount() {
+        console.log('color mounted')
+    }
+
     render() {
         return (
             <Center>

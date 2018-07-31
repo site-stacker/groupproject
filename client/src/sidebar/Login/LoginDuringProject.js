@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import { getUser } from '../../redux/reducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { Route, Redirect } from 'react-router'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 
-class Login extends Component {
-    constructor() {
-        super()
+class LoginDuringProject extends Component {
+    constructor(props) {
+        super(props)
         this.state = {
             username: '',
             password: '',
@@ -23,6 +21,20 @@ class Login extends Component {
                 console.log(res.data)
                 if (res.data.length !== 0) {
                     this.props.getUser(res.data)
+                    axios.put(`/api/updateProjectWithUser/${this.props.project_id}`).then(res => {
+                        console.log('project updated with user id!')
+                        axios.put(`/api/updateHeaderWithUser/${this.props.project_id}`).then(res => {
+                            console.log('header updated with user id!')
+                            axios.put(`/api/updateAboutWithUser/${this.props.project_id}`).then(res => {
+                                console.log('about updated with user id!')
+                                this.props.currentProject.feature_components.forEach(feature => {
+                                    axios.put(`/api/updateFeatureWithUser/${feature.feature_component_id}`).then(res => {
+                                        console.log('feature updated with user id!')
+                                    })
+                                })
+                            })
+                        })
+                    })
                     //   this.setState({error: res.data})
                     this.setState({ loggedIn: true })
                 } else {
@@ -38,8 +50,24 @@ class Login extends Component {
         if (username && password) {
             axios.post('/api/createUser', { username: username.toLocaleLowerCase(), password: password }).then(res => {
                 if (res.data.length !== 0) {
-                    this.props.getUser(res.data)
+                    this.props.getUser(res.data).then(res => {
+                        axios.put(`/api/updateProjectWithUser/${this.props.project_id}`).then(res => {
+                            console.log('project updated with user id!')
+                            axios.put(`/api/updateHeaderWithUser/${this.props.project_id}`).then(res => {
+                                console.log('header updated with user id!')
+                                axios.put(`/api/updateAboutWithUser/${this.props.project_id}`).then(res => {
+                                    console.log('about updated with user id!')
+                                    this.props.currentProject.feature_components.forEach(feature => {
+                                        axios.put(`/api/updateFeatureWithUser/${feature.feature_component_id}`).then(res => {
+                                            console.log('feature updated with user id!')
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
                     this.setState({ error: 'You have registered' })
+                    alert(`You are now registered ${res.data.username}`)
                 } else {
                     this.setState({ loggedIn: true })
                 }
@@ -48,46 +76,25 @@ class Login extends Component {
             this.setState({ error: 'Please fill in both fields' })
         }
     }
-    logout() {
-        // const {username, password} = this.state
-        axios.post('/api/logout').then(res => {
-            if (res) {
-                this.setState({ loggedIn: false })
-            }
-        })
-    }
     render() {
-        if (this.state.loggedIn) {
-            return <Redirect to={'/projects'} />
-        }
         return (
             <div className='login-component'>
-                <h3 style={{ textAlign: 'center' }}>Username</h3>
+                <h3 style={{textAlign: 'center'}}>Username</h3>
                 <Username
                     type='text'
                     onChange={e => this.setState({ username: e.target.value })}
+                    className='username-input'
                 />
-                <h3 style={{ textAlign: 'center' }}>Password</h3>
+                <h3 style={{textAlign: 'center'}}>Password</h3>
                 <Password
-                    type='password'
+                    type='text'
                     onChange={e => this.setState({ password: e.target.value })}
+                    className='password-input'
                 />
                 <br /><br />
-                {
-                    this.props.user ?
-                        <ButtonHolder>
-                            <Link to='/'>
-                                <Logout type='submit' onClick={() => this.logout()} className='logout-btn'>
-                                    Logout
-                    </Logout>
-                            </Link>
-                        </ButtonHolder>
-                        :
-                        <ButtonHolder>
-                            <LoginRegister type='submit' onClick={() => this.login()} className='login-btn'>Login</LoginRegister>
-                            <LoginRegister type='submit' onClick={() => this.register()} className='register-btn'>Register</LoginRegister>
-                        </ButtonHolder>
-                }
+                <LoginRegister type='submit' onClick={() => this.login()} className='login-btn'>Login</LoginRegister>
+                <LoginRegister type='submit' onClick={() => this.register()} className='register-btn'>
+                    Register</LoginRegister>
                 <p>{this.state.error}</p>
             </div>
         )
@@ -95,13 +102,14 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.user)
     return {
-        user: state.user
+        user: state.user,
+        project_id: state.currentProject.project_id,
+        currentProject: state.currentProject
     }
 }
 
-export default connect(mapStateToProps, { getUser })(Login)
+export default connect(mapStateToProps, { getUser })(LoginDuringProject)
 
 const Username = styled.input`
     border-bottom: 1px solid #5D38DB;
@@ -112,6 +120,7 @@ const Username = styled.input`
     color: #5D38DB;
     font-size: 15px;
     transition: .5s;
+    background: none;
     justify-content: center;
     text-align: center;
 
@@ -135,6 +144,7 @@ const Password = styled.input`
     color: #5D38DB;
     font-size: 15px;
     transition: .5s;
+    background: none;
     justify-content: center;
     text-align: center;
 
@@ -150,7 +160,7 @@ const Password = styled.input`
 `
 
 const LoginRegister = styled.button`
-    /* display: ${props => isNaN(props.user) ? 'initial' : 'none'}; */
+    display: ${props => props.user ? 'none' : 'initial'};
     border: 2px solid #5D38DB;
     border-radius: 5px;
     color: #5D38DB;
@@ -158,14 +168,9 @@ const LoginRegister = styled.button`
 `
 
 const Logout = styled.button`
-    /* display: ${props => isNaN(props.user) ? 'none' : 'initial'}; */
+    display: ${props => props.user ? 'initial' : 'none'};
     border: 2px solid #5D38DB;
     border-radius: 5px;
     color: #5D38DB;
     background-color: whitesmoke;
     `
-
-const ButtonHolder = styled.div`
-    display: flex;
-    justify-content: space-around;
-`

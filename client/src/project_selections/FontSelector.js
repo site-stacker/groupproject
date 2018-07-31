@@ -15,6 +15,10 @@ class FontPicker extends Component {
         }
     }
 
+    componentDidMount() {
+        console.log('font mounted')
+    }
+
     freeStart = () => {
         axios.post('/api/createDefaultProject', { color_id: this.props.color_id, font: this.props.font, title: this.props.title }).then(res => {
             this.setState({
