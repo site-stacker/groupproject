@@ -195,9 +195,10 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         updateFeature: (req, res) => {
-            const { feature_component_id } = req.params
-            const { feature_icon, feature_title, feature_text } = req.body
+            // const { feature_component_id } = req.params
+            const { feature_icon, feature_title, feature_text, feature_component_id } = req.body
             const db = req.app.get('db')
+            console.log(feature_title)
             db.update_feature_component([feature_icon, feature_title, feature_text, feature_component_id])
                 .then(() => res.status(200).send())
                 .catch((err) => res.status(500).send(err))

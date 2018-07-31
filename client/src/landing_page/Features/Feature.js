@@ -8,6 +8,7 @@ function Features(props){
   const Feature = props.features ? props.features.map( (f, i) => {
     return(
     <FeatureWrapper key={i}>
+      {/* <span className={f.feature_icon}></span> */}
       <H2>{f.feature_title}</H2>
       <P>{f.feature_text}</P>
     </FeatureWrapper>
@@ -22,7 +23,6 @@ function Features(props){
 }
 
 const mapStateToProps = state => {
-  console.log(state.currentProject.feature_components)
   return{
     features: state.currentProject.feature_components
   }

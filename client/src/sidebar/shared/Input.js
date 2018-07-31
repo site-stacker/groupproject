@@ -11,7 +11,7 @@ export default class Input extends Component{
     }
   }
   handler = (str) =>{
-    this.props.handleInput(str)
+    this.props.handleInput(str, this.props.id)
     this.setState({input: str})
   }
   render(){
