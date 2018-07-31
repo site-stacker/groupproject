@@ -74,7 +74,6 @@ const UPDATE_ABOUT_TEXT = "UPDATE_ABOUT_TEXT"
 const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
 
 export default function reducer(state = initialState, action) {
-  console.log(action)
   switch (action.type) {
 
     case GET_USER:
@@ -141,8 +140,16 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_FEATURES:
       return Object.assign({}, state, {currentProject: {...state.currentProject, features: action.payload}});
     case UPDATE_FEATURES_HEADING:
-      return Object.assign({}, state, { currentProject: { ...state.currentProject, features_heading: action.payload } })
-
+    const newArr = [...state.currentProject.feature_components]
+    let r = newArr.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
+      return Object.assign({}, f, {feature_title: action.payload.str})
+    }else{
+      return f
+    }})
+    
+      return Object.assign({}, state, {currentProject: {...state.currentProject, feature_components: r
+      }})
+     
     default:
       return state
   }
@@ -192,9 +199,7 @@ export const getFontsList = () => {
 }
 
 export const getProject = (project_id) => {
-  console.log(project_id)
   const project = axios.get(`/api/getProject/${project_id}`).then(res => {
-    console.log(res.data[0])
     res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g)
     return res.data[0]
   })
@@ -221,7 +226,7 @@ export const getFeatures = (project_id) => {
   }
 }
 
-export const changeSelectedSection = (str) => {
+export const changeSelectedSection = str => {
   return {
     type: CHANGE_SELECTED_SECTION,
     payload: str
@@ -289,14 +294,14 @@ export const updateHeaderBackgroundColor = num => {
   }
 }
 
-export const updateToggleCombination = (bool) => {
+export const updateToggleCombination = bool => {
   return {
     type: UPDATE_TOGGLE_COMBINATION,
     payload: bool
   }
 }
 
-export const updateTheme = (arr) => {
+export const updateTheme = arr => {
   return {
     type: UPDATE_THEME,
     payload: arr
@@ -305,7 +310,7 @@ export const updateTheme = (arr) => {
 
 // ABOUT EDITOR
 
-export const toggleAboutSection = (bool) => {
+export const toggleAboutSection = bool => {
   return{
     type: TOGGLE_ABOUT, 
     payload: bool
@@ -327,21 +332,21 @@ export const updateAboutText = str => {
 }
 
 // FATURES EDITOR
-export const toggleFeaturesSection = (bool) => {
+export const toggleFeaturesSection = bool => {
   return{
     type: TOGGLE_FEATURES,
     payload: bool
   }
 } 
 
-export const updateFeaturesHeading = str => {
+export const updateFeaturesHeading = (obj) => {
   return {
     type: UPDATE_FEATURES_HEADING,
-    payload: str
+    payload: obj
   }
 }
 
-export const updateFeaturesText = str => {
+export const updateFeaturesText = (id, str) => {
   return {
     type: UPDATE_ABOUT_TEXT,
     payload: str
