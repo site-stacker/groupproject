@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import styled from "styled-components"
 import {connect} from "react-redux"
 import FontSample from "./FontSample";
+import {grey} from "./../shared/colors"
 
 class FontSelector extends Component{
 
@@ -11,7 +12,7 @@ class FontSelector extends Component{
     })
     return(
       <div>
-      <p>FONTS</p>
+      <H2>FONTS GALLERY</H2>
       <SampleWrapper>
       {mapped}
       </SampleWrapper>
@@ -27,9 +28,14 @@ const mapStateToProps = (state) => {
 }
 export default connect(mapStateToProps)(FontSelector)
 
+const H2 = styled.h2`
+  color: ${grey};
+  text-align: center;
+`;
 const SampleWrapper = styled.div`
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-bottom: 160px;
 `;

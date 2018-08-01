@@ -4,9 +4,10 @@ import {connect} from "react-redux"
 import {pickColor} from "./../../redux/reducer"
 
 function ColorSample(props){
+  
   const color = props.palette.match(/[#a-zA-Z0-9]+/g) 
   return(
-    <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)}>
+    <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)}    >
       <ColorPalette>
         <ThemeSample bg_color={color[1]}/>
         <ThemeSample bg_color={color[2]}/>
@@ -42,6 +43,10 @@ const NameContainer = styled.div`
   bottom: 0;
   padding: 0 20px;
   box-sizing: border-box;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center; 
 `;
 
 const ColorName = styled.p`

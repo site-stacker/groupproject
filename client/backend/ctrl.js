@@ -111,9 +111,9 @@ module.exports =
             })
         },
         createProject: (req, res) => {
-            const { user_id, color_id, font, title, domain, logo } = req.body
+            const { user_id, color_id, font, title, domain, logo, color_palette } = req.body
             const db = req.app.get('db')
-            db.create_project([user_id, color_id, font, title, domain, logo])
+            db.create_project([user_id, color_id, font, title, domain, logo, color_palette])
                 .then(projectId => res.status(200).send(projectId))
                 .catch((err) => res.status(500).send(err))
         },
@@ -145,14 +145,15 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         createDefaultProject: (req, res) => {
-            const { color_id, font, title } = req.body
+            const { color_id, font, title, color_palette } = req.body
             const db = req.app.get('db')
+            console.log(req.body)
             if (req.session.user.user_id) {
-                db.create_project([req.session.user.user_id, color_id, font, title])
+                db.create_project([req.session.user.user_id, color_id, font, title, color_palette])
                     .then(projectId => res.status(200).send(projectId))
                     .catch((err) => res.status(500).send(err))
             } else {
-                db.create_default_project([color_id, font, title])
+                db.create_default_project([color_id, font, title, color_palette])
                     .then(projectId => res.status(200).send(projectId))
                     .catch((err) => res.status(500).send(err))
             }
@@ -188,9 +189,10 @@ module.exports =
         },
         updateProject: (req, res) => {
             const { project_id } = req.params
-            const { color_id, font, title, domain, logo, about, features } = req.body
+            const { color_id, font, title, domain, logo, about, features, color_palette } = req.body
             const db = req.app.get('db')
-            db.update_project([color_id, font, title, domain, logo, about, features, project_id])
+            console.log(req.body)
+            db.update_project([color_id, font, title, domain, logo, about, features, color_palette, project_id])
                 .then(updatedProject => res.status(200).send(updatedProject))
                 .catch((err) => res.status(500).send(err))
         },
@@ -206,7 +208,6 @@ module.exports =
             // const { feature_component_id } = req.params
             const { feature_icon, feature_title, feature_text, feature_component_id } = req.body
             const db = req.app.get('db')
-            console.log(feature_title)
             db.update_feature_component([feature_icon, feature_title, feature_text, feature_component_id])
                 .then(() => res.status(200).send())
                 .catch((err) => res.status(500).send(err))
@@ -265,9 +266,10 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         deleteFeature: (req, res) => {
-            const { feature_id } = req.params
+            console.log(req.params)
+            const { feature_component_id } = req.params
             const db = req.app.get('db')
-            db.delete_feature_component([feature_id])
+            db.delete_feature_component([feature_component_id])
                 .then(() => res.status(200).send())
                 .catch((err) => res.status(500).send(err))
         }

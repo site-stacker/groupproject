@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection, updateToggleCombination} from "./../../../redux/reducer"
+import {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection, updateToggleCombination, updateHeaderImage, updateHeaderBg} from "./../../../redux/reducer"
 import {connect} from "react-redux"
 import ImageUploader from ".//ImageUploader"
 import Input from "./../../shared/Input"
@@ -41,21 +41,37 @@ class HeaderEditor extends Component{
     this.props.updateToggleCombination(!this.props.toggleSwitch)
   }
 
+  removeImg = (str) => {
+    switch(str){
+      case "main":
+        this.props.updateHeaderImage("");
+      case "bg":
+        this.props.updateHeaderBg("");
+    }
+  }
+
   render(){
+    
     return(
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>
-        <Input handleInput={this.handleHeading} name="Heading"/>
-        <Input handleInput={this.handleSubheading} name="Subheading"/>
-        <Input handleInput={this.handleButtonText} name="Button text"/>
+        <Input handleInput={this.handleHeading} name="Heading" value={this.props.currentProject.heading}/>
+        <Input handleInput={this.handleSubheading} name="Subheading" value={this.props.currentProject.subheading}/>
+        <Input handleInput={this.handleButtonText} name="Button text" value={this.props.currentProject.button_text}/>
         <OptionWrapper>
           <p>Main image</p>
-          <ImageUploader />
+          <ButtonsWrapper>
+            <RemoveBtn className="pe-7s-trash" onClick={()=>this.removeImg("main")}/>
+            <ImageUploader />
+          </ButtonsWrapper>
         </OptionWrapper>
         <OptionWrapper>
         <p>Background image</p>
-        <Button onClick={()=>this.handleToggle()}>Choose</Button>
-        <BackgroundImgPicker right={!this.state.toggleImgPicker ? "-500px" : "50px" } toggle={this.handleToggle}/>
+        <ButtonsWrapper>
+          <RemoveBtn className="pe-7s-trash" onClick={()=>this.removeImg("bg")}/>
+          <Button onClick={()=>this.handleToggle()}>Choose</Button>
+          <BackgroundImgPicker right={!this.state.toggleImgPicker ? "-500px" : "50px" } toggle={this.handleToggle}/>
+        </ButtonsWrapper>
         </OptionWrapper>
         <ColorPicker/>
         <OptionWrapper>
@@ -73,10 +89,11 @@ class HeaderEditor extends Component{
 const mapStateToProps = (state) => {
   return{
     toggleSwitch: state.currentProject.picture_and_color,
-    sections: state.sectionSelected
+    sections: state.sectionSelected,
+    currentProject: state.currentProject 
   }
 }
-export default connect(mapStateToProps, {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection, updateToggleCombination})(HeaderEditor)
+export default connect(mapStateToProps, {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection, updateToggleCombination, updateHeaderImage, updateHeaderBg})(HeaderEditor)
 
 const Button = Btn.extend`
     padding: 15px;
@@ -149,5 +166,46 @@ const SwitchLabel = styled.label`
     background-color: #fff;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
     transition: left 0.25s ease;
+  }
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content:center;
+  align-items: center;
+`;
+
+const RemoveBtn = styled.div`
+  position: relative;
+  right: 40px;
+  transform: scale(1.6);
+
+  &:before{
+    content: '';
+    background: #5D38DB;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    transform: scale(1);
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in;
+    opacity: 1;
+    position: absolute;
+    transform: translate(50%, -50%);
+    top: 0%;
+    right: 0%;
+    cursor: pointer;
+  }
+
+  &:hover:before{
+    width: 24px;
+    height: 24px;
+  }
+  &:hover{
+    color: #fff;
   }
 `;

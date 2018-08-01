@@ -67,6 +67,7 @@ function ContentSelector(props){
           <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
         </Modal>
         <SaveBtn onClick={() => save()}>Save</SaveBtn>
+        <SaveBtn onClick={()=>alert("")}>Publish</SaveBtn>
       </SectionWrapper>
     )
   }
@@ -97,7 +98,7 @@ const SectionWrapper = FlexRow.extend`
 `;
 
 const SectionBtn = FlexRow.extend`
-  width: 75%;
+  width: 60%;
   height: 50px;
   display: flex;
   align-items: center;
@@ -114,7 +115,7 @@ const SectionBtn = FlexRow.extend`
     /* background: ${lightGrey}; */
   }
   &:hover :nth-child(2){
-    right: 230px;
+    right: 180px;
     font-size: 36px;
   }
 `;
@@ -128,7 +129,7 @@ const Header = styled.div`
 const MenuIcon = styled.span`
   position: absolute;
   text-align: right;
-  right: 240px;
+  right:190px;
   font-size: 30px;
   transition: 0.2s ease-in;
 `;
@@ -138,8 +139,8 @@ const SaveBtn = styled.button`
   color: ${darkwhite};
   width: 100px;
   padding: 20px;
-  position: absolute;
-  bottom: 0px;
+  position: relative;
+  bottom: -200px;
   left: 200px;
   transform: translateX(-50%);
   border: none;

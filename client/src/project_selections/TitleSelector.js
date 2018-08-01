@@ -10,7 +10,15 @@ class TitleSelector extends Component {
         console.log('title mounted')
     }
 
+    handleKeyUp(e){
+        console.log(e)
+       if(e.keyCode === 13) {
+            this.props.goToColor()
+       } 
+    }
+
     render() {
+        console.log(this.props)
         return (
             <ScaleIn>
                 <Center>
