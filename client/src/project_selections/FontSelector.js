@@ -16,7 +16,7 @@ class FontPicker extends Component {
     }
 
     freeStart = () => {
-        axios.post('/api/createDefaultProject', { color_id: this.props.color_id, font: this.props.font, title: this.props.title }).then(res => {
+        axios.post('/api/createDefaultProject', { color_id: this.props.color_id, font: this.props.font, title: this.props.title, color_palette: this.props.color_palette }).then(res => {
             this.setState({
                 project_id: +res.data[0].project_id
             })
@@ -59,7 +59,8 @@ class FontPicker extends Component {
 function mapStateToProps(state) {
     return {
         color_id: state.currentProject.color_id,
-        font: state.currentProject.font
+        font: state.currentProject.font,
+        color_palette: state.currentProject.color_palette
     }
 }
 

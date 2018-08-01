@@ -28,7 +28,7 @@ export default ContentWrapper
 const Container = styled.div`
   display:flex;
   flex-flow: column;
-  padding: 50px;
+  padding: 0 50px;
   width: 500px;
   height: 100vh;
   background: ${darkwhite};

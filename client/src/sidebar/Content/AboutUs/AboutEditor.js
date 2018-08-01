@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {changeSelectedSection, updateAboutHeading, updateAboutText} from "./../../../redux/reducer"
 import {connect} from "react-redux"
 import Input from "./../../shared/Input"
-import {Textarea} from "./../../shared/Textarea"
+import Textarea from "./../../shared/Textarea"
 import styled from "styled-components";
 import Back from "./../../shared/Back"
 
@@ -17,6 +17,10 @@ class AboutEditor extends Component{
   handleInput = (str) => {
     this.props.updateAboutHeading(str)
   };
+
+  handleTextarea = (str) => {
+    this.props.updateAboutText(str)
+  }
   
 
   render(){
@@ -24,16 +28,16 @@ class AboutEditor extends Component{
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>
         <p>About Us</p>
-        <Input handleInput={this.handleInput} name="Heading"/>
-        <Textarea rows="6" cols="50" onChange={(e) => this.props.updateAboutText(e.target.value)}/>
+        <Input handleInput={this.handleInput} id={this.props.id} name="Heading"/>
+        <Textarea handleTextarea = {this.handleTextarea}/>
       </Wrapper>
     )
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state.sectionSelected)
   return{
-    sections: state.sectionSelected
+    sections: state.sectionSelected,
+    id: state.currentProject.project_id
   }
 }
 export default connect(mapStateToProps, {changeSelectedSection, updateAboutHeading, updateAboutText})(AboutEditor)

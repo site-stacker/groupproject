@@ -64,7 +64,7 @@ app.put('/api/updateFeature/:project_id', ctrl.updateFeature)
 app.delete('/api/deleteProject/:project_id', ctrl.deleteProject)
 app.delete('/api/deleteUser/:user_id', ctrl.deleteUser)
 app.delete('/api/deleteAbout/:about_id', ctrl.deleteAbout)
-app.delete('/api/deleteFeature/:feature_id', ctrl.deleteFeature)
+app.delete('/api/deleteFeature/:feature_component_id', ctrl.deleteFeature)
 
 
 // server ///////////////////////////////////////

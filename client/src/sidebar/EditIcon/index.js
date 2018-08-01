@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import {connect} from "react-redux"
 import {toggleSidebar} from "./../../redux/reducer"
+import {darkwhite} from "./../shared/colors"
 
 function EditIcon(props){
   return(
@@ -22,7 +23,7 @@ const Edit = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: white;
+  background: ${darkwhite};
   position: absolute;
   z-index: 10;
   right: 30px;

@@ -26,16 +26,17 @@ function ContentSelector(props){
       <Header>
       <p>Choose the section you want to edit</p>
       </Header>
-      <SectionBtn onClick={() => action("general")}>
-        <p>General</p>
+      <SectionBtn>
+        <p onClick={() => action("general")}>General</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
       </SectionBtn>
       <SectionBtn onClick={() => action("header")}>
-        <p>Header</p>
+        <p onClick={() => action("general")}>Header</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
       </SectionBtn>
     {mappedSections}
     <SaveBtn onClick={()=>alert("")}>Save</SaveBtn>
+    <SaveBtn onClick={()=>alert("")}>Publish</SaveBtn>
     </SectionWrapper>
   )
 }
@@ -65,7 +66,7 @@ const SectionWrapper = FlexRow.extend`
 `;
 
 const SectionBtn = FlexRow.extend`
-  width: 75%;
+  width: 60%;
   height: 50px;
   display: flex;
   align-items: center;
@@ -82,7 +83,7 @@ const SectionBtn = FlexRow.extend`
     /* background: ${lightGrey}; */
   }
   &:hover :nth-child(2){
-    right: 230px;
+    right: 180px;
     font-size: 36px;
   }
 `;
@@ -96,7 +97,7 @@ const Header = styled.div`
 const MenuIcon = styled.span`
   position: absolute;
   text-align: right;
-  right: 240px;
+  right:190px;
   font-size: 30px;
   transition: 0.2s ease-in;
 `;
@@ -106,8 +107,8 @@ const SaveBtn = styled.button`
   color: ${darkwhite};
   width: 100px;
   padding: 20px;
-  position: absolute;
-  bottom: 0px;
+  position: relative;
+  bottom: -200px;
   left: 200px;
   transform: translateX(-50%);
   border: none;
@@ -125,4 +126,8 @@ const SaveBtn = styled.button`
 const ToggleWrapper = styled.div`
   position: absolute;
   right: 0;
+`;
+
+const P = styled.p`
+  
 `;

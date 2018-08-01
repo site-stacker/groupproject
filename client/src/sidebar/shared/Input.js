@@ -18,7 +18,7 @@ export default class Input extends Component{
     return(
       <Div>
         <Inputs onChange={(e) => this.handler(e.target.value)}/>
-        <Label top={!this.state.input ? 0 : "-16px"}>{this.props.name}</Label>
+        <Label top={!this.state.input ? "-18px" : "-18px"}>{this.props.name}</Label>
         <FocusBorder width={!this.state.input ? 0 : "100%"}/>
       </Div>
     )
@@ -29,8 +29,6 @@ const Div = styled.div`
   width: 100%;
   position: relative;
   margin: 50px 0;
-
-
 `;
 
 const Inputs = styled.input`
