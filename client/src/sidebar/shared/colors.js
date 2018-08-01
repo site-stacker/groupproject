@@ -5,6 +5,7 @@ export const lightGrey = "#c4c4c4"
 export const grey = "rgba(91, 108, 148, 1)";
 export const greyBlue = "#5B6C94";
 export const violet = "#5D38DB";
+export const lightblue = "#78D5D7";
 
 //bg colors
 export const turquoise = "#13c8b0"

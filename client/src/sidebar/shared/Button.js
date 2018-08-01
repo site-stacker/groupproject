@@ -4,7 +4,7 @@ import {violet, darkwhite} from "./colors"
 export const Btn = styled.button`
   background: ${violet};
   color: ${darkwhite};
-  padding: 20px;
+  padding: 15px;
   position: absolute;
   bottom: 80px;
   left: 200px;

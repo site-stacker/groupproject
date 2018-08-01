@@ -2,23 +2,6 @@ import axios from "axios";
 
 const initialState = {
   toggleLogin: false,
-  features: [
-    {
-      icon: "",
-      title: "Feature 1",
-      text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
-    },
-    {
-      icon: "",
-      title: "Feature 2",
-      text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
-    },
-    {
-      icon: "",
-      title: "Feature 3",
-      text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
-    }
-  ],
   color_themes: [],
   fonts_list: [],
   currentProject: {
@@ -29,12 +12,13 @@ const initialState = {
         title: "Feature 1",
         text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
       }
-    ]
+    ],
+    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB", "#1AAEFC"]
   },
   sections: ["About Us", "Features"],
   contentSection: "Sections",
   sectionSelected: "content",
-  selectedTheme: ["#FFFFFF", "#313A5A", "#1FDB84", "#999999", "#00B9FF"],
+  selectedTheme: [],
   toggleSidebar: true,
   resetPosition: 0
 
@@ -74,6 +58,7 @@ const UPDATE_ABOUT_HEADING = "UPDATE_ABOUT_HEADING"
 const UPDATE_ABOUT_TEXT = "UPDATE_ABOUT_TEXT"
 
 const UPDATE_FEATURES_HEADING = "UPDATE_FEATURES_HEADING"
+const UPDATE_FEATURES_TEXT = "UPDATE_FEATURES_TEXT"
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -92,7 +77,6 @@ export default function reducer(state = initialState, action) {
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, { fonts_list: action.payload })
     case GET_PROJECT + "_FULFILLED":
-      console.log(action.payload)
       return Object.assign({}, state, { currentProject: action.payload })
 
     case GET_ABOUT + "_FULFILLED":
@@ -145,16 +129,27 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_FEATURES:
       return Object.assign({}, state, {currentProject: {...state.currentProject, features: action.payload}});
     case UPDATE_FEATURES_HEADING:
-    const newArr = [...state.currentProject.feature_components]
-    let r = newArr.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
-      return Object.assign({}, f, {feature_title: action.payload.str})
-    }else{
-      return f
-    }})
+      const newArr = [...state.currentProject.feature_components]
+      let r = newArr.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
+        return Object.assign({}, f, {feature_title: action.payload.str})
+      }else{
+        return f
+      }})
     
       return Object.assign({}, state, {currentProject: {...state.currentProject, feature_components: r
       }})
      
+      case UPDATE_FEATURES_TEXT:
+      console.log(action.payload)
+        const newArrTwo = [...state.currentProject.feature_components]
+        let s = newArrTwo.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
+          return Object.assign({}, f, {feature_text: action.payload.str})
+        } else {
+          return f
+        }})
+
+        return Object.assign({}, state, {currentProject: {...state.currentProject, feature_components: s
+        }})
     default:
       return state
   }
@@ -224,7 +219,6 @@ export const getAbout = (project_id) => {
 
 export const getFeatures = (project_id) => {
   const feature_components = axios.get(`/api/getFeature/${project_id}`).then(res => res.data)
-  console.log(feature_components)
   return {
     type: GET_FEATURES,
     payload: feature_components
@@ -351,10 +345,10 @@ export const updateFeaturesHeading = (obj) => {
   }
 }
 
-export const updateFeaturesText = (id, str) => {
+export const updateFeaturesText = (obj) => {
   return {
-    type: UPDATE_ABOUT_TEXT,
-    payload: str
+    type: UPDATE_FEATURES_TEXT,
+    payload: obj
   }
 }
 
