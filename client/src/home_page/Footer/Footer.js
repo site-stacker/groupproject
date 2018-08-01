@@ -24,7 +24,7 @@ const FooterDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
+    margin: 70px auto 0;
     color: #5D38DB;
 `
 

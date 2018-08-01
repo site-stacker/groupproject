@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import {lightGrey} from '../../sidebar/shared/colors';
 
 class Main extends Component {
 
@@ -31,11 +32,11 @@ const MainDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px auto;
+    justify-content: center;
     background-color: #5D38DB;
-    width: 750px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px whitesmoke;
+    width: 100%;
+    height: 400px;
+    box-shadow: 5px 5px 10px ${lightGrey};
 `
 
 const FreeButton = styled.button`
@@ -43,10 +44,12 @@ const FreeButton = styled.button`
     width: 280px;
     font-size: 25px;
     margin: 20px;
-    border: 3px whitesmoke solid;
+    padding: 10px 0;
+    border: 3px ${lightGrey} solid;
     color: #5D38DB;
     border-radius: 5px;
     transition: .5s;
+    cursor: pointer;
 
     :hover{
         width: 350px;

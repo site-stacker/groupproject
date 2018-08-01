@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ScaleIn } from '../sidebar/shared/animations';
 
 class TitleSelector extends Component {
 
@@ -11,20 +12,22 @@ class TitleSelector extends Component {
 
     render() {
         return (
-            <Center>
-                <Title>
-                    <h1>What is the Title of Your Project?</h1>
-                    <TitleInput onChange={(e) => this.props.setTitle(e.target.value)} value={this.props.title} />
-                    <br />
-                    <br />
-                    <div>
-                        <Link to={this.props.user ? '/projects' : '/'} >
-                            <Arrow className='pe-7s-left-arrow' ></Arrow>
-                        </Link >
-                        <Arrow onClick={() => this.props.goToColor()} className='pe-7s-right-arrow'></Arrow>
-                    </div>
-                </Title>
-            </Center>
+            <ScaleIn>
+                <Center>
+                    <Title>
+                        <h1>What is the Title of Your Project?</h1>
+                        <TitleInput onChange={(e) => this.props.setTitle(e.target.value)} value={this.props.title} />
+                        <br />
+                        <br />
+                        <div>
+                            <Link to={this.props.user ? '/projects' : '/'} >
+                                <Arrow className='pe-7s-left-arrow' ></Arrow>
+                            </Link >
+                            <Arrow onClick={() => this.props.goToColor()} className='pe-7s-right-arrow'></Arrow>
+                        </div>
+                    </Title>
+                </Center>
+            </ScaleIn>
         )
     }
 }

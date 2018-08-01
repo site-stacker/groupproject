@@ -3,6 +3,8 @@ import { getUser } from '../../redux/reducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import styled from 'styled-components';
+import { violet, darkwhite } from '../shared/colors';
+import { toggleLoginOff } from '../../redux/reducer';
 
 class LoginDuringProject extends Component {
     constructor(props) {
@@ -37,12 +39,13 @@ class LoginDuringProject extends Component {
                     })
                     //   this.setState({error: res.data})
                     this.setState({ loggedIn: true })
+                    this.props.toggleLoginOff()
                 } else {
-                    this.setState({ loggedIn: true, error: '' })
+                    this.setState({ loggedIn: false, error: 'Login failed' })
                 }
             })
         } else {
-            this.setState({ err: 'Please fill in both input fields' })
+            this.setState({ error: 'Please fill in both input fields' })
         }
     }
     register() {
@@ -67,36 +70,44 @@ class LoginDuringProject extends Component {
                         })
                     })
                     this.setState({ error: 'You have registered' })
+                    this.props.toggleLoginOff()
                     alert(`You are now registered ${res.data.username}`)
                 } else {
-                    this.setState({ loggedIn: true })
+                    this.setState({ loggedIn: false, error: 'Login failed' })
                 }
             })
         } else {
             this.setState({ error: 'Please fill in both fields' })
         }
     }
+    pressEnter(e) {
+        if(e.keyCode === 13) {
+            this.login()
+        }
+    }
     render() {
         return (
-            <div className='login-component'>
-                <h3 style={{textAlign: 'center'}}>Username</h3>
+            <TopDiv>
+                <h3 style={{ textAlign: 'center' }}>Username</h3>
                 <Username
                     type='text'
                     onChange={e => this.setState({ username: e.target.value })}
                     className='username-input'
                 />
-                <h3 style={{textAlign: 'center'}}>Password</h3>
+                <h3 style={{ textAlign: 'center' }}>Password</h3>
                 <Password
-                    type='text'
+                    type='password'
                     onChange={e => this.setState({ password: e.target.value })}
                     className='password-input'
+                    onKeyUp={e => this.pressEnter(e)}
                 />
                 <br /><br />
-                <LoginRegister type='submit' onClick={() => this.login()} className='login-btn'>Login</LoginRegister>
-                <LoginRegister type='submit' onClick={() => this.register()} className='register-btn'>
-                    Register</LoginRegister>
+                <ButtonHolder>
+                    <Btn type='submit' onClick={() => this.login()} className='login-btn'>Login</Btn>
+                    <Btn type='submit' onClick={() => this.register()} className='register-btn'>Register</Btn>
+                </ButtonHolder>
                 <p>{this.state.error}</p>
-            </div>
+            </TopDiv>
         )
     }
 }
@@ -109,7 +120,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { getUser })(LoginDuringProject)
+export default connect(mapStateToProps, { getUser, toggleLoginOff })(LoginDuringProject)
 
 const Username = styled.input`
     border-bottom: 1px solid #5D38DB;
@@ -159,18 +170,38 @@ const Password = styled.input`
     }
 `
 
-const LoginRegister = styled.button`
-    display: ${props => props.user ? 'none' : 'initial'};
-    border: 2px solid #5D38DB;
-    border-radius: 5px;
-    color: #5D38DB;
-    background-color: whitesmoke;
+const Btn = styled.button`
+  background: ${violet};
+  color: ${darkwhite};
+  padding: 20px;
+  position: relative;
+  border: 1px solid ${violet};
+  border-radius: 6px;
+  display: flex;
+  flex-flow: row;
+  cursor: pointer;
+  transition: .3s;
+  
+  :hover{
+      background: ${darkwhite};
+      color: ${violet};
+      border: 1px solid ${violet};
+  }
+
+  &:focus{
+    outline: none;
+  }
 `
 
-const Logout = styled.button`
-    display: ${props => props.user ? 'initial' : 'none'};
-    border: 2px solid #5D38DB;
-    border-radius: 5px;
-    color: #5D38DB;
-    background-color: whitesmoke;
-    `
+const ButtonHolder = styled.div`
+    display: flex;
+    justify-content: space-around;
+    width: 175px;
+`
+
+const TopDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`

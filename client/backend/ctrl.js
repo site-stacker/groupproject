@@ -170,6 +170,14 @@ module.exports =
                     .catch((err) => res.status(500).send(err))
             }
         },
+        publishProject: (req, res) => {
+            const { project_id, title } = req.body;
+            let domain = `skizzl.com/z/${project_id}` + title.toLowerCase().replace(' ', '-')
+            const db = req.app.get('db')
+            db.publish_project([domain, project_id])
+                .then((domain) => res.status(200).send(domain))
+                .catch((err) => res.status(500).send(err))
+        },
         updateHeader: (req, res) => {
             const { project_id } = req.params
             const { main_img, button_text, heading, subheading, background_img, picture_and_color, background_color } = req.body
