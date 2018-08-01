@@ -15,7 +15,6 @@ export default class Input extends Component{
     this.setState({input: str})
   }
   render(){
-    console.log(this.props)
     return(
       <Div>
         <Inputs onChange={(e) => this.handler(e.target.value)} value={this.props.value}/>

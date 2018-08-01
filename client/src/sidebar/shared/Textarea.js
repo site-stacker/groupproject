@@ -12,9 +12,10 @@ export default class Textarea extends Component{
   }
 
   render(){
+        console.log(this.props)
     return(
       <div>
-        <TextInput rows="3" cols="50" onChange={(e) => this.props.handleTextarea(e.target.value, this.props.id)}/>
+        <TextInput rows="3" cols="50" onChange={(e) => this.props.handleTextarea(e.target.value, this.props.id)} value={this.props.value}/>
       </div>
     )
   }

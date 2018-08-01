@@ -19,7 +19,6 @@ class Wrapper extends Component{
   }
 
   render(){
-    console.log(this.props.theme)
     const opactity = this.props.bg_combined ? 0.9 : !this.props.bg_img ? 1 : 0;
     return(
       <div style={{width: "100%", height: "700px", color: `${props => props.color}`,  position:"relative", zIndex: "0", display: "flex", flexFlow: "column", justifyContent: "center", alignItems: "center"}}>

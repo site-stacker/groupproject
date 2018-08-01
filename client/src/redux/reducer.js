@@ -77,7 +77,6 @@ export default function reducer(state = initialState, action) {
     case GET_FONTS_LIST + "_FULFILLED":
       return Object.assign({}, state, { fonts_list: action.payload })
     case GET_PROJECT + "_FULFILLED":
-      console.log(action.payload)
       return Object.assign({}, state, { currentProject: action.payload })
 
     case GET_ABOUT + "_FULFILLED":
@@ -201,7 +200,6 @@ export const getFontsList = () => {
 
 export const getProject = (project_id) => {
   const project = axios.get(`/api/getProject/${project_id}`).then(res => {
-    console.log(res.data[0])
     res.data[0].color_palette = res.data[0].color_palette.match(/[#a-zA-Z0-9]+/g)
     return res.data[0]
   })
@@ -221,7 +219,6 @@ export const getAbout = (project_id) => {
 
 export const getFeatures = (project_id) => {
   const feature_components = axios.get(`/api/getFeature/${project_id}`).then(res => res.data)
-  console.log(feature_components)
   return {
     type: GET_FEATURES,
     payload: feature_components

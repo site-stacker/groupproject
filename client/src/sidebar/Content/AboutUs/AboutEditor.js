@@ -29,7 +29,7 @@ class AboutEditor extends Component{
         <Back updatePosition={this.props.updatePosition}/>
         <p>About Us</p>
         <Input handleInput={this.handleInput} name="Heading" id={this.props.id} value={this.props.about_header}/>
-        <Textarea rows="6" cols="50" onChange={(e) => this.props.updateAboutText(e.target.value)} value={this.props.about_text}/>
+        <Textarea rows="6" cols="50" value={this.props.about_text} handleTextarea={this.handleTextarea}/>
       </Wrapper>
     )
   }

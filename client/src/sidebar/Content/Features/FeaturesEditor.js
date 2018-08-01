@@ -27,6 +27,7 @@ class FeaturesEditor extends Component{
   };
 
   handleTextarea = (str, id) => {
+    console.log("hit")
     const obj = {
       str: str,
       id: id
@@ -50,7 +51,7 @@ class FeaturesEditor extends Component{
           {/* <H3>Feature {i+1}</H3> */}
           <RemoveBtn className="pe-7s-trash" onClick={() => this.deleteFeature(f.feature_component_id)}/>
           <Input handleInput={this.handleInput} name="Heading" id={f.feature_component_id} value={f.feature_title} />
-          <Textarea id={f.feature_component_id} handleTextarea={this.handleTextarea}/>
+          <Textarea id={f.feature_component_id} handleTextarea={this.handleTextarea} value={f.feature_text}/>
         </Div>  
       )
     })
