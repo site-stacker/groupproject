@@ -26,7 +26,7 @@ class GeneralEditor extends Component{
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>
         <p>General</p>
-        <Input handleInput={this.handleInput} name="Project Name"/>
+        <Input handleInput={this.handleInput} name='Project name' value={this.props.title}/>
         <OptionWrapper>
           <p>Logo</p>
           <LogoUploader />

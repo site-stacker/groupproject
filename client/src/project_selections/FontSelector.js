@@ -45,7 +45,7 @@ class FontPicker extends Component {
         }
         return (
             <Center>
-                <Font>
+                <Font onClick={() => this.freeStart()}>
                     <h1>Pick a Font for Your Project</h1>
                     <FontSelector />
                     <div>

@@ -24,8 +24,8 @@ class AboutEditor extends Component{
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>
         <p>About Us</p>
-        <Input handleInput={this.handleInput} name="Heading"/>
-        <Textarea rows="6" cols="50" onChange={(e) => this.props.updateAboutText(e.target.value)}/>
+        <Input handleInput={this.handleInput} name="Heading" value={this.props.about_header}/>
+        <Textarea rows="6" cols="50" onChange={(e) => this.props.updateAboutText(e.target.value)} value={this.props.about_text}/>
       </Wrapper>
     )
   }
@@ -33,7 +33,9 @@ class AboutEditor extends Component{
 const mapStateToProps = (state) => {
   console.log(state.sectionSelected)
   return{
-    sections: state.sectionSelected
+    sections: state.sectionSelected,
+    about_header: state.currentProject.about_header,
+    about_text: state.currentProject.about_text
   }
 }
 export default connect(mapStateToProps, {changeSelectedSection, updateAboutHeading, updateAboutText})(AboutEditor)

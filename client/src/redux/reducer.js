@@ -137,7 +137,7 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_ABOUT:
       return Object.assign({}, state, { currentProject: { ...state.currentProject, about: action.payload } })
     case UPDATE_ABOUT_HEADING:
-      return Object.assign({}, state, { currentProject: { ...state.currentProject, about_heading: action.payload } })
+      return Object.assign({}, state, { currentProject: { ...state.currentProject, about_header: action.payload } })
     case UPDATE_ABOUT_TEXT:
       return Object.assign({}, state, { currentProject: { ...state.currentProject, about_text: action.payload } })
 
