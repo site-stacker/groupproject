@@ -42,12 +42,13 @@ class HeaderEditor extends Component{
   }
 
   render(){
+    
     return(
       <Wrapper>
         <Back updatePosition={this.props.updatePosition}/>
-        <Input handleInput={this.handleHeading} name="Heading"/>
-        <Input handleInput={this.handleSubheading} name="Subheading"/>
-        <Input handleInput={this.handleButtonText} name="Button text"/>
+        <Input handleInput={this.handleHeading} name="Heading" value={this.props.currentProject.heading}/>
+        <Input handleInput={this.handleSubheading} name="Subheading" value={this.props.currentProject.subheading}/>
+        <Input handleInput={this.handleButtonText} name="Button text" value={this.props.currentProject.button_text}/>
         <OptionWrapper>
           <p>Main image</p>
           <ImageUploader />
@@ -73,7 +74,8 @@ class HeaderEditor extends Component{
 const mapStateToProps = (state) => {
   return{
     toggleSwitch: state.currentProject.picture_and_color,
-    sections: state.sectionSelected
+    sections: state.sectionSelected,
+    currentProject: state.currentProject 
   }
 }
 export default connect(mapStateToProps, {updateHeaderHeading, updateHeaderSubheading, updateHeaderButton, changeSelectedSection, updateToggleCombination})(HeaderEditor)

@@ -38,8 +38,8 @@ class FeaturesEditor extends Component{
       return(
         <Div key={i}>
           <H3>Feature {i+1}</H3>
-          <Input handleInput={this.handleInput} name="Heading" id={f.feature_component_id}/>
-          <Textarea rows="3" cols="50" onChange={(e) => this.handleTextarea(f.feature_id, e.target.value)}/>
+          <Input handleInput={this.handleInput} name="Heading" id={f.feature_component_id} value={f.feature_title} />
+          <Textarea rows="3" cols="50" onChange={(e) => this.handleTextarea(f.feature_id, e.target.value)} value={f.feature_text}/>
         </Div>  
       )
     })
