@@ -15,9 +15,10 @@ export default class Input extends Component{
     this.setState({input: str})
   }
   render(){
+    console.log(this.props)
     return(
       <Div>
-        <Inputs onChange={(e) => this.handler(e.target.value)}/>
+        <Inputs onChange={(e) => this.handler(e.target.value)} value={this.props.value}/>
         <Label top={!this.state.input ? "-18px" : "-18px"}>{this.props.name}</Label>
         <FocusBorder width={!this.state.input ? 0 : "100%"}/>
       </Div>

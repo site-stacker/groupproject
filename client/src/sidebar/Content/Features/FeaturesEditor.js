@@ -49,7 +49,7 @@ class FeaturesEditor extends Component{
         <Div key={i}>
           {/* <H3>Feature {i+1}</H3> */}
           <RemoveBtn className="pe-7s-trash" onClick={() => this.deleteFeature(f.feature_component_id)}/>
-          <Input handleInput={this.handleInput} name="Heading" id={f.feature_component_id}/>
+          <Input handleInput={this.handleInput} name="Heading" id={f.feature_component_id} value={f.feature_title} />
           <Textarea id={f.feature_component_id} handleTextarea={this.handleTextarea}/>
         </Div>  
       )

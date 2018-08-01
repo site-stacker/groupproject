@@ -5,15 +5,19 @@ import styled from 'styled-components';
 
 class ColorPicker extends Component {
 
+    componentDidMount() {
+        console.log('color mounted')
+    }
+
     render() {
         return (
             <Center>
-                <Color>
+                <Color onClick={() => this.props.goToFont()}>
                     <h1>Pick a Color Palette for Your Project</h1>
-                    <ColorSelector />
+                    <ColorSelector/>
                     <div>
                         <Arrow className='pe-7s-left-arrow' onClick={() => this.props.goToTitle()}></Arrow>
-                        <Arrow className='pe-7s-right-arrow' onClick={() => this.props.goToFont()}></Arrow>
+                        <Arrow className='pe-7s-right-arrow' onClick={() => this.props.goToFont()} ></Arrow> 
                     </div>
                 </Color>
             </Center>

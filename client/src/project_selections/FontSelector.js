@@ -15,6 +15,10 @@ class FontPicker extends Component {
         }
     }
 
+    componentDidMount() {
+        console.log('font mounted')
+    }
+
     freeStart = () => {
         axios.post('/api/createDefaultProject', { color_id: this.props.color_id, font: this.props.font, title: this.props.title, color_palette: this.props.color_palette }).then(res => {
             this.setState({
@@ -41,7 +45,7 @@ class FontPicker extends Component {
         }
         return (
             <Center>
-                <Font>
+                <Font onClick={() => this.freeStart()}>
                     <h1>Pick a Font for Your Project</h1>
                     <FontSelector />
                     <div>

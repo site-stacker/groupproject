@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon from '@material-ui/icons';
 
-function TitleSelector(props) {
-    return (
-        <Center>
-            <Title>
-                <h1>What is the Title of Your Project?</h1>
-                <TitleInput onChange={(e) => props.setTitle(e.target.value)} value={props.title} />
-                <br />
-                <br />
-                <div>
-                    <Link to={props.user ? '/projects' : '/'} >
-                        <Arrow className='pe-7s-left-arrow' ></Arrow>
-                    </Link >
-                    <Arrow onClick={() => props.goToColor()} className='pe-7s-right-arrow'></Arrow>
-                </div>
-            </Title>
-        </Center>
-    )
+class TitleSelector extends Component {
+
+    componentDidMount() {
+        console.log('title mounted')
+    }
+
+    handleKeyUp(e){
+        console.log(e)
+       if(e.keyCode === 13) {
+            this.props.goToColor()
+       } 
+    }
+
+    render() {
+        console.log(this.props)
+        return (
+            <Center>
+                <Title>
+                    <h1>What is the Title of Your Project?</h1>
+                    <TitleInput onChange={(e) => this.props.setTitle(e.target.value)} onKeyUp={(e) => this.handleKeyUp(e)} value={this.props.title} />
+                    <br />
+                    <br />
+                    <div>
+                        <Link to={this.props.user ? '/projects' : '/'} >
+                            <Arrow className='pe-7s-left-arrow' ></Arrow>
+                        </Link >
+                        <Arrow onClick={() => this.props.goToColor()}  className='pe-7s-right-arrow'></Arrow>
+                    </div>
+                </Title>
+            </Center>
+        )
+    }
 }
 
 function mapStateToProps(state) {
@@ -80,6 +94,7 @@ const TitleInput = styled.input`
     }
     :focus{
         width: 400px;
+        transition: .5s;
         outline: none;
     }
 `
