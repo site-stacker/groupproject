@@ -61,7 +61,7 @@ function ContentSelector(props){
         </SectionBtn>
         {mappedSections}
         {/* <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn> */}
-        <Modal show={props.toggleLogin}>
+        <Modal height={props.toggleLogin}>
           <h3>You must login to save.</h3>
           <LoginDuringProject />
           <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
@@ -162,21 +162,24 @@ const ToggleWrapper = styled.div`
 
 const Modal = styled.div`
   width: 400px;
-  height: 100%;
+  height: ${props => props.height ? '100%' : 0};
   color: #5D38DB;
   background-color: ${darkwhite};
   position: absolute;
-  display: ${props => props.show ? 'flex' : 'none'};
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  transition: 0.2s;
 `
 
 const Exit = styled.button`
-    background: none;
-    outline: none;
-    border: none;
-    color: #5D38DB;
-    font-size: 40px;
-    transition: .5s;
+  background: none;
+  outline: none;
+  border: none;
+  color: #5D38DB;
+  font-size: 40px;
+  transition: .5s;
+  cursor: pointer;
 `

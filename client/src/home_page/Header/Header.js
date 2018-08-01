@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from '../../sidebar/Login/Login';
+import { lightGrey } from '../../sidebar/shared/colors';
+import axios from 'axios';
+import { logout } from '../../redux/reducer';
 
 class Header extends Component {
     constructor(props) {
@@ -19,6 +22,13 @@ class Header extends Component {
         })
     }
 
+    logout = () => {
+        // const {username, password} = this.state
+        axios.post('/api/logout').then(res => {
+            this.props.logout()
+        })
+    }
+
     render() {
         return (
             <HeaderDiv>
@@ -28,32 +38,53 @@ class Header extends Component {
                         <H2>SKIZZL</H2>
                     </TitleHolder>
                 </Link >
-                <div>
-                    <H3 onClick={() => this.handleToggle()}>Account</H3>
-                    <Modal show={this.state.toggleModal}>
-                        <Login/>
-                    </Modal>
-                </div>
+                {
+                    this.props.user ?
+                        <Link to='/' >
+                            <H3 onClick={() => this.logout()}>Logout</H3>
+                        </Link>
+                        :
+                        <div>
+                            <H3 onClick={() => this.handleToggle()}>Account</H3>
+                            <Modal height={this.state.toggleModal}>
+                                <Login />
+                            </Modal>
+                        </div>
+                }
             </HeaderDiv>
         )
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { logout })(Header);
+
 const HeaderDiv = styled.div`
+    z-index: 20;
+    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 90%;
-    margin: 0 auto;
-    color: #5D38DB;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    color: white;
     & a {text-decoration: none};
 `
 
 const TitleHolder = styled.div`
+    width: 150px;
+    justify-content: space-between;
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #5D38DB;
+    color: white;
 `
 
 const H2 = styled.h2`
@@ -62,6 +93,8 @@ const H2 = styled.h2`
 
 const H3 = styled.h3`
     transition: .5s;
+    color: white;
+    cursor: pointer;
 
     :hover{
         font-size: 20px;
@@ -71,23 +104,16 @@ const H3 = styled.h3`
 
 const Modal = styled.div`
     width: 250px;
-    height: 275px;
+    height: ${props => props.height ? '275px' : 0};
     border-radius: 5px;
     color: #5D38DB;
     background-color: white;
-    border: 1px solid #5D38DB;
     position: absolute;
-    right: 50px;
-    box-shadow: 2px 2px 5px #5D38DB;
-    display: ${props => props.show ? 'flex' : 'none'};
+    right: 30px;
+    box-shadow: 2px 2px 10px ${lightGrey};
+    display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    transition: 0.2s ease-in;
 `
-
-function mapStateToProps(state) {
-    return {
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps)(Header);

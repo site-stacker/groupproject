@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { getUser } from '../../redux/reducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { Route, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
+import { violet, darkwhite } from '../shared/colors';
 
 class Login extends Component {
     constructor() {
@@ -22,9 +23,9 @@ class Login extends Component {
             axios.post('/api/login', { username: username.toLowerCase(), password: password }).then(res => {
                 console.log(res.data)
                 if (res.data.length !== 0) {
+                    this.setState({ loggedIn: true })
                     this.props.getUser(res.data)
                     //   this.setState({error: res.data})
-                    this.setState({ loggedIn: true })
                 } else {
                     this.setState({ loggedIn: true, error: '' })
                 }
@@ -56,12 +57,17 @@ class Login extends Component {
             }
         })
     }
+    pressEnter(e) {
+        if(e.keyCode === 13) {
+            this.login()
+        }
+    }
     render() {
         if (this.state.loggedIn) {
             return <Redirect to={'/projects'} />
         }
         return (
-            <div className='login-component'>
+            <TopDiv >
                 <h3 style={{ textAlign: 'center' }}>Username</h3>
                 <Username
                     type='text'
@@ -71,6 +77,7 @@ class Login extends Component {
                 <Password
                     type='password'
                     onChange={e => this.setState({ password: e.target.value })}
+                    onKeyUp={e => this.pressEnter(e)}
                 />
                 <br /><br />
                 {
@@ -79,17 +86,17 @@ class Login extends Component {
                             <Link to='/'>
                                 <Logout type='submit' onClick={() => this.logout()} className='logout-btn'>
                                     Logout
-                    </Logout>
+                                </Logout>
                             </Link>
                         </ButtonHolder>
                         :
                         <ButtonHolder>
-                            <LoginRegister type='submit' onClick={() => this.login()} className='login-btn'>Login</LoginRegister>
-                            <LoginRegister type='submit' onClick={() => this.register()} className='register-btn'>Register</LoginRegister>
+                            <Btn type='submit' onClick={() => this.login()} className='login-btn'>Login</Btn>
+                            <Btn type='submit' onClick={() => this.register()} className='register-btn'>Register</Btn>
                         </ButtonHolder>
                 }
                 <p>{this.state.error}</p>
-            </div>
+            </TopDiv>
         )
     }
 }
@@ -112,8 +119,8 @@ const Username = styled.input`
     color: #5D38DB;
     font-size: 15px;
     transition: .5s;
-    justify-content: center;
     text-align: center;
+    margin: 0 auto;
 
     :hover{
         width: 150px;
@@ -137,6 +144,7 @@ const Password = styled.input`
     transition: .5s;
     justify-content: center;
     text-align: center;
+    margin: 0 auto;
 
     :hover{
         width: 150px;
@@ -147,14 +155,6 @@ const Password = styled.input`
         transition: .5s;
         outline: none;
     }
-`
-
-const LoginRegister = styled.button`
-    /* display: ${props => isNaN(props.user) ? 'initial' : 'none'}; */
-    border: 2px solid #5D38DB;
-    border-radius: 5px;
-    color: #5D38DB;
-    background-color: whitesmoke;
 `
 
 const Logout = styled.button`
@@ -168,4 +168,35 @@ const Logout = styled.button`
 const ButtonHolder = styled.div`
     display: flex;
     justify-content: space-around;
+    width: 175px;
+`
+
+const Btn = styled.button`
+  background: ${violet};
+  color: ${darkwhite};
+  padding: 20px;
+  position: relative;
+  border: 1px solid ${violet};
+  border-radius: 6px;
+  display: flex;
+  flex-flow: row;
+  cursor: pointer;
+  transition: .3s;
+  
+  :hover{
+      background: ${darkwhite};
+      color: ${violet};
+      border: 1px solid ${violet};
+  }
+
+  &:focus{
+    outline: none;
+  }
+`
+
+const TopDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
