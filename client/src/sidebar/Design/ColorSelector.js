@@ -6,7 +6,12 @@ import ColorSample from "./ColorSample"
 
 function ColorSelector(props){
   const sample = props.themes.map( theme => {
-    return <ColorSample key={theme.color_id} name={theme.color_palette_name}  color_id={theme.color_id} palette={theme.color_palette} />
+    return <ColorSample 
+            key={theme.color_id} 
+            name={theme.color_palette_name}  
+            color_id={theme.color_id} 
+            palette={theme.color_palette} 
+             />
   })
   return(
     <Div>
@@ -26,7 +31,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(ColorSelector)
 
 const Div = styled.div`
-
+  
 `;
 
 const H2 = styled.h2`

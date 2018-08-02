@@ -5,7 +5,9 @@ import styled from "styled-components";
 
 function FontSample(props){
   return(
-    <FontBox onClick={() => props.pickFont(props.name)}>
+    <FontBox onClick={() => props.pickFont(props.name)}
+            selectedFont={props.name === props.selectedFont ? 'solid 3px #5441D3' : 'none'}
+    >
       <FontDisplay font_family={props.name}><TextSample>Aa</TextSample></FontDisplay>  
       <NameContainer>
         <FontName font_family={props.name}>{props.name}</FontName>
@@ -13,8 +15,13 @@ function FontSample(props){
     </FontBox>  
   )
 }
+const mapStateToProps = state => {
+  return{
+    selectedFont: state.currentProject.font
+  }
+}
 
-export default connect(null, {pickFont})(FontSample)
+export default connect(mapStateToProps, {pickFont})(FontSample)
 
 const FontBox = styled.div`
   display: flex;
@@ -26,6 +33,7 @@ const FontBox = styled.div`
   background: white;
   margin: 0 0 30px;
   cursor: pointer;
+  border: ${props => props.selectedFont}
 `;
 
 const NameContainer = styled.div`
