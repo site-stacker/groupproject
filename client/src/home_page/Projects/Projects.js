@@ -12,6 +12,7 @@ class Projects extends Component {
         this.state = {
             projects: [],
             redirect: false,
+            unauthorized: false,
             project_id: 0
         }
         this.deleteProject = this.deleteProject.bind(this)
@@ -19,9 +20,16 @@ class Projects extends Component {
 
     componentDidMount() {
         axios.get('/api/getProjects').then(res => {
-            this.setState({
-                projects: res.data
-            })
+            console.log(res.data)
+            if(res.data === 'redirect') {
+                this.setState({
+                    unauthorized: true
+                })
+            } else {
+                this.setState({
+                    projects: res.data
+                })
+            }
         })
     }
 
@@ -41,9 +49,13 @@ class Projects extends Component {
     }
 
     render() {
+        if (this.state.unauthorized) {
+            return <Redirect to='/' />
+        }
         if (this.state.redirect) {
             return <Redirect to={`/edit/${this.state.project_id}`} />
-        }
+        } 
+        
         let mapped = this.state.projects.map(project => {
             console.log(project)
             console.log(this.props.user_id)
@@ -148,7 +160,8 @@ const IconHolder = styled.div`
 function mapStateToProps(state) {
     console.log(state.user)
     return {
-        user_id: state.user
+        user_id: state.user,
+        currentProject: state.currentProject
     }
 }
 

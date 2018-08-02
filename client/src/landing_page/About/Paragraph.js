@@ -7,7 +7,7 @@ import {violet} from "./../../sidebar/shared/colors"
 
 function Paragraph(props){
   return (
-    <P style={{fontFamily: `${props.fontFamily}`}}>{props.text}</P>
+    <P style={{fontFamily: `${props.fontFamily}`, color: `${props.color_palette[4]}`}}>{props.text}</P>
     //  <p style={{fontFamily: `${this.props.fontFamily}`}}>{this.props.text}</p>
   )   
 }
@@ -16,7 +16,8 @@ function Paragraph(props){
 const mapStateToProps = state => {
   return{
     text: state.currentProject.about_text,
-    fontFamily: state.currentProject.font
+    fontFamily: state.currentProject.font,
+    color_palette: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette : []
   }
 }
 

@@ -5,9 +5,13 @@ module.exports =
     {
         getProjects: (req, res) => {
             const db = req.app.get('db')
-            db.get_projects([req.session.user.user_id])
-                .then(projects => res.status(200).send(projects))
-                .catch((err) => res.status(500).send(err))
+            if (req.session.user.user_id) {
+                db.get_projects([req.session.user.user_id])
+                    .then(projects => res.status(200).send(projects))
+                    .catch((err) => res.status(500).send(err))
+            } else {
+                res.status(200).send('redirect')
+            }
         },
         getProject: (req, res) => {
             const { project_id } = req.params
@@ -172,8 +176,9 @@ module.exports =
             }
         },
         publishProject: (req, res) => {
-            const { project_id, title } = req.body;
-            let domain = `skizzl.com/z/${project_id}` + title.toLowerCase().replace(' ', '-')
+            const { project_id } = req.params
+            const { title } = req.body;
+            let domain = `skizzl.com/z/${project_id}/` + title.toLowerCase().replace(' ', '-')
             const db = req.app.get('db')
             db.publish_project([domain, project_id])
                 .then((domain) => res.status(200).send(domain))
