@@ -7,9 +7,6 @@ function ColorSample(props){
   
   const color = props.palette.match(/[#a-zA-Z0-9]+/g) 
   
-
-
-
   return(
     <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)} 
               selected={props.color_id === props.selectedColor ? 'solid 3px #5441D3' : 'none'} >

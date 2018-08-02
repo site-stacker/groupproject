@@ -67,6 +67,7 @@ function ContentSelector(props){
           <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
         </Modal>
         <SaveBtn onClick={() => save()}>Save</SaveBtn>
+        
         <SaveBtn onClick={()=>alert("")}>Publish</SaveBtn>
       </SectionWrapper>
     )

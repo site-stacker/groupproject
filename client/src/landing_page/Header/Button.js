@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 
 function Button(props){
   return(
-    <Btn style={{fontFamily: `${props.font_family}`, backgroundColor: `${props.bg_color}`, color: `${props.color}`}} onClick={()=>alert("fsdf")}>{props.btn_text}</Btn>
+    <Btn style={{fontFamily: `${props.font_family}`, backgroundColor: `${props.bg_color}`, color: `${props.color}`}} onClick={()=>alert("Hello World")}>{props.btn_text}</Btn>
   )
 }
 
