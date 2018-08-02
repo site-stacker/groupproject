@@ -21,7 +21,7 @@ const initialState = {
     {family:"Roboto Condensed"},
     {family:"Roboto Mono"},
     {family:"Roboto Slab"},
-    {family:"Slabo"},
+    {family:"Arvo"},
     {family:"Source Sans Pro"},
     {family:"Ubuntu"}
   ],
