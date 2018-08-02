@@ -24,7 +24,7 @@ class TitleSelector extends Component {
                 <Center>
                     <Title>
                         <h1>What is the Title of Your Project?</h1>
-                        <TitleInput onChange={(e) => this.props.setTitle(e.target.value)} value={this.props.title} />
+                        <TitleInput onChange={(e) => this.props.setTitle(e.target.value)} value={this.props.title} onKeyUp={(e) => this.handleKeyUp(e)} />
                         <br />
                         <br />
                         <div>
