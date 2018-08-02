@@ -14,10 +14,10 @@ function ColorSample(props){
     <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)} 
               selected={props.color_id === props.selectedColor ? 'solid 3px #5441D3' : 'none'} >
       <ColorPalette>
+        <ThemeSample bg_color={color[0]}/>
         <ThemeSample bg_color={color[1]}/>
         <ThemeSample bg_color={color[2]}/>
         <ThemeSample bg_color={color[3]}/>
-        <ThemeSample bg_color={color[4]}/>
       </ColorPalette>
       <NameContainer>
         <ColorName>{props.name}</ColorName>

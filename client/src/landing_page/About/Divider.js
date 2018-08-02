@@ -24,5 +24,4 @@ export const HR = styled.div`
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-
 `;
