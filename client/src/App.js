@@ -23,7 +23,6 @@ class App extends Component {
         this.setState({
           display: 'initial'
         });
-        console.log(this.props.currentProject)
         setInterval(this.autosaver, 20000);
       })
     })

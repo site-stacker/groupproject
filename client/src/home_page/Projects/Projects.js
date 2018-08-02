@@ -78,6 +78,7 @@ const FlexHolder = styled.div`
     width: 930px;
     margin: 0 auto;
     justify-content: space-around;
+    margin: 100px auto 0;
 `
 
 const ProjectHolder = styled.div`
@@ -114,6 +115,7 @@ const Delete = styled.button`
     font-size: 40px;
     transition: .5s;
     text-decoration: none;
+    cursor: pointer;
 
     :hover{
         font-size: 45px;
@@ -130,6 +132,7 @@ const Edit = styled.button`
     font-size: 40px;
     transition: .5s;
     text-decoration: none;
+    cursor: pointer;
 
     :hover{
         font-size: 45px;

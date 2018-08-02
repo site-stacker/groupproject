@@ -2,6 +2,7 @@ import React from "react"
 import {connect} from "react-redux"
 import styled from "styled-components"
 import ColorSample from "./ColorSample"
+import {grey} from "./../shared/colors"
 
 
 function ColorSelector(props){
@@ -15,7 +16,7 @@ function ColorSelector(props){
   })
   return(
     <Div>
-      <H2>COLOR THEMES</H2>
+      <H2>THEMES GALLERY</H2>
       <SampleWrapper>
       {sample}
       </SampleWrapper>
@@ -35,7 +36,8 @@ const Div = styled.div`
 `;
 
 const H2 = styled.h2`
-  color: red;
+  color: ${grey};
+  text-align: center;
 `;
 
 const SampleWrapper = styled.div`

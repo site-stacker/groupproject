@@ -57,6 +57,7 @@ app.post('/api/createDefaultProject', ctrl.createDefaultProject)
 app.post('/api/createDefaultHeader/:project_id', ctrl.createDefaultHeader)
 app.post('/api/createAbout/:project_id', ctrl.createAbout)
 app.post('/api/createFeature/:project_id', ctrl.createFeature)
+app.put('/api/publishProject/:project_id', ctrl.publishProject)
 app.put('/api/updateHeader/:project_id', ctrl.updateHeader)
 app.put('/api/updateProject/:project_id', ctrl.updateProject)
 app.put('/api/updateAbout/:project_id', ctrl.updateAbout)
@@ -68,7 +69,7 @@ app.put('/api/updateFeatureWithUser/:feature_component_id', ctrl.updateFeatureWi
 app.delete('/api/deleteProject/:project_id', ctrl.deleteProject)
 app.delete('/api/deleteUser/:user_id', ctrl.deleteUser)
 app.delete('/api/deleteAbout/:about_id', ctrl.deleteAbout)
-app.delete('/api/deleteFeature/:feature_id', ctrl.deleteFeature)
+app.delete('/api/deleteFeature/:feature_component_id', ctrl.deleteFeature)
 
 
 // server ///////////////////////////////////////

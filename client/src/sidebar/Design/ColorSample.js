@@ -55,6 +55,10 @@ const NameContainer = styled.div`
   padding: 0 20px;
   box-sizing: border-box;
     
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center; 
 `;
 
 const ColorName = styled.p`

@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {pickFont} from "./../../redux/reducer";
 import styled from "styled-components";
+import { greyBlue } from "../shared/colors";
 
 function FontSample(props){
   return(
@@ -34,11 +35,13 @@ const FontBox = styled.div`
   margin: 0 0 30px;
   cursor: pointer;
   border: ${props => props.selectedFont}
+  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 const NameContainer = styled.div`
   background-color: white;
-  width: 100%;
+  width: 70%;
   height: 50px;
   position: absolute;
   bottom: 0;
@@ -47,7 +50,7 @@ const NameContainer = styled.div`
   flex-flow: row;
   align-items: center;
   justify-content: center;
-  border-top: 2px solid red;
+  border-top: 2px solid ${greyBlue};
 `;
 
 const FontName = styled.p`

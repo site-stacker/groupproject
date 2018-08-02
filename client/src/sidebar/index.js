@@ -33,13 +33,13 @@ class Sidebar extends Component{
   render(){
     console.log(this.props.project)
     return(
-      <SidebarDiv left={this.props.toggle ? 0 : "-500px"}>
-      <Menu />
-      <Div>
-        <Container lefty={this.props.selected === "design" ? "500px" : "0px"}>
-        <DesignWrapper /> 
-        <ContentWrapper />
-        </Container >  
+      <SidebarDiv left={this.props.toggle ? 0 : "-500px"} >
+        <Menu />
+        <Div>
+          <Container lefty={this.props.selected === "design" ? "500px" : "0px"}>
+          <DesignWrapper /> 
+          <ContentWrapper />
+          </Container >  
         </Div>
       </SidebarDiv>
     )
@@ -59,11 +59,11 @@ export default connect(mapStateToProps, {getFontsList, getProject, getColorTheme
 
 const SidebarDiv = styled.div`
   font-family: "Raleway";
-  position: absolute;
+  position: fixed;
   left: ${props => props.left};
   transition: 0.3s ease-in;
   width: 500px;
-  height: 100%;
+  height: 100vh;
   box-shadow: 0px 0 10px #888888;
   z-index: 2;
 `;
@@ -78,9 +78,9 @@ const Container = styled.div`
 `;
 const Div = styled.div`
   position: absolute;
-  height: 100%;
+  height: calc(100% - 100px);
   width: 100%;
-  top: 0;
+  top: 100px;
   bottom: 0;
   left: 0;
   right: 0;
