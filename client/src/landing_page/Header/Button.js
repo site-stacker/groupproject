@@ -26,6 +26,9 @@ const Btn = styled.button`
   border: none;
   z-index:  3;
   cursor: pointer;
+  color: ${props => props.color};
+  background-color: ${props => props.bg_color};
+  font-family: ${props => props.font};
   border-radius: 4px;
   margin: 30px 0;
 `;
