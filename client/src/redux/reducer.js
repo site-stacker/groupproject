@@ -3,7 +3,27 @@ import axios from "axios";
 const initialState = {
   toggleLogin: false,
   color_themes: [],
-  fonts_list: [],
+  fonts_list: [{family:"Lato"},
+  {family:"Lora"},
+  {family:"Merriweather"},
+  {family:"Montserrat"},
+  {family:"Noto Sans"},
+  {family:"Open Sans"},
+  {family:"Open Sans Condensed"},
+  {family:"Oswald"},
+  {family:"PT Sans"},
+  {family:"PT Serif"},
+  {family:"Playfair Display"},
+  {family:"Poppins"},
+  {family:"Raleway"},
+  {family:"Roboto"},
+  {family:"Roboto Condensed"},
+  {family:"Roboto Mono"},
+  {family:"Roboto Slab"},
+  {family:"Slabo"},
+  {family:"Source Sans Pro"},
+  {family:"Ubuntu"}
+],
   currentProject: {
     background_img: '',
     feature_components: [
