@@ -28,7 +28,7 @@ class ImageUploader extends Component {
 
     handleUpload = () => {
         const {image} = this.state;
-        const uploadTask = storage.ref(`main_images/${image.name}`).put(image);
+        const uploadTask = storage.ref(`logos/${image.name}`).put(image);
         uploadTask.on('state_changed', 
         (snapshot) => {
             // progress function

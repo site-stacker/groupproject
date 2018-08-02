@@ -1,10 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
+import styled from "styled-components"
+
 
 function Heading(props){
     return(
-      <h1 style={{fontFamily: `${props.font_family}`, color: `${props.color}`, width: "100%",
-      textAlign: "center", position: "relative", zIndex: "1", margin: "0"}}>{props.heading}</h1>
+      <Header font={props.font_family} color={props.color}>{props.heading}</Header>
     )
   }
 
@@ -19,3 +20,13 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(Heading)
+
+export const Header = styled.h1`
+  width: 100%;
+  text-align: center;
+  color: ${props => props.color};
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: ${props => props.font};
+`;

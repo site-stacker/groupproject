@@ -4,7 +4,7 @@ import {H2} from "./../shared/H2";
 
 function Heading(props){
   return (
-    <H2 style={{fontFamily: `${props.fontFamily}`, color: `${props.color_palette[1]}`}}>{props.heading}</H2>
+    <H2>{props.heading}</H2>
   )
 }
 
