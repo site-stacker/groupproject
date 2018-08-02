@@ -4,6 +4,7 @@ import FontSelector from '../sidebar/Design/FontSelector';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { ScaleIn } from '../sidebar/shared/animations';
 
 class FontPicker extends Component {
     constructor(props) {
@@ -44,18 +45,20 @@ class FontPicker extends Component {
             return <Redirect to={`/edit/${this.state.project_id}`} />
         }
         return (
-            <Center>
-                <Font onClick={() => this.freeStart()}>
-                    <h1>Pick a Font for Your Project</h1>
-                    <FontSelector />
-                    <div>
-                        <Arrow className='pe-7s-left-arrow' onClick={() => this.props.goToColor()}>
-                        </Arrow>
-                        <Arrow className='pe-7s-check' onClick={() => this.freeStart()}>
-                        </Arrow>
-                    </div>
-                </Font>
-            </Center>
+            <ScaleIn>
+                <Center>
+                    <Font>
+                        <h1>Pick a Font for Your Project</h1>
+                        <FontSelector />
+                        <div>
+                            <Arrow className='pe-7s-left-arrow' onClick={() => this.props.goToColor()}>
+                            </Arrow>
+                            <Arrow className='pe-7s-check' onClick={() => this.freeStart()}>
+                            </Arrow>
+                        </div>
+                    </Font>
+                </Center>
+            </ScaleIn>
         )
     }
 }

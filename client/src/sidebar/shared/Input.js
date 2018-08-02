@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import styled from "styled-components";
-import {lightGrey, violet} from "./colors"
+import {lightGrey, violet, greyBlue} from "./colors"
 
 export default class Input extends Component{
   constructor(){
@@ -16,9 +16,9 @@ export default class Input extends Component{
   }
   render(){
     return(
-      <Div>
+      <Div mb={this.props.mb ? this.props.mb : "50px"}>
         <Inputs onChange={(e) => this.handler(e.target.value)} value={this.props.value}/>
-        <Label top={!this.state.input ? "-18px" : "-18px"}>{this.props.name}</Label>
+        <Label top={this.state.input ? "-20px" : "-20px"}>{this.props.name}</Label>
         <FocusBorder width={!this.state.input ? 0 : "100%"}/>
       </Div>
     )
@@ -28,7 +28,7 @@ export default class Input extends Component{
 const Div = styled.div`
   width: 100%;
   position: relative;
-  margin: 50px 0;
+  margin-bottom: ${props => props.mb};
 `;
 
 const Inputs = styled.input`
@@ -38,6 +38,8 @@ const Inputs = styled.input`
   box-sizing: border-box; 
   border-bottom: 1px solid #ccc; 
   background-color: transparent;
+  color: ${greyBlue};
+  font-size: 14px;
 
   &:focus{
     outline: none;

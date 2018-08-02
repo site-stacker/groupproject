@@ -40,8 +40,7 @@ export const FeaturesWrapper = styled.div`
 `;
 
 export const FeatureWrapper = styled.div`
-  max-width: 100%;
-  min-width: 50%;
+  width: 50%;
   display:flex;
   flex-flow: column;
   height: 200px;

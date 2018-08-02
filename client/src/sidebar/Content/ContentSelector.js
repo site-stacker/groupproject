@@ -14,7 +14,7 @@ function ContentSelector(props){
         <p onClick={() => action(s)}>{s}</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         <ToggleWrapper>
-          <Toggle name={s} toggle={ s === "About Us" ? props.about : s === "Features" ? props.features : null }/>
+          <Toggle name={s} toggle={ s === "About Us" ? props.about : s === "Features" ? props.features : null } />
         </ToggleWrapper>
       </SectionBtn>
     )
@@ -45,7 +45,7 @@ function ContentSelector(props){
       console.log(props.toggleLogin)
     }
   }
-  
+  console.log(props.sections)
     return (
       <SectionWrapper>
         <Header>
@@ -60,8 +60,7 @@ function ContentSelector(props){
           <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         </SectionBtn>
         {mappedSections}
-        {/* <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn> */}
-        <Modal show={props.toggleLogin}>
+        <Modal height={props.toggleLogin}>
           <h3>You must login to save.</h3>
           <LoginDuringProject />
           <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
@@ -77,7 +76,9 @@ const mapStateTopProps = (state) => {
     sections: state.sections,
     user: state.user,
     currentProject: state.currentProject,
-    toggleLogin: state.toggleLogin
+    toggleLogin: state.toggleLogin,
+    about: state.currentProject.about,
+    features: state.currentProject.features
   }
 }
 export default connect(mapStateTopProps, {toggleLoginOn, toggleLoginOff})(ContentSelector);
@@ -111,9 +112,6 @@ const SectionBtn = FlexRow.extend`
   transition: 0.2s ease-in;
   position: relative;
 
-  &:hover{
-    /* background: ${lightGrey}; */
-  }
   &:hover :nth-child(2){
     right: 180px;
     font-size: 36px;
@@ -162,21 +160,24 @@ const ToggleWrapper = styled.div`
 
 const Modal = styled.div`
   width: 400px;
-  height: 100%;
+  height: ${props => props.height ? '100%' : 0};
   color: #5D38DB;
   background-color: ${darkwhite};
   position: absolute;
-  display: ${props => props.show ? 'flex' : 'none'};
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  transition: 0.2s;
 `
 
 const Exit = styled.button`
-    background: none;
-    outline: none;
-    border: none;
-    color: #5D38DB;
-    font-size: 40px;
-    transition: .5s;
+  background: none;
+  outline: none;
+  border: none;
+  color: #5D38DB;
+  font-size: 40px;
+  transition: .5s;
+  cursor: pointer;
 `

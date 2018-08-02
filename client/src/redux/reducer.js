@@ -33,7 +33,7 @@ const initialState = {
         text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
       }
     ],
-    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB", "#1AAEFC"]
+    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB"]
   },
   sections: ["About Us", "Features"],
   contentSection: "Sections",
@@ -46,6 +46,7 @@ const initialState = {
 
 
 const GET_USER = "GET_USER";
+const LOGOUT_USER = "LOGOUT_USER"
 
 const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
@@ -86,12 +87,15 @@ export default function reducer(state = initialState, action) {
     case GET_USER:
       return Object.assign({}, state, { user: action.payload })
 
+    case LOGOUT_USER:
+      return Object.assign({}, state, { user: action.payload })
+
     case TOGGLE_SIDEBAR:
       return Object.assign({}, state, { toggleSidebar: !state.toggleSidebar })
 
     case TOGGLE_LOGIN:
       return Object.assign({}, state, { toggleLogin: action.payload })
-      
+
     case GET_COLORS_THEME + "_FULFILLED":
       return Object.assign({}, state, { color_themes: action.payload })
     case GET_FONTS_LIST + "_FULFILLED":
@@ -147,7 +151,7 @@ export default function reducer(state = initialState, action) {
 
     //FEATURES EDITOR  
     case TOGGLE_FEATURES:
-      return Object.assign({}, state, {currentProject: {...state.currentProject, features: action.payload}});
+      return Object.assign({}, state, { currentProject: { ...state.currentProject, features: action.payload } });
     case UPDATE_FEATURES_HEADING:
       const newArr = [...state.currentProject.feature_components]
       let r = newArr.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
@@ -180,6 +184,13 @@ export function getUser(userData) {
   return {
     type: GET_USER,
     payload: userData
+  }
+}
+
+export const logout = () => {
+  return {
+    type: LOGOUT_USER,
+    payload: null
   }
 }
 
@@ -330,8 +341,8 @@ export const updateTheme = arr => {
 // ABOUT EDITOR
 
 export const toggleAboutSection = bool => {
-  return{
-    type: TOGGLE_ABOUT, 
+  return {
+    type: TOGGLE_ABOUT,
     payload: bool
   }
 }
@@ -352,11 +363,11 @@ export const updateAboutText = str => {
 
 // FATURES EDITOR
 export const toggleFeaturesSection = bool => {
-  return{
+  return {
     type: TOGGLE_FEATURES,
     payload: bool
   }
-} 
+}
 
 export const updateFeaturesHeading = (obj) => {
   return {

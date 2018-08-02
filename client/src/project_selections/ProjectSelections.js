@@ -59,10 +59,24 @@ class ProjectSelections extends Component {
     render() {
         return (
             <div>
-                { this.state.titleShow ? <TitleSelector goToColor={this.goToColor} setTitle={this.setTitle} title={this.state.title}/> : this.state.colorShow ? <ColorPicker goToFont={this.goToFont} goToTitle={this.goToTitle}/> : this.state.fontShow ? <FontPicker goToColor={this.goToColor} title={this.state.title}/> : '' }
-            </div> 
+                {
+                this.state.titleShow
+                    ?
+                <TitleSelector goToColor={this.goToColor} setTitle={this.setTitle} title={this.state.title} />
+                    :
+                this.state.colorShow
+                    ?
+                <ColorPicker goToFont={this.goToFont} goToTitle={this.goToTitle} />
+                    :
+                this.state.fontShow
+                    ?
+                <FontPicker goToColor={this.goToColor} title={this.state.title} />
+                    :
+                ''
+                }
+            </div>
         )
     }
 }
 
-export default connect(null, {getFontsList, getColorThemes})(ProjectSelections);
+export default connect(null, { getFontsList, getColorThemes })(ProjectSelections);

@@ -6,8 +6,13 @@ import {pickColor} from "./../../redux/reducer"
 function ColorSample(props){
   
   const color = props.palette.match(/[#a-zA-Z0-9]+/g) 
+  
+
+
+
   return(
-    <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)}    >
+    <ColorBox onClick={() => props.pickColor(props.color_id, props.palette, props.name)} 
+              selected={props.color_id === props.selectedColor ? 'solid 3px #5441D3' : 'none'} >
       <ColorPalette>
         <ThemeSample bg_color={color[1]}/>
         <ThemeSample bg_color={color[2]}/>
@@ -20,8 +25,13 @@ function ColorSample(props){
     </ColorBox>
   )
 }
+const mapStateToProps = state => {
+  return{
+    selectedColor: state.currentProject.color_id
+  }
+}
 
-export default connect(null, {pickColor})(ColorSample);
+export default connect(mapStateToProps, {pickColor})(ColorSample);
 
 const ColorBox = styled.div`
   display: flex;
@@ -33,6 +43,7 @@ const ColorBox = styled.div`
   background: white;
   cursor: pointer;
   box-shadow: 0 0 10px #ccc;
+  border: ${props => props.selected}
 `;
 
 const NameContainer = styled.div`
@@ -43,6 +54,7 @@ const NameContainer = styled.div`
   bottom: 0;
   padding: 0 20px;
   box-sizing: border-box;
+    
   display: flex;
   flex-flow: row;
   justify-content: center;
