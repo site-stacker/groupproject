@@ -3,27 +3,28 @@ import axios from "axios";
 const initialState = {
   toggleLogin: false,
   color_themes: [],
-  fonts_list: [{family:"Lato"},
-  {family:"Lora"},
-  {family:"Merriweather"},
-  {family:"Montserrat"},
-  {family:"Noto Sans"},
-  {family:"Open Sans"},
-  {family:"Open Sans Condensed"},
-  {family:"Oswald"},
-  {family:"PT Sans"},
-  {family:"PT Serif"},
-  {family:"Playfair Display"},
-  {family:"Poppins"},
-  {family:"Raleway"},
-  {family:"Roboto"},
-  {family:"Roboto Condensed"},
-  {family:"Roboto Mono"},
-  {family:"Roboto Slab"},
-  {family:"Slabo"},
-  {family:"Source Sans Pro"},
-  {family:"Ubuntu"}
-],
+  fonts_list: [
+    {family:"Lato"},
+    {family:"Lora"},
+    {family:"Merriweather"},
+    {family:"Montserrat"},
+    {family:"Noto Sans"},
+    {family:"Open Sans"},
+    {family:"Open Sans Condensed"},
+    {family:"Oswald"},
+    {family:"PT Sans"},
+    {family:"PT Serif"},
+    {family:"Playfair Display"},
+    {family:"Poppins"},
+    {family:"Raleway"},
+    {family:"Roboto"},
+    {family:"Roboto Condensed"},
+    {family:"Roboto Mono"},
+    {family:"Roboto Slab"},
+    {family:"Arvo"},
+    {family:"Source Sans Pro"},
+    {family:"Ubuntu"}
+  ],
   currentProject: {
     background_img: '',
     feature_components: [
@@ -48,7 +49,6 @@ const initialState = {
 const GET_USER = "GET_USER";
 const LOGOUT_USER = "LOGOUT_USER"
 
-const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
 const GET_ABOUT = "GET_ABOUT";
 const GET_FEATURES = "GET_FEATURES";
@@ -98,8 +98,7 @@ export default function reducer(state = initialState, action) {
 
     case GET_COLORS_THEME + "_FULFILLED":
       return Object.assign({}, state, { color_themes: action.payload })
-    case GET_FONTS_LIST + "_FULFILLED":
-      return Object.assign({}, state, { fonts_list: action.payload })
+
     case GET_PROJECT + "_FULFILLED":
       return Object.assign({}, state, { currentProject: action.payload })
 
@@ -215,17 +214,6 @@ export const pickFont = (name) => {
   return {
     type: PICK_FONT,
     payload: name
-  }
-}
-
-
-export const getFontsList = () => {
-  const list = axios.get("https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=AIzaSyAyR8cCSuls2EHZHPFIUdxzpDZOM8AJ1r8").then(res => {
-    return res.data.items.filter((font, i) => i < 20)
-  })
-  return {
-    type: GET_FONTS_LIST,
-    payload: list
   }
 }
 

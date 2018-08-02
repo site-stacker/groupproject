@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 
 function Button(props){
   return(
-    <Btn font={props.font_family} bg_color={props.bg_color} color={props.color} onClick={()=>alert("fsdf")}>{props.btn_text}</Btn>
+    <Btn style={{fontFamily: `${props.font_family}`, backgroundColor: `${props.bg_color}`, color: `${props.color}`}} onClick={()=>alert("Hello World")}>{props.btn_text}</Btn>
   )
 }
 
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
       btn_text: state.currentProject.button_text,
       font_family: state.currentProject.font,
       bg_color: state.currentProject.color_palette[2],
-      color: state.currentProject.color_palette[1]
+      color: state.currentProject.color_palette[0]
     }
   }
 }

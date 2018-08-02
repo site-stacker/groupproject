@@ -1,16 +1,25 @@
 import React from "react"
 import styled from "styled-components"
+import { connect } from 'react-redux'
 
-export default function Divider(props){
+function Divider(props){
   return (
-    <HR />
+    <HR style={{background: props.color_palette ? props.color_palette[2] : 'black'}}/>
   )
 }
+
+function mapStateToProps(state) {
+  return {
+    color_palette: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette : []
+  }
+}
+
+export default connect(mapStateToProps)(Divider)
 
 export const HR = styled.div`
   width: 50%;
   height: 2px;
-  background: red;
+  background: black;
   position: absolute;
   bottom: 0;
   left: 50%;

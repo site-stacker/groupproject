@@ -9,7 +9,7 @@ function Logo(props){
      props.logo ?
      <CompanyLogo src={props.logo} />
       :
-      <CompanyTitle font={props.font_family}>{props.title}</CompanyTitle>
+      <CompanyTitle font={props.font_family} color={props.color}>{props.title}</CompanyTitle>
     }
     </div>
   )
@@ -19,7 +19,8 @@ const mapStateToProps = state => {
   return {
     logo: state.currentProject.logo,
     title: state.currentProject.title,
-    font_family: state.currentProject.font
+    font_family: state.currentProject.font,
+    color: state.currentProject.color_palette[2],
   }
 }
 
@@ -42,4 +43,5 @@ export const CompanyTitle = styled.h3`
   border: none;
   z-index: 1;
   font-family: ${props => props.font}
+  color:${props => props.color};
 `;

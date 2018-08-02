@@ -10,7 +10,9 @@ function Paragraph(props){
 
 const mapStateToProps = state => {
   return{
-    text: state.currentProject.about_text
+    text: state.currentProject.about_text,
+    fontFamily: state.currentProject.font,
+    color_palette: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette : []
   }
 }
 

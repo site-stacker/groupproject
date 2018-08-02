@@ -10,7 +10,9 @@ function Heading(props){
 
 const mapStateToProps = state => {
   return{
-    heading: state.currentProject.about_header
+    heading: state.currentProject.about_header,
+    fontFamily: state.currentProject.font,
+    color_palette: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette : []
   }
 }
 

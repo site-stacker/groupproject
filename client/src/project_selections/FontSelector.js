@@ -36,9 +36,6 @@ class FontPicker extends Component {
             })
         })
     }
-    // this.setState({
-    //     redirect: true
-    // })
 
     render() {
         if (this.state.redirect) {
@@ -47,7 +44,7 @@ class FontPicker extends Component {
         return (
             <ScaleIn>
                 <Center>
-                    <Font>
+                    <Font onClick={() => this.freeStart()}>
                         <h1>Pick a Font for Your Project</h1>
                         <FontSelector />
                         <div>
@@ -97,6 +94,7 @@ const Arrow = styled.button`
     margin: 0px 20px;
     font-size: 40px;
     transition: .5s;
+    cursor: pointer;
 
     :hover{
         font-size: 45px;

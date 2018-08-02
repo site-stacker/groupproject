@@ -13,7 +13,6 @@ class Toggle extends Component{
     }
   }
   componentDidMount(){
-    console.log(this.props)
     this.setState({toggleSwitch: this.props.toggle})
   }
 

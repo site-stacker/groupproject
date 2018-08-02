@@ -5,10 +5,10 @@ import { darkwhite, lightGrey, violet, green } from "../shared/colors";
 import Toggle from "./../shared/SwitchToggle";
 import axios from 'axios';
 import LoginDuringProject from '../Login/LoginDuringProject';
-import {toggleLoginOn, toggleLoginOff} from '../../redux/reducer';
+import { toggleLoginOn, toggleLoginOff } from '../../redux/reducer';
 
-function ContentSelector(props){
-  const mappedSections = props.sections.map( (s, i) => {
+function ContentSelector(props) {
+  const mappedSections = props.sections.map((s, i) => {
     return (
       <SectionBtn key={i} >
         <p onClick={() => action(s)}>{s}</p>
@@ -42,34 +42,46 @@ function ContentSelector(props){
       })
     } else {
       props.toggleLoginOn()
-      console.log(props.toggleLogin)
     }
   }
-  console.log(props.sections)
-    return (
-      <SectionWrapper>
-        <Header>
-          <p>Choose the section you want to edit</p>
-        </Header>
-        <SectionBtn onClick={() => action("general")}>
-          <p>General</p>
-          <MenuIcon className="pe-7s-angle-right"></MenuIcon>
-        </SectionBtn>
-        <SectionBtn onClick={() => action("header")}>
-          <p>Header</p>
-          <MenuIcon className="pe-7s-angle-right"></MenuIcon>
-        </SectionBtn>
-        {mappedSections}
-        <Modal height={props.toggleLogin}>
-          <h3>You must login to save.</h3>
-          <LoginDuringProject />
-          <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
-        </Modal>
-        <SaveBtn onClick={() => save()}>Save</SaveBtn>
-        <SaveBtn onClick={()=>alert("")}>Publish</SaveBtn>
-      </SectionWrapper>
-    )
+
+  const publish = () => {
+    if (props.user) {
+      axios.put(`/api/publishProject/${props.currentProject.project_id}`, props.currentProject).then(res => {
+        alert(`Your site is available at ${res.data[0].domain}`)
+      })
+    } else {
+      props.toggleLoginOn()
+    }
   }
+
+  return (
+    <SectionWrapper>
+      <Header>
+        <p>Choose the section you want to edit</p>
+      </Header>
+      <SectionBtn onClick={() => action("general")}>
+        <p>General</p>
+        <MenuIcon className="pe-7s-angle-right"></MenuIcon>
+      </SectionBtn>
+      <SectionBtn onClick={() => action("header")}>
+        <p>Header</p>
+        <MenuIcon className="pe-7s-angle-right"></MenuIcon>
+      </SectionBtn>
+      {mappedSections}
+      {/* <AddBtn onClick={()=>alert("dsf")}><AddIcon className="pe-7s-plus"></AddIcon>Add New Section </AddBtn> */}
+      <Modal height={props.toggleLogin}>
+        <h3>You must login to save or publish.</h3>
+        <LoginDuringProject />
+        <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
+      </Modal>
+      <ButtonHolder>
+        <SaveBtn onClick={() => save()}>Save</SaveBtn>
+        <SaveBtn style={{background: violet}} onClick={() => publish()}>Publish</SaveBtn>
+      </ButtonHolder>
+    </SectionWrapper>
+  )
+}
 
 const mapStateTopProps = (state) => {
   return {
@@ -81,7 +93,7 @@ const mapStateTopProps = (state) => {
     features: state.currentProject.features
   }
 }
-export default connect(mapStateTopProps, {toggleLoginOn, toggleLoginOff})(ContentSelector);
+export default connect(mapStateTopProps, { toggleLoginOn, toggleLoginOff })(ContentSelector);
 
 const FlexRow = styled.div`
   display: flex;
@@ -139,7 +151,7 @@ const SaveBtn = styled.button`
   padding: 20px;
   position: relative;
   bottom: -200px;
-  left: 200px;
+  left: 100px;
   transform: translateX(-50%);
   border: none;
   border-radius: 6px;
@@ -180,4 +192,11 @@ const Exit = styled.button`
   font-size: 40px;
   transition: .5s;
   cursor: pointer;
+`
+
+const ButtonHolder = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
 `
