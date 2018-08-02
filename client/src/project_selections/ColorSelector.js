@@ -54,6 +54,7 @@ const Arrow = styled.button`
     margin: 0px 20px;
     font-size: 40px;
     transition: .5s;
+    cursor: pointer;
 
     :hover{
         font-size: 45px;
