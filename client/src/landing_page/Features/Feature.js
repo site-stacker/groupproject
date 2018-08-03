@@ -7,24 +7,25 @@ function Features(props){
   
   const Feature = props.features.map( (f, i) => {
     return(
-    <FeatureWrapper key={i}>
-      <H2>{f.feature_title}</H2>
-      <P>{f.feature_text}</P>
+    <FeatureWrapper key={i} >
+      <H2 color={props.color_palette[1]} font_family={props.fontFamily}>{f.feature_title}</H2>
+      <P font_family={props.fontFamily}>{f.feature_text}</P>
     </FeatureWrapper>
     )
   })
 
   return (
-    <FeaturesWrapper>
+    <FeaturesWrapper justify={props.features.map.length > 1 ? "flex-start" : "center"}>
     {Feature}
     </FeaturesWrapper>
   )
 }
 
 const mapStateToProps = state => {
-  console.log()
   return{
-    features:state.currentProject.feature_components !== undefined ? state.currentProject.feature_components : []
+    features:state.currentProject.feature_components !== undefined ? state.currentProject.feature_components : [],
+    fontFamily: state.currentProject.font,
+    color_palette: state.currentProject.color_palette !== undefined ? state.currentProject.color_palette : []
   }
 }
 
@@ -36,7 +37,7 @@ export const FeaturesWrapper = styled.div`
   flex-wrap: wrap;
   width: 80%;
   margin: 0 auto;
-  justify-content: flex-start;
+  justify-content: ${props => props.justify};
 `;
 
 export const FeatureWrapper = styled.div`
@@ -46,8 +47,11 @@ export const FeatureWrapper = styled.div`
   height: 200px;
   padding: 50px;
   box-sizing: border-box;
+  justify-content: center;
 `;
 
 export const P = styled.p`
-  color: red;
+  color: #333;
+  font-family: ${props => props.font_family};
+  text-align: center;
 `;

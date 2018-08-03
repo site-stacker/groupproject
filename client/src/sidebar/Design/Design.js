@@ -7,7 +7,7 @@ export default function Design(){
 return(
   <SliderWrapper>
     <ColorSelector />
-    <FontSelector />
+    <FontSelector mb="160px"/>
   </SliderWrapper>
 )
 }

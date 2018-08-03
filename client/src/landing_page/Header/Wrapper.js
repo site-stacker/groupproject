@@ -20,7 +20,7 @@ class Wrapper extends Component{
 
   render(){
     return(
-      <Header bg_img={`url("${this.props.bg_img}")`} bg_color={this.props.theme[this.props.bg_color]} bg_combined={this.props.bg_combined ? 0.9 : 0} color={this.props.color}>
+      <Header bg_img={`url("${this.props.bg_img}")`} bg_color={this.props.theme[0]} bg_combined={this.props.bg_combined ? 0.9 : 0} color={this.props.color}>
       <Logo/>
       <TextWrapper>
         <Heading />
@@ -38,7 +38,6 @@ const mapStateToProps = state => {
   return {
     theme: theme,
     bg_img: state.currentProject.background_img,
-    bg_color: state.currentProject.background_color,
     bg_combined: state.currentProject.picture_and_color,
     color: state.currentProject.color_palette ? state.currentProject.color_palette[0] : "#ffffff"
   }
