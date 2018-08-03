@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const ctrl = require('./ctrl')
 const cors = require('cors')
 const checkUserSession = require('./middleware/checkUserSession')
+const path = require('path'); // Usually moved to the start of file
 //env variables
 const 
 {
@@ -23,7 +24,12 @@ massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
 })
 
-app.use( express.static( `${__dirname}/../../build` ) );
+// app.use( express.static( `${__dirname}/../../build` ) );
+
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../../build/index.html'));
+});
 
 app.use(session({
     secret: SESSION_SECRET,
