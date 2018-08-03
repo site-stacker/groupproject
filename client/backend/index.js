@@ -27,9 +27,7 @@ massive(CONNECTION_STRING).then(db => {
 app.use( express.static( `${__dirname}/../build` ) );
 
 
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+
 
 app.use(session({
     secret: SESSION_SECRET,
@@ -77,6 +75,9 @@ app.delete('/api/deleteUser/:user_id', ctrl.deleteUser)
 app.delete('/api/deleteAbout/:about_id', ctrl.deleteAbout)
 app.delete('/api/deleteFeature/:feature_component_id', ctrl.deleteFeature)
 
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 // server ///////////////////////////////////////
 app.listen(SERVER_PORT, () => {
