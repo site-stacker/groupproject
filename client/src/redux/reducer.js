@@ -34,7 +34,7 @@ const initialState = {
         text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
       }
     ],
-    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB", "#1AAEFC"]
+    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB"]
   },
   sections: ["About Us", "Features"],
   contentSection: "Sections",
@@ -49,7 +49,6 @@ const initialState = {
 const GET_USER = "GET_USER";
 const LOGOUT_USER = "LOGOUT_USER"
 
-const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
 const GET_ABOUT = "GET_ABOUT";
 const GET_FEATURES = "GET_FEATURES";
@@ -98,9 +97,9 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, { toggleLogin: action.payload })
 
     case GET_COLORS_THEME + "_FULFILLED":
+    console.log(action.payload)
       return Object.assign({}, state, { color_themes: action.payload })
-    case GET_FONTS_LIST + "_FULFILLED":
-      return Object.assign({}, state, { fonts_list: action.payload })
+
     case GET_PROJECT + "_FULFILLED":
       return Object.assign({}, state, { currentProject: action.payload })
 
@@ -130,8 +129,10 @@ export default function reducer(state = initialState, action) {
     case UPDATE_HEADER_BUTTON:
       return Object.assign({}, state, { currentProject: { ...state.currentProject, button_text: action.payload } })
     case UPDATE_HEADER_IMAGE:
+      console.log("main_img")
       return Object.assign({}, state, { currentProject: { ...state.currentProject, main_img: action.payload } })
     case UPDATE_HEADER_BG:
+    console.log("bg")
       return Object.assign({}, state, { currentProject: { ...state.currentProject, background_img: action.payload } })
     case UPDATE_HEADER_BG_COLOR:
       return Object.assign({}, state, { currentProject: { ...state.currentProject, background_color: action.payload } })
@@ -165,7 +166,6 @@ export default function reducer(state = initialState, action) {
       }})
      
       case UPDATE_FEATURES_TEXT:
-      console.log(action.payload)
         const newArrTwo = [...state.currentProject.feature_components]
         let s = newArrTwo.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
           return Object.assign({}, f, {feature_text: action.payload.str})
@@ -216,17 +216,6 @@ export const pickFont = (name) => {
   return {
     type: PICK_FONT,
     payload: name
-  }
-}
-
-
-export const getFontsList = () => {
-  const list = axios.get("https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=AIzaSyAyR8cCSuls2EHZHPFIUdxzpDZOM8AJ1r8").then(res => {
-    return res.data.items.filter((font, i) => i < 20)
-  })
-  return {
-    type: GET_FONTS_LIST,
-    payload: list
   }
 }
 

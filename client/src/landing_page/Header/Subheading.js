@@ -12,7 +12,7 @@ const mapStateToProps = state => {
   if(state.currentProject.color_palette){
     return {
       subheading: state.currentProject.subheading,
-      font_color:  state.currentProject.color_palette[0],
+      font_color:  state.currentProject.color_palette[1],
       font_family: state.currentProject.font
     }
   }

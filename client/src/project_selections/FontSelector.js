@@ -46,13 +46,13 @@ class FontPicker extends Component {
                 <Center>
                     <Font onClick={() => this.freeStart()}>
                         <h1>Pick a Font for Your Project</h1>
-                        <FontSelector />
-                        <div>
+                        <FontSelector mb="80px"/>
+                        <Div>
                             <Arrow className='pe-7s-left-arrow' onClick={() => this.props.goToColor()}>
                             </Arrow>
                             <Arrow className='pe-7s-check' onClick={() => this.freeStart()}>
                             </Arrow>
-                        </div>
+                        </Div>
                     </Font>
                 </Center>
             </ScaleIn>
@@ -94,6 +94,7 @@ const Arrow = styled.button`
     margin: 0px 20px;
     font-size: 40px;
     transition: .5s;
+    cursor: pointer;
 
     :hover{
         font-size: 45px;
@@ -101,3 +102,7 @@ const Arrow = styled.button`
         margin: -5px 20px;
     }
 `
+
+const Div = styled.div`
+    margin-bottom: 80px;
+`;

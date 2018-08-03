@@ -5,6 +5,7 @@ import Input from "./../../shared/Input"
 import styled from "styled-components";
 import LogoUploader from "./LogoUploader";
 import Back from "./../../shared/Back";
+import { greyBlue } from "../../shared/colors";
 
 class GeneralEditor extends Component{
   constructor(props){
@@ -23,11 +24,13 @@ class GeneralEditor extends Component{
   render(){
     return(
       <Wrapper>
-        <Back updatePosition={this.props.updatePosition}/>
-        <p>General</p>
+        <HeaderWrapper>
+          <H3 mb="50px">General</H3>
+          <Back updatePosition={this.props.updatePosition}/>
+        </HeaderWrapper>
         <Input handleInput={this.handleInput} name='Project name' value={this.props.title}/>
         <OptionWrapper>
-          <p>Logo</p>
+          <P mb="0">Logo</P>
           <ButtonsWrapper>
             <RemoveBtn className="pe-7s-trash" onClick={()=>this.props.uploadGeneralLogo("")}/>
             <LogoUploader />
@@ -97,4 +100,24 @@ const RemoveBtn = styled.div`
   &:hover{
     color: #fff;
   }
+`;
+
+const HeaderWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
+const P = styled.p`
+  margin: 0;
+  margin-bottom: ${props =>props.mb};
+`;
+
+const H3 = styled.h3`
+  position: relative;
+  margin: 0;
+  color: ${greyBlue}
 `;

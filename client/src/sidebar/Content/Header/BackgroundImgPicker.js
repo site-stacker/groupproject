@@ -5,7 +5,7 @@ import {violet, lightGrey} from "./../../shared/colors"
 import axios from "axios"
 import {updateHeaderBg} from "./../../../redux/reducer"
 import BackgroundUploader from "./BackgroundImageUploader";
-// require("dotenv").config()
+import {greyBlue} from "./../../shared/colors" 
 
 class BackgroundPicker extends Component{
   constructor(){
@@ -64,8 +64,8 @@ class BackgroundPicker extends Component{
         <Close onClick={()=>this.props.toggle()}>Close</Close>
         <BackgroundUploader />
         <Div>
-          <Input input={theme} onChange={(e)=>this.setState({theme: e.target.value})} onKeyDown={ (e) => this.getKeySearch(e.key)} value={theme} />
-          <Label top={theme ? 0 : "-16px"}>Search image</Label>
+          <Input input={theme} onChange={(e)=>this.setState({theme: e.target.value})} onKeyDown={ (e) => this.getKeySearch(e.key)} value={theme}/>
+          <Label top={theme ? "-20px" : "-20px"}>Search image</Label>
           <FocusBorder width={theme ? 0 : "100%"}/>
         </Div>
         <ImgsGrid>
@@ -138,6 +138,8 @@ const Input = styled.input`
   box-sizing: border-box;
   border-bottom: 1px solid #ccc; 
   background-color: transparent;
+  color: ${greyBlue};
+  font-size: 14px;
 
   &:focus{
     outline: none;

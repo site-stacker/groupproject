@@ -3,6 +3,8 @@ import Wrapper from "./Wrapper";
 
 export default function Features(){
   return(
-    <Wrapper />
+    <div id="About">
+      <Wrapper />
+    </div>  
   )
 }

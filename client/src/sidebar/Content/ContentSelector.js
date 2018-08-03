@@ -14,7 +14,7 @@ function ContentSelector(props) {
         <p onClick={() => action(s)}>{s}</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         <ToggleWrapper>
-          <Toggle name={s} toggle={s === "About Us" ? props.about : s === "Features" ? props.features : null} />
+          <Toggle name={s} toggle={ s === "About Us" ? props.about : s === "Features" ? props.features : null } />
         </ToggleWrapper>
       </SectionBtn>
     )
@@ -75,8 +75,10 @@ function ContentSelector(props) {
         <LoginDuringProject />
         <Exit className='pe-7s-close-circle' onClick={() => props.toggleLoginOff()}></Exit>
       </Modal>
-      <SaveBtn onClick={() => save()}>Save</SaveBtn>
-      <SaveBtn onClick={() => publish()}>Publish</SaveBtn>
+      <ButtonHolder>
+        <SaveBtn onClick={() => save()}>Save</SaveBtn>
+        <SaveBtn style={{background: violet}} onClick={() => publish()}>Publish</SaveBtn>
+      </ButtonHolder>
     </SectionWrapper>
   )
 }
@@ -86,7 +88,9 @@ const mapStateTopProps = (state) => {
     sections: state.sections,
     user: state.user,
     currentProject: state.currentProject,
-    toggleLogin: state.toggleLogin
+    toggleLogin: state.toggleLogin,
+    about: state.currentProject.about,
+    features: state.currentProject.features
   }
 }
 export default connect(mapStateTopProps, { toggleLoginOn, toggleLoginOff })(ContentSelector);
@@ -120,9 +124,6 @@ const SectionBtn = FlexRow.extend`
   transition: 0.2s ease-in;
   position: relative;
 
-  &:hover{
-    /* background: ${lightGrey}; */
-  }
   &:hover :nth-child(2){
     right: 180px;
     font-size: 36px;
@@ -150,7 +151,7 @@ const SaveBtn = styled.button`
   padding: 20px;
   position: relative;
   bottom: -200px;
-  left: 200px;
+  left: 100px;
   transform: translateX(-50%);
   border: none;
   border-radius: 6px;
@@ -191,4 +192,11 @@ const Exit = styled.button`
   font-size: 40px;
   transition: .5s;
   cursor: pointer;
+`
+
+const ButtonHolder = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
 `

@@ -50,8 +50,6 @@ class BackgroundUploader extends Component {
     }
 
     render() {
-        console.log(this.state)
-
         if(this.state.progress !== 0 && this.state.progress < 100) {
             return (
                 <Uploader>

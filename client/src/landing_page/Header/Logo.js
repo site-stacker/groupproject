@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 import styled from "styled-components"
 
 function Logo(props){
+  console.log(props.color)
   return(
     <div>
     {
-     props.logo ?
+     props.logo !== ""?
      <CompanyLogo src={props.logo} />
       :
-      <CompanyTitle font={props.font_family}>{props.title}</CompanyTitle>
+      <CompanyTitle font={props.font_family} color={props.color}>{props.title}</CompanyTitle>
     }
     </div>
   )
@@ -19,7 +20,8 @@ const mapStateToProps = state => {
   return {
     logo: state.currentProject.logo,
     title: state.currentProject.title,
-    font_family: state.currentProject.font
+    font_family: state.currentProject.font,
+    color: state.currentProject.color_palette[1],
   }
 }
 
@@ -41,5 +43,6 @@ export const CompanyTitle = styled.h3`
   width: 150px;
   border: none;
   z-index: 1;
-  font-family: ${props => props.font}
+  font-family: ${props => props.font};
+  color:${props => props.color};
 `;
