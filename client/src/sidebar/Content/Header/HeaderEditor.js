@@ -45,8 +45,10 @@ class HeaderEditor extends Component{
     switch(str){
       case "main":
         this.props.updateHeaderImage("");
+        break;
       case "bg":
         this.props.updateHeaderBg("");
+        break;
     }
   }
 

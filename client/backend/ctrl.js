@@ -58,7 +58,6 @@ module.exports =
                             session_id_count++
                             req.session.user.user_id = user[0].user_id
                             req.session.user.username = user[0].username
-                            console.log(req.session)
                             res.status(200).send(req.session.user)
                         })
                         .catch(err => res.status(500).send(err))
@@ -102,14 +101,11 @@ module.exports =
                         session_id_count++
                         req.session.user.user_id = user[0].user_id
                         req.session.user.username = user[0].username
-                        console.log('hey', req.session)
                         res.status(200).send(req.session.user.user_id.toString())
                     } else {
-                        console.log(req.session)
                         res.status(200).send('Invalid Password')
                     }
                 } else {
-                    console.log(req.session)
                     res.status(200).send('User does not exist')
                 }
             })
@@ -151,7 +147,6 @@ module.exports =
         createDefaultProject: (req, res) => {
             const { color_id, font, title, color_palette } = req.body
             const db = req.app.get('db')
-            console.log(req.body)
             if (req.session.user.user_id) {
                 db.create_project([req.session.user.user_id, color_id, font, title, color_palette])
                     .then(projectId => res.status(200).send(projectId))
@@ -196,7 +191,6 @@ module.exports =
             const { project_id } = req.params
             const { color_id, font, title, domain, logo, about, features, color_palette } = req.body
             const db = req.app.get('db')
-            console.log(req.body)
             db.update_project([color_id, font, title, domain, logo, about, features, color_palette, project_id])
                 .then(updatedProject => res.status(200).send(updatedProject))
                 .catch((err) => res.status(500).send(err))
@@ -271,7 +265,6 @@ module.exports =
                 .catch((err) => res.status(500).send(err))
         },
         deleteFeature: (req, res) => {
-            console.log(req.params)
             const { feature_component_id } = req.params
             const db = req.app.get('db')
             db.delete_feature_component([feature_component_id])

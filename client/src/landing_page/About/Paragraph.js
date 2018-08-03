@@ -23,4 +23,6 @@ export const P = styled.p`
   margin: 0 auto;
   color: #333;
   font-family: ${props => props.font_family};
+  text-align: center;
+  line-height: 1.8;
 `;

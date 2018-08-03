@@ -128,8 +128,10 @@ export default function reducer(state = initialState, action) {
     case UPDATE_HEADER_BUTTON:
       return Object.assign({}, state, { currentProject: { ...state.currentProject, button_text: action.payload } })
     case UPDATE_HEADER_IMAGE:
+      console.log("main_img")
       return Object.assign({}, state, { currentProject: { ...state.currentProject, main_img: action.payload } })
     case UPDATE_HEADER_BG:
+    console.log("bg")
       return Object.assign({}, state, { currentProject: { ...state.currentProject, background_img: action.payload } })
     case UPDATE_HEADER_BG_COLOR:
       return Object.assign({}, state, { currentProject: { ...state.currentProject, background_color: action.payload } })
@@ -163,7 +165,6 @@ export default function reducer(state = initialState, action) {
       }})
      
       case UPDATE_FEATURES_TEXT:
-      console.log(action.payload)
         const newArrTwo = [...state.currentProject.feature_components]
         let s = newArrTwo.map( (f, i) => {if(f.feature_component_id === action.payload.id ){
           return Object.assign({}, f, {feature_text: action.payload.str})
