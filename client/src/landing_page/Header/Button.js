@@ -14,7 +14,7 @@ const mapStateToProps = state => {
       btn_text: state.currentProject.button_text,
       font_family: state.currentProject.font,
       bg_color: state.currentProject.color_palette[2],
-      color: state.currentProject.color_palette[1]
+      color: state.currentProject.color_palette[0]
     }
   }
 }

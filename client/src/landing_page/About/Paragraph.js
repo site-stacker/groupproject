@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 
 function Paragraph(props){
   return (
-    <P>{props.text}</P>
+    <P font_family={props.fontFamily}>{props.text}</P>
   )
 }
 
@@ -21,4 +21,6 @@ export default connect(mapStateToProps)(Paragraph)
 export const P = styled.p`
   width: 50%;
   margin: 0 auto;
+  color: #333;
+  font-family: ${props => props.font_family};
 `;

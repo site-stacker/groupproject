@@ -34,7 +34,7 @@ const initialState = {
         text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
       }
     ],
-    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB", "#1AAEFC"]
+    color_palette: ["#FFFFFF", "#297AFB", "#01D8FD", "#2898FB"]
   },
   sections: ["About Us", "Features"],
   contentSection: "Sections",
@@ -49,7 +49,6 @@ const initialState = {
 const GET_USER = "GET_USER";
 const LOGOUT_USER = "LOGOUT_USER"
 
-const GET_FONTS_LIST = "GET_FONTS_LIST";
 const GET_PROJECT = "GET_PROJECT";
 const GET_ABOUT = "GET_ABOUT";
 const GET_FEATURES = "GET_FEATURES";
@@ -99,8 +98,7 @@ export default function reducer(state = initialState, action) {
 
     case GET_COLORS_THEME + "_FULFILLED":
       return Object.assign({}, state, { color_themes: action.payload })
-    case GET_FONTS_LIST + "_FULFILLED":
-      return Object.assign({}, state, { fonts_list: action.payload })
+
     case GET_PROJECT + "_FULFILLED":
       return Object.assign({}, state, { currentProject: action.payload })
 
@@ -216,17 +214,6 @@ export const pickFont = (name) => {
   return {
     type: PICK_FONT,
     payload: name
-  }
-}
-
-
-export const getFontsList = () => {
-  const list = axios.get("https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=AIzaSyAyR8cCSuls2EHZHPFIUdxzpDZOM8AJ1r8").then(res => {
-    return res.data.items.filter((font, i) => i < 20)
-  })
-  return {
-    type: GET_FONTS_LIST,
-    payload: list
   }
 }
 

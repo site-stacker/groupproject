@@ -14,7 +14,7 @@ function ContentSelector(props) {
         <p onClick={() => action(s)}>{s}</p>
         <MenuIcon className="pe-7s-angle-right"></MenuIcon>
         <ToggleWrapper>
-          <Toggle name={s} toggle={s === "About Us" ? props.about : s === "Features" ? props.features : null} />
+          <Toggle name={s} toggle={ s === "About Us" ? props.about : s === "Features" ? props.features : null } />
         </ToggleWrapper>
       </SectionBtn>
     )
@@ -88,7 +88,9 @@ const mapStateTopProps = (state) => {
     sections: state.sections,
     user: state.user,
     currentProject: state.currentProject,
-    toggleLogin: state.toggleLogin
+    toggleLogin: state.toggleLogin,
+    about: state.currentProject.about,
+    features: state.currentProject.features
   }
 }
 export default connect(mapStateTopProps, { toggleLoginOn, toggleLoginOff })(ContentSelector);
@@ -122,9 +124,6 @@ const SectionBtn = FlexRow.extend`
   transition: 0.2s ease-in;
   position: relative;
 
-  &:hover{
-    /* background: ${lightGrey}; */
-  }
   &:hover :nth-child(2){
     right: 180px;
     font-size: 36px;
