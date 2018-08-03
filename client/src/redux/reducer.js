@@ -97,6 +97,7 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, { toggleLogin: action.payload })
 
     case GET_COLORS_THEME + "_FULFILLED":
+    console.log(action.payload)
       return Object.assign({}, state, { color_themes: action.payload })
 
     case GET_PROJECT + "_FULFILLED":
