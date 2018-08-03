@@ -22,6 +22,9 @@ app.use(bodyParser.json())
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
 })
+
+app.use("/", express.static(__dirname))
+
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
