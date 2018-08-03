@@ -1,3 +1,4 @@
+require('dotenv').config();
 //npm
 const express = require('express');
 const session = require('express-session')
@@ -7,7 +8,6 @@ const ctrl = require('./ctrl')
 const cors = require('cors')
 const checkUserSession = require('./middleware/checkUserSession')
 //env variables
-require('dotenv').config();
 const 
 {
     SERVER_PORT,
@@ -21,7 +21,6 @@ app.use(cors())
 app.use(bodyParser.json())
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
-    console.log('db connected')
 })
 app.use(session({
     secret: SESSION_SECRET,
@@ -46,9 +45,7 @@ app.get('/api/getFeature/:project_id', ctrl.getFeature)
 app.post('/api/createUser', ctrl.createUser)
 app.post('/api/login', ctrl.loginUser)
 app.post('/api/logout', (req, res) => { 
-    console.log(req.session)
     req.session.destroy();
-    console.log(req.session)
     res.status(200).send()
 })
 app.post('/api/createProject', ctrl.createProject)
