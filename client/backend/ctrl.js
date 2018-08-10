@@ -178,7 +178,7 @@ module.exports =
         publishProject: (req, res) => {
             const { project_id } = req.params
             const { title } = req.body;
-            let domain = `skizzl.com/z/${project_id}/` + title.toLowerCase().replace(' ', '-')
+            let domain = `skizzl.com/#/z/${project_id}/` + title.toLowerCase().replace(' ', '-')
             const db = req.app.get('db')
             db.publish_project([domain, project_id])
                 .then((domain) => res.status(200).send(domain))
