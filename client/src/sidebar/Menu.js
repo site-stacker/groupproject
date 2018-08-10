@@ -13,7 +13,6 @@ class Menu extends Component{
     this.state ={
       toggle: true
     }
-    // this.selectede = this.selectede.bind(this)
   }
 
   selected = (str) =>{

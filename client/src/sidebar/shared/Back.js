@@ -12,9 +12,10 @@ export default function Back(props){
 export const Btn = styled.div`
   display: flex;
   flex-flow: row;
-  position: relative;
+  position: absolute;
   cursor: pointer;
   width: 80px;
+  left: 0;
   
   &:hover :nth-child(1){
     left: -5px;

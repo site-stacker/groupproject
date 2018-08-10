@@ -3,7 +3,6 @@ import TitleSelector from './TitleSelector';
 import ColorPicker from './ColorSelector';
 import FontPicker from './FontSelector';
 import { connect } from 'react-redux';
-import { getFontsList } from '../redux/reducer';
 import { getColorThemes } from '../redux/reducer';
 
 class ProjectSelections extends Component {
@@ -23,7 +22,6 @@ class ProjectSelections extends Component {
 
     componentDidMount() {
         this.props.getColorThemes();
-        this.props.getFontsList();
     }
 
     goToTitle = () => {
@@ -79,4 +77,4 @@ class ProjectSelections extends Component {
     }
 }
 
-export default connect(null, { getFontsList, getColorThemes })(ProjectSelections);
+export default connect(null, { getColorThemes })(ProjectSelections);

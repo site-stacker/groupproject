@@ -6,6 +6,7 @@ import Login from '../../sidebar/Login/Login';
 import { lightGrey } from '../../sidebar/shared/colors';
 import axios from 'axios';
 import { logout } from '../../redux/reducer';
+import logoWhite from "./../../assets/logo_white.svg";
 
 class Header extends Component {
     constructor(props) {
@@ -34,8 +35,7 @@ class Header extends Component {
             <HeaderDiv>
                 <Link to={this.props.user ? '/projects' : '/'} >
                     <TitleHolder>
-                        <img src='http://lees.fe.uni-lj.si/uploads/default-logo.png' alt='' width='50px' />
-                        <H2>SKIZZL</H2>
+                        <img src={logoWhite} alt='' width='120px' />
                     </TitleHolder>
                 </Link >
                 {

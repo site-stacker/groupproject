@@ -6,7 +6,7 @@ import Input from "./../../shared/Input"
 import styled from "styled-components";
 import BackgroundImgPicker from "./BackgroundImgPicker";
 import Back from "./../../shared/Back"
-import {violet, lightGrey} from "./../../shared/colors";
+import {violet, lightGrey, greyBlue} from "./../../shared/colors";
 import ColorPicker from "./ColorPicker";
 import {Btn} from "./../../shared/Button"
 
@@ -45,8 +45,10 @@ class HeaderEditor extends Component{
     switch(str){
       case "main":
         this.props.updateHeaderImage("");
+        break;
       case "bg":
         this.props.updateHeaderBg("");
+        break;
     }
   }
 
@@ -54,7 +56,10 @@ class HeaderEditor extends Component{
     
     return(
       <Wrapper>
-        <Back updatePosition={this.props.updatePosition}/>
+        <HeaderWrapper>
+          <H3 mb="50px">Header</H3>
+          <Back updatePosition={this.props.updatePosition}/>
+        </HeaderWrapper>
         <Input handleInput={this.handleHeading} name="Heading" value={this.props.currentProject.heading}/>
         <Input handleInput={this.handleSubheading} name="Subheading" value={this.props.currentProject.subheading}/>
         <Input handleInput={this.handleButtonText} name="Button text" value={this.props.currentProject.button_text}/>
@@ -208,4 +213,24 @@ const RemoveBtn = styled.div`
   &:hover{
     color: #fff;
   }
+`;
+
+const HeaderWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
+const P = styled.p`
+  margin: 0;
+  margin-bottom: ${props =>props.mb};
+`;
+
+const H3 = styled.h3`
+  position: relative;
+  margin: 0;
+  color: ${greyBlue}
 `;

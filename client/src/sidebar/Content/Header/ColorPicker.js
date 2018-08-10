@@ -35,7 +35,7 @@ class ColorPicker extends Component {
       <ColorPickerWrapper>
         <P>Choose main color</P>
         <Div>
-        <Samples width={this.state.togglePicker ? "200px" : 0}>
+        <Samples width={this.state.togglePicker ? "160px" : 0}>
           {mappedSamples}
         </Samples>
         <ColorSample background={this.props.theme[this.props.backgroundColor]} onClick={() => this.handleTogglePicker()}/>

@@ -1,7 +1,11 @@
 
-
 const functions = {
     //Jon's Tests
+    fonts: (arr) =>{
+        arr === true
+    },
+    
+    //Michael
 
     //Michael
     createAbout: (user_id, project_id) => {
@@ -21,8 +25,11 @@ const functions = {
         else {
             return 'data invalid'
         }
-    }
+    },
     //Seba
+
+    toggle: (bool) => !bool,
+    checkSection: (s) => s === "About Us" ? "About Us": s === "Features" ? "Features" : "Header"
 
 }
 

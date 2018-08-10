@@ -1,2 +1,2 @@
 INSERT INTO header_components (project_id, main_img, button_text, heading, subheading, background_img, picture_and_color, background_color)
-VALUES ($1, 'https://cdn.dribbble.com/users/39905/screenshots/1353646/simple-browser-mockup.png', 'Click here', 'Main Title Goes Here', 'Welcome to our website. Try our product.', '', false, 1)
+VALUES ($1, 'https://firebasestorage.googleapis.com/v0/b/skizzl-67005.appspot.com/o/main_images%2Fdefault_img.png?alt=media&token=e0b297ec-e552-415c-bd3c-9c9e70ff1744', 'Click here', 'Main Title Goes Here', 'Welcome to our website. Try our product.', '', false, 1)

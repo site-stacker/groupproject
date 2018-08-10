@@ -6,14 +6,14 @@ import {grey} from "./../shared/colors"
 
 class FontSelector extends Component{
 
-  render(props){
+  render(){
     const mapped = this.props.fonts.map((obj, i) => {
      return <FontSample key={obj.family} name={obj.family} />
     })
     return(
       <div>
       <H2>FONTS GALLERY</H2>
-      <SampleWrapper>
+      <SampleWrapper mb={this.props.mb}>
       {mapped}
       </SampleWrapper>
       </div>
@@ -37,5 +37,5 @@ const SampleWrapper = styled.div`
   flex-flow: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-bottom: 160px;
+  margin-bottom: ${props => props.mb};
 `;
